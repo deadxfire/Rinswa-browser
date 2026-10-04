@@ -62,3 +62,7 @@ pref("browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.enable
 pref("browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.library.enabled", true);
 pref("browser.newtabpage.activity-stream.newtabWallpapers.user.enabled", true);
 
+// Cyber-Glass Stylesheet Customization & SVG Context Properties
+pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+pref("svg.context-properties.content.enabled", true);
+

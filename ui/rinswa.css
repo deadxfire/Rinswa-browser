@@ -36,13 +36,15 @@
   --rinswa-radius-input: 12px;
 }
 
-/* Overwrite default Gecko toolbar design tokens ONLY when custom theme is not active */
-:root:not([lwtheme]) {
+/* Overwrite default Gecko toolbar design tokens across all themes and modes */
+:root {
   --toolbar-bgcolor: var(--rinswa-bg-base) !important;
   --toolbar-color: var(--rinswa-fg-primary) !important;
   --toolbox-non-lwt-bgcolor: var(--rinswa-bg-base) !important;
   --tab-selected-bgcolor: rgba(45, 23, 84, 0.85) !important;
   --tab-selected-textcolor: #ffffff !important;
+  --tab-text-color: #cbd5e1 !important;
+  --tab-loading-fill: #00f2fe !important;
   --toolbarbutton-border-radius: 8px !important;
   --lwt-toolbar-field-background-color: rgba(24, 15, 48, 0.85) !important;
   --lwt-toolbar-field-color: #f8fafc !important;
@@ -138,12 +140,86 @@
   display: none !important;
 }
 
-.tab-label {
-  font-weight: 500 !important;
-  letter-spacing: 0.15px !important;
+/* Ensure High-Contrast Tab Text Readability Across All Modes (Light, Dark, and Default) */
+#TabsToolbar,
+#tabbrowser-tabs,
+.tabbrowser-tab,
+.tab-content {
+  color: #cbd5e1 !important;
 }
 
-/* Modern Rounded New Tab Button (+) */
+.tab-label,
+.tab-text {
+  color: #cbd5e1 !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.15px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75) !important;
+  transition: color 0.15s ease !important;
+}
+
+.tabbrowser-tab:hover:not([selected="true"]) .tab-label,
+.tabbrowser-tab:hover:not([selected="true"]) .tab-text {
+  color: #f8fafc !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-label,
+.tabbrowser-tab[selected="true"] .tab-text {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 12px rgba(0, 242, 254, 0.5), 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+}
+
+.tab-secondary-label {
+  color: #94a3b8 !important;
+  opacity: 0.9 !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-secondary-label {
+  color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+
+/* Tab Close Button & Icon visibility */
+.tab-close-button {
+  fill: #cbd5e1 !important;
+  color: #cbd5e1 !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+  opacity: 0.8 !important;
+  transition: all 0.15s ease !important;
+}
+
+.tab-close-button:hover {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  opacity: 1 !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-close-button {
+  fill: #f8fafc !important;
+  color: #f8fafc !important;
+  opacity: 0.9 !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-close-button:hover {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  opacity: 1 !important;
+}
+
+/* Tab Bar Auxiliary Buttons (+) and Scroll Chevrons */
+#tabs-newtab-button,
+#new-tab-button,
+#alltabs-button,
+#tabbrowser-tabs toolbarbutton,
+.tab-icon-sound,
+.tab-icon-overlay {
+  fill: #cbd5e1 !important;
+  color: #cbd5e1 !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
 #tabs-newtab-button,
 #new-tab-button {
   border-radius: 10px !important;
@@ -154,12 +230,26 @@
 }
 
 #tabs-newtab-button:hover,
-#new-tab-button:hover {
-  background: rgba(99, 102, 241, 0.2) !important;
-  border-color: rgba(129, 140, 248, 0.4) !important;
-  color: #38bdf8 !important;
+#new-tab-button:hover,
+#alltabs-button:hover {
+  background: rgba(99, 102, 241, 0.25) !important;
+  border-color: rgba(129, 140, 248, 0.5) !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
   transform: scale(1.05) !important;
   box-shadow: 0 0 12px rgba(56, 189, 248, 0.3) !important;
+}
+
+/* Navigation Toolbar Icons (Back, Forward, Refresh, Menu) */
+#nav-bar toolbarbutton:not(#urlbar-search-button),
+#back-button,
+#forward-button,
+#reload-button,
+#stop-button,
+#PanelUI-menu-button {
+  color: #f1f5f9 !important;
+  fill: #f1f5f9 !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 /* ==========================================================================
@@ -473,23 +563,39 @@ menupopup menu:-moz-locale-dir(rtl):hover::after {
   box-sizing: border-box !important;
 }
 
+:root {
+  --menu-panel-width: 360px !important;
+  --menu-panel-width-wide: 420px !important;
+}
+
 #appMenu-popup,
+#appMenu-popup panelmultiview,
+#appMenu-popup .panel-viewcontainer,
+#appMenu-popup .panel-viewstack,
 #appMenu-multiView,
 #appMenu-multiView > .panel-viewcontainer,
 #appMenu-multiView > .panel-viewcontainer > .panel-viewstack,
 #appMenu-popup panelview,
 #appMenu-mainView,
 .PanelUI-subView {
-  width: 380px !important;
-  min-width: 380px !important;
-  max-width: 440px !important;
+  width: 360px !important;
+  min-width: 360px !important;
+  max-width: 360px !important;
+  box-sizing: border-box !important;
+}
+
+#appMenu-popup > .panel-arrowcontainer,
+#appMenu-popup > .panel-arrowcontainer > .panel-arrowcontent {
+  width: 360px !important;
+  min-width: 360px !important;
+  max-width: 360px !important;
   box-sizing: border-box !important;
 }
 
 #appMenu-popup panelview:not(#appMenu-mainView) {
-  width: 380px !important;
-  min-width: 380px !important;
-  max-width: 440px !important;
+  width: 360px !important;
+  min-width: 360px !important;
+  max-width: 360px !important;
   box-sizing: border-box !important;
 }
 
@@ -657,6 +763,12 @@ tab-groups-list .tab-groups-list-empty-state moz-button {
 #appMenu-fxa-separator,
 #appMenu-referrals-button,
 #appMenu-referrals-separator,
+#appMenu-new-ai-window-button,
+#appMenu-new-classic-window-button,
+#appMenu-new-ai-window-badge,
+#appMenu-passwords-button,
+#appMenu-translate-button,
+#appMenu-chats-history-button,
 :root #appMenu-fxa-sign-in-promo,
 :root #appMenu-fxa-status2,
 :root #appMenu-update-banner,
@@ -752,23 +864,47 @@ setting-group[groupid="moreFromMozillaProducts"] {
   padding-inline-end: 8px !important;
 }
 
-/* Real Keyboard Shortcut Accelerator Pseudo-Element */
+/* Real Keyboard Shortcut Accelerators - Exact strings matching Image 2 */
+#appMenu-new-tab-button2::after { content: "Ctrl+T" !important; }
+#appMenu-new-window-button2::after { content: "Ctrl+N" !important; }
+#appMenu-new-private-window-button2::after { content: "Ctrl+Shift+P" !important; }
+#appMenu-downloads-button::after { content: "Ctrl+J" !important; }
+#appMenu-extensions-themes-button::after { content: "Ctrl+Shift+A" !important; }
+#appMenu-print-button2::after { content: "Ctrl+P" !important; }
+#appMenu-save-file-button2::after { content: "Ctrl+S" !important; }
+#appMenu-find-button2::after { content: "Ctrl+F" !important; }
+#appMenu-quit-button2::after { content: "Ctrl+Shift+Q" !important; }
+
 #appMenu-popup panelview toolbarbutton.subviewbutton[shortcut]::after,
 .PanelUI-subView toolbarbutton.subviewbutton[shortcut]::after,
-.subviewbutton[shortcut]::after {
-  content: attr(shortcut) !important;
+#appMenu-new-tab-button2::after,
+#appMenu-new-window-button2::after,
+#appMenu-new-private-window-button2::after,
+#appMenu-downloads-button::after,
+#appMenu-extensions-themes-button::after,
+#appMenu-print-button2::after,
+#appMenu-save-file-button2::after,
+#appMenu-find-button2::after,
+#appMenu-quit-button2::after {
   display: flex !important;
   align-items: center !important;
   margin-inline-start: auto !important;
-  margin-inline-end: 8px !important;
+  margin-inline-end: 6px !important;
   padding-inline-start: 12px !important;
   flex: 0 0 auto !important;
   flex-shrink: 0 !important;
   white-space: nowrap !important;
-  color: #818cf8 !important;
-  font-size: 11px !important;
-  font-weight: 500 !important;
-  opacity: 0.9 !important;
+  color: #38bdf8 !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2px !important;
+  opacity: 0.95 !important;
+}
+
+/* Tab groups button display */
+#appMenu-tab-groups-button {
+  display: flex !important;
+  visibility: visible !important;
 }
 
 /* Full Set of SVG Icons for Perfect Vertical Alignment Across All Items */
@@ -776,12 +912,6 @@ setting-group[groupid="moreFromMozillaProducts"] {
   list-style-image: url("chrome://browser/skin/new-tab.svg") !important;
 }
 #appMenu-new-window-button2 {
-  list-style-image: url("chrome://browser/skin/window.svg") !important;
-}
-#appMenu-new-ai-window-button {
-  list-style-image: url("chrome://browser/skin/grid-sparkle.svg") !important;
-}
-#appMenu-new-classic-window-button {
   list-style-image: url("chrome://browser/skin/window.svg") !important;
 }
 #appMenu-new-private-window-button2 {
@@ -796,14 +926,8 @@ setting-group[groupid="moreFromMozillaProducts"] {
 #appMenu-tab-groups-button {
   list-style-image: url("chrome://browser/skin/tabbrowser/tab-groups.svg") !important;
 }
-#appMenu-chats-history-button {
-  list-style-image: url("chrome://browser/skin/history.svg") !important;
-}
 #appMenu-downloads-button {
   list-style-image: url("chrome://browser/skin/downloads/downloads.svg") !important;
-}
-#appMenu-passwords-button {
-  list-style-image: url("chrome://browser/skin/login.svg") !important;
 }
 #appMenu-extensions-themes-button,
 #appMenu-unified-extensions-button {
@@ -814,9 +938,6 @@ setting-group[groupid="moreFromMozillaProducts"] {
 }
 #appMenu-save-file-button2 {
   list-style-image: url("chrome://browser/skin/save.svg") !important;
-}
-#appMenu-translate-button {
-  list-style-image: url("chrome://browser/skin/translations.svg") !important;
 }
 #appMenu-find-button2 {
   list-style-image: url("chrome://global/skin/icons/search-glass.svg") !important;
@@ -834,25 +955,33 @@ setting-group[groupid="moreFromMozillaProducts"] {
   list-style-image: url("chrome://browser/skin/quit.svg") !important;
 }
 
-/* AI / Beta Badge inside Smart Window Item */
-#appMenu-new-ai-window-badge {
-  background: linear-gradient(135deg, #6366f1, #a855f7) !important;
-  color: #ffffff !important;
-  font-size: 9px !important;
-  font-weight: 700 !important;
-  padding: 1px 4px !important;
-  border-radius: 4px !important;
-  margin-inline-start: 6px !important;
-  letter-spacing: 0.4px !important;
-}
+/* Custom Colorful Icon Accents (matching Image 2) */
+#appMenu-new-tab-button2 > .toolbarbutton-icon { fill: #f1f5f9 !important; color: #f1f5f9 !important; }
+#appMenu-new-window-button2 > .toolbarbutton-icon { fill: #67e8f9 !important; color: #67e8f9 !important; }
+#appMenu-new-private-window-button2 > .toolbarbutton-icon { fill: #c084fc !important; color: #c084fc !important; }
+#appMenu-history-button > .toolbarbutton-icon { fill: #fb7185 !important; color: #fb7185 !important; }
+#appMenu-bookmarks-button > .toolbarbutton-icon { fill: #facc15 !important; color: #facc15 !important; }
+#appMenu-tab-groups-button > .toolbarbutton-icon { fill: #f472b6 !important; color: #f472b6 !important; }
+#appMenu-downloads-button > .toolbarbutton-icon { fill: #38bdf8 !important; color: #38bdf8 !important; }
+#appMenu-extensions-themes-button > .toolbarbutton-icon { fill: #4ade80 !important; color: #4ade80 !important; }
+#appMenu-print-button2 > .toolbarbutton-icon { fill: #c084fc !important; color: #c084fc !important; }
+#appMenu-save-file-button2 > .toolbarbutton-icon { fill: #ec4899 !important; color: #ec4899 !important; }
+#appMenu-find-button2 > .toolbarbutton-icon { fill: #22d3ee !important; color: #22d3ee !important; }
+#appMenu-settings-button > .toolbarbutton-icon { fill: #94a3b8 !important; color: #94a3b8 !important; }
+#appMenu-more-button2 > .toolbarbutton-icon { fill: #a78bfa !important; color: #a78bfa !important; }
+#appMenu-help-button2 > .toolbarbutton-icon { fill: #f43f5e !important; color: #f43f5e !important; }
+#appMenu-quit-button2 > .toolbarbutton-icon { fill: #fb923c !important; color: #fb923c !important; }
 
-/* Universal Submenu Arrow for Panel Subviews across the entire browser */
+/* Submenu Navigation Chevron Arrows (matching Image 2) */
+#appMenu-history-button::after,
+#appMenu-bookmarks-button::after,
+#appMenu-tab-groups-button::after,
+#appMenu-more-button2::after,
+#appMenu-help-button2::after,
 #appMenu-popup panelview .subviewbutton-nav:not(.subviewbutton-nav-down)::after,
 .PanelUI-subView .subviewbutton-nav:not(.subviewbutton-nav-down)::after,
-.subviewbutton-nav:not(.subviewbutton-nav-down)::after,
-.moz-button-subviewbutton-nav::after {
-  -moz-context-properties: fill, fill-opacity !important;
-  content: url("chrome://global/skin/icons/arrow-right.svg") !important;
+.subviewbutton-nav:not(.subviewbutton-nav-down)::after {
+  content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 3 11 8 6 13'/></svg>") !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -860,33 +989,33 @@ setting-group[groupid="moreFromMozillaProducts"] {
   height: 16px !important;
   min-width: 16px !important;
   min-height: 16px !important;
-  fill: #94a3b8 !important;
-  fill-opacity: 0.85 !important;
   margin-inline-start: auto !important;
-  margin-inline-end: 8px !important;
+  margin-inline-end: 6px !important;
   flex: 0 0 auto !important;
   flex-shrink: 0 !important;
-  transition: transform 0.15s ease, fill 0.15s ease, fill-opacity 0.15s ease !important;
+  transition: transform 0.15s ease !important;
 }
 
+#appMenu-history-button:hover::after,
+#appMenu-bookmarks-button:hover::after,
+#appMenu-tab-groups-button:hover::after,
+#appMenu-more-button2:hover::after,
+#appMenu-help-button2:hover::after,
 #appMenu-popup panelview .subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
 .PanelUI-subView .subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
 .subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
-.subviewbutton-nav[_moz-menuactive="true"]::after,
-.moz-button-subviewbutton-nav:hover::after {
-  fill: #ffffff !important;
-  fill-opacity: 1 !important;
+.subviewbutton-nav[_moz-menuactive="true"]::after {
+  content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 3 11 8 6 13'/></svg>") !important;
   transform: translateX(2px) !important;
 }
 
-.subviewbutton-nav:-moz-locale-dir(rtl)::after,
-.moz-button-subviewbutton-nav:-moz-locale-dir(rtl)::after {
-  background-image: url("chrome://global/skin/icons/arrow-left.svg") !important;
+.subviewbutton-nav:-moz-locale-dir(rtl)::after {
+  content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='10 3 5 8 10 13'/></svg>") !important;
   transform: none !important;
 }
 
-.subviewbutton-nav:-moz-locale-dir(rtl):hover::after,
-.moz-button-subviewbutton-nav:-moz-locale-dir(rtl):hover::after {
+.subviewbutton-nav:-moz-locale-dir(rtl):hover::after {
+  content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='10 3 5 8 10 13'/></svg>") !important;
   transform: translateX(-2px) !important;
 }
 
