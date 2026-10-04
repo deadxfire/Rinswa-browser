@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Rinswa Light",
+  "version": "1.0",
+  "description": "Default light theme for Rinswa Browser",
+  "theme": {
+    "colors": {
+      "frame": "#f8f9fa",
+      "tab_background_text": "#495057",
+      "toolbar": "#ffffff",
+      "bookmark_text": "#212529",
+      "toolbar_field": "#f1f3f5",
+      "toolbar_field_text": "#212529",
+      "tab_line": "transparent",
+      "popup": "#ffffff",
+      "popup_text": "#212529"
+    }
+  }
+}

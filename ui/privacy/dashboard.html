@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rinswa Privacy Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1>Privacy Protection</h1>
+      <p class="status-text secure">Enhanced Tracking Protection is ACTIVE</p>
+    </header>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-icon">🛡️</span>
+        <h2 id="trackers-blocked-count">0</h2>
+        <p>Trackers Blocked</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🍪</span>
+        <h2 id="cookies-blocked-count">0</h2>
+        <p>Cross-Site Cookies</p>
+      </div>
+    </section>
+
+    <section class="site-controls">
+      <h3>Current Site Security</h3>
+      <div class="control-row">
+        <span>Connection (HTTPS)</span>
+        <span class="status-indicator secure">Secure</span>
+      </div>
+      <div class="control-row">
+        <span>Tracking Protection</span>
+        <label class="switch">
+          <input type="checkbox" id="etp-site-toggle" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </section>
+
+    <section class="permissions-manager">
+      <h3>Active Permissions</h3>
+      <ul id="permissions-list" class="permissions-list">
+        <!-- Populated by JS bridging SitePermissions API -->
+      </ul>
+      <button class="manage-btn">Manage All Permissions</button>
+    </section>
+  </div>
+  <script src="dashboard.js"></script>
+</body>
+</html>

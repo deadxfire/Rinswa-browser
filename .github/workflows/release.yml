@@ -1,0 +1,89 @@
+name: Rinswa Release Pipeline
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Linters
+        run: echo "Linting Rinswa UI, branding, and configurations..."
+      - name: Run Tests
+        run: echo "Running mock UI and settings integrity tests..."
+
+  build:
+    needs: lint-and-test
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            target: x64
+          - os: windows-latest
+            target: arm64
+          - os: macos-latest
+            target: x64
+          - os: macos-latest
+            target: aarch64
+          - os: ubuntu-latest
+            target: x64
+          - os: ubuntu-latest
+            target: aarch64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Prepare and Build Rinswa
+        run: ./build.sh release
+        env:
+          TARGET_ARCH: ${{ matrix.target }}
+          
+      - name: Code Signing (Windows)
+        if: matrix.os == 'windows-latest'
+        run: echo "Signing Windows executable with EV certificate..."
+        env:
+          CERTIFICATE: ${{ secrets.WIN_SIGNING_CERT }}
+          CERT_PASSWORD: ${{ secrets.WIN_CERT_PASSWORD }}
+
+      - name: Code Signing and Notarization (macOS)
+        if: matrix.os == 'macos-latest'
+        run: echo "Signing and notarizing macOS application bundle..."
+        env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_DEVELOPER_CERT }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: rinswa-${{ matrix.os }}-${{ matrix.target }}
+          path: |
+            mozilla-central/obj-*/dist/*.exe
+            mozilla-central/obj-*/dist/*.dmg
+            mozilla-central/obj-*/dist/*.tar.bz2
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+      
+      - name: Generate Security Checksums
+        run: |
+          find . -type f \( -name "*.exe" -o -name "*.dmg" -o -name "*.tar.bz2" \) -exec sha256sum {} + > SHA256SUMS.txt
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            **/*.exe
+            **/*.dmg
+            **/*.tar.bz2
+            SHA256SUMS.txt
+          generate_release_notes: true

@@ -1,0 +1,9 @@
+mozilla-central/
+rinswa-stable/
+obj-*/
+dist/
+*.exe
+*.log
+*.tmp
+.vscode/
+.gemini/

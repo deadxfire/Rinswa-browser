@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "categories": [
+    "General", "Appearance", "Tabs", "Search", "Privacy & Security", 
+    "Permissions", "Downloads", "Extensions", "Sync", "Profiles", 
+    "Advanced", "About Rinswa"
+  ],
+  "settings": {
+    "general.startup.restore_session": {
+      "category": "General",
+      "type": "integer",
+      "geckoPref": "browser.startup.page",
+      "default": 3,
+      "validation": [0, 1, 3],
+      "label": "Restore previous session"
+    },
+    "appearance.theme": {
+      "category": "Appearance",
+      "type": "string",
+      "geckoPref": "extensions.activeThemeID",
+      "default": "default-theme@rinswa.org",
+      "label": "Browser Theme"
+    },
+    "appearance.compact_mode": {
+      "category": "Appearance",
+      "type": "boolean",
+      "geckoPref": "browser.uidensity",
+      "default": false,
+      "valueMap": { "true": 1, "false": 0 },
+      "label": "Compact mode"
+    },
+    "tabs.close_behavior.warn": {
+      "category": "Tabs",
+      "type": "boolean",
+      "geckoPref": "browser.tabs.warnOnClose",
+      "default": true,
+      "label": "Warn when closing multiple tabs"
+    },
+    "privacy.https_only": {
+      "category": "Privacy & Security",
+      "type": "boolean",
+      "geckoPref": "dom.security.https_only_mode",
+      "default": true,
+      "label": "Enable HTTPS-Only Mode in all windows"
+    },
+    "privacy.tracking_protection": {
+      "category": "Privacy & Security",
+      "type": "boolean",
+      "geckoPref": "privacy.trackingprotection.enabled",
+      "default": true,
+      "label": "Enhanced Tracking Protection"
+    },
+    "permissions.location": {
+      "category": "Permissions",
+      "type": "integer",
+      "geckoPref": "permissions.default.geo",
+      "default": 0,
+      "label": "Location Access"
+    },
+    "downloads.dir": {
+      "category": "Downloads",
+      "type": "string",
+      "geckoPref": "browser.download.dir",
+      "default": "",
+      "label": "Download directory"
+    },
+    "advanced.hardware_acceleration": {
+      "category": "Advanced",
+      "type": "boolean",
+      "geckoPref": "layers.acceleration.disabled",
+      "default": true,
+      "valueMap": { "true": false, "false": true },
+      "label": "Use hardware acceleration when available"
+    }
+  }
+}

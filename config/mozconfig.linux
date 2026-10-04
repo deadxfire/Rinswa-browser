@@ -1,0 +1,19 @@
+# Rinswa Linux Build Configuration
+# Target: Linux x64 and ARM64
+
+ac_add_options --enable-application=browser
+
+# Point mach to our isolated branding directory
+ac_add_options --with-branding=../branding
+
+# Hard-disable Firefox telemetry and data collection
+ac_add_options --disable-telemetry
+ac_add_options --disable-crashreporter
+
+# Optimize for release build
+ac_add_options --enable-optimize
+ac_add_options --disable-debug
+
+# Linux specific toolkit setup
+ac_add_options --enable-default-toolkit=cairo-gtk3-wayland
+ac_add_options --enable-alsa

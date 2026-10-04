@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Rinswa Dark",
+  "version": "1.0",
+  "description": "Default dark theme for Rinswa Browser",
+  "theme": {
+    "colors": {
+      "frame": "#121212",
+      "tab_background_text": "#adb5bd",
+      "toolbar": "#1e1e1e",
+      "bookmark_text": "#f1f3f5",
+      "toolbar_field": "#2d2d2d",
+      "toolbar_field_text": "#f1f3f5",
+      "tab_line": "transparent",
+      "popup": "#1e1e1e",
+      "popup_text": "#f1f3f5"
+    }
+  }
+}

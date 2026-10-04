@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rinswa Browser - Support & Help</title>
+    <meta name="description" content="Official support and help center for the Rinswa Browser. Find guides, troubleshoot issues, and contact the community.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-surface: rgba(11, 15, 29, 0.7);
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-glow: rgba(255, 255, 255, 0.08);
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            
+            --ribbon-red: #ef4444;
+            --ribbon-orange: #f59e0b;
+            --ribbon-green: #10b981;
+            --ribbon-blue: #3b82f6;
+            --ribbon-purple: #8b5cf6;
+            
+            --gradient-ribbon: linear-gradient(90deg, var(--ribbon-red), var(--ribbon-orange), var(--ribbon-green), var(--ribbon-blue), var(--ribbon-purple));
+            --gradient-card-hover: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Abstract Background Glows */
+        .bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            top: -200px;
+            left: -100px;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(60px);
+        }
+        
+        .bg-glow.right {
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%);
+            top: 40%;
+            left: auto;
+            right: -200px;
+        }
+
+        /* Navbar */
+        nav {
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-glow);
+            background: rgba(6, 9, 19, 0.8);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            background: var(--gradient-ribbon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 32px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        header.hero {
+            text-align: center;
+            padding: 100px 24px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 18px 24px 18px 56px;
+            border-radius: 99px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(11, 15, 29, 0.6);
+            color: white;
+            font-size: 18px;
+            font-family: inherit;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: rgba(245, 158, 11, 0.5);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2), 0 8px 32px rgba(0, 0, 0, 0.3);
+            background: rgba(11, 15, 29, 0.9);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: var(--text-secondary);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Support Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 100px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--gradient-card-hover);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon-box {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .icon-box svg {
+            width: 28px;
+            height: 28px;
+            stroke: url(#ribbon-gradient);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Community Section */
+        .community {
+            margin-top: 80px;
+            text-align: center;
+            padding: 60px;
+            background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.05));
+            border-radius: 30px;
+            border: 1px solid var(--border-glow);
+        }
+
+        .community h2 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 16px 32px;
+            border-radius: 99px;
+            background: var(--gradient-ribbon);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 40px 24px;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-glow);
+            font-size: 14px;
+        }
+
+        /* SVG Gradient Definition */
+        .svg-defs {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <svg class="svg-defs">
+        <defs>
+            <linearGradient id="ribbon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ef4444" />
+                <stop offset="50%" stop-color="#f59e0b" />
+                <stop offset="100%" stop-color="#8b5cf6" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <div class="bg-glow"></div>
+    <div class="bg-glow right"></div>
+
+    <nav>
+        <div class="logo">
+            <span>Rinswa</span> Support
+        </div>
+        <div class="nav-links">
+            <a href="#">Knowledge Base</a>
+            <a href="#">Community</a>
+            <a href="https://github.com/deadxfire/Rinswa-browser">GitHub</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>How can we help you?</h1>
+        <p>Search for guides, troubleshooting steps, and tips to get the most out of Rinswa Browser.</p>
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" placeholder="Search for 'Ad Blocker' or 'Import Bookmarks'...">
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <h2>Getting Started</h2>
+                    <p>Learn how to install Rinswa, import your bookmarks, and set up your profile for the first time.</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h2>Privacy & Security</h2>
+                    <p>Configure the native Ad Blocker, adjust Enhanced Tracking Protection, and secure your browsing.</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                        </svg>
+                    </div>
+                    <h2>Themes & Customization</h2>
+                    <p>Change your wallpaper, customize the Cyber-Glass UI, and organize your modular tabs.</p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h2>Troubleshooting</h2>
+                    <p>Fix crashes, solve slow loading pages, and resolve extensions compatibility issues.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="community">
+            <h2>Need more help?</h2>
+            <p>Join the Rinswa developer community on GitHub. Report bugs, request features, and help us build the future of the web.</p>
+            <a href="https://github.com/deadxfire/Rinswa-browser/issues" class="btn">Open an Issue</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Rinswa Browser. Developed by Arindam Makar. Built on the Gecko Engine.</p>
+    </footer>
+</body>
+</html>
