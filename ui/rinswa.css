@@ -455,8 +455,13 @@ menupopup menu:-moz-locale-dir(rtl):hover::after {
   box-sizing: border-box !important;
 }
 
+#appMenu-popup,
+#appMenu-multiView,
+#appMenu-multiView > .panel-viewcontainer,
+#appMenu-multiView > .panel-viewcontainer > .panel-viewstack,
+#appMenu-popup panelview,
 #appMenu-mainView,
-#appMenu-popup panelview {
+.PanelUI-subView {
   width: 380px !important;
   min-width: 380px !important;
   max-width: 440px !important;
@@ -470,11 +475,13 @@ menupopup menu:-moz-locale-dir(rtl):hover::after {
   box-sizing: border-box !important;
 }
 
-#appMenu-popup .panel-subview-body {
+#appMenu-popup .panel-subview-body,
+.PanelUI-subView .panel-subview-body {
   background: transparent !important;
   color: #f1f5f9 !important;
   box-sizing: border-box !important;
-  padding: 4px 6px !important;
+  padding: 6px 10px !important;
+  width: 100% !important;
 }
 
 #appMenu-popup scrollbox {
@@ -665,16 +672,17 @@ setting-group[groupid="moreFromMozillaProducts"] {
 }
 
 /* Compact, Uniformly Aligned Menu Items - ONLY genuine, visible menu row toolbarbuttons */
-#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):not(#appMenu-update-banner):not(#appMenu-create-profile-button):not(#appMenu-profiles-button):not(#appMenu-referrals-button):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]) {
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):not(#appMenu-update-banner):not(#appMenu-create-profile-button):not(#appMenu-profiles-button):not(#appMenu-referrals-button):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]),
+.PanelUI-subView toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]) {
   display: flex !important;
   align-items: center !important;
-  min-height: 28px !important;
+  min-height: 30px !important;
   height: auto !important;
   padding: 4px 10px !important;
   margin: 1px 0 !important;
-  border-radius: 7px !important;
+  border-radius: 8px !important;
   color: #cbd5e1 !important;
-  font-size: 12px !important;
+  font-size: 12.5px !important;
   font-weight: 500 !important;
   line-height: 1.2 !important;
   box-sizing: border-box !important;
@@ -715,24 +723,34 @@ setting-group[groupid="moreFromMozillaProducts"] {
   fill: #a5b4fc !important;
 }
 
-#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-text {
-  flex: 1 !important;
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-text,
+.PanelUI-subView toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-text {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
   text-align: start !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
+  padding-inline-end: 8px !important;
 }
 
-/* Keyboard Shortcut Accelerator Text */
-#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-accel {
+/* Real Keyboard Shortcut Accelerator Pseudo-Element */
+#appMenu-popup panelview toolbarbutton.subviewbutton[shortcut]::after,
+.PanelUI-subView toolbarbutton.subviewbutton[shortcut]::after,
+.subviewbutton[shortcut]::after {
+  content: attr(shortcut) !important;
+  display: flex !important;
+  align-items: center !important;
   margin-inline-start: auto !important;
   margin-inline-end: 8px !important;
-  color: #818cf8 !important;
-  font-size: 10.5px !important;
-  font-weight: 500 !important;
-  opacity: 0.85 !important;
-  padding-inline-start: 8px !important;
+  padding-inline-start: 12px !important;
+  flex: 0 0 auto !important;
   flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  color: #818cf8 !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  opacity: 0.9 !important;
 }
 
 /* Full Set of SVG Icons for Perfect Vertical Alignment Across All Items */
@@ -811,28 +829,31 @@ setting-group[groupid="moreFromMozillaProducts"] {
 }
 
 /* Universal Submenu Arrow for Panel Subviews across the entire browser */
+#appMenu-popup panelview .subviewbutton-nav:not(.subviewbutton-nav-down)::after,
+.PanelUI-subView .subviewbutton-nav:not(.subviewbutton-nav-down)::after,
 .subviewbutton-nav:not(.subviewbutton-nav-down)::after,
 .moz-button-subviewbutton-nav::after {
-  content: "" !important;
-  display: block !important;
-  width: 14px !important;
-  height: 14px !important;
-  min-width: 14px !important;
-  min-height: 14px !important;
-  background-image: url("chrome://global/skin/icons/arrow-right.svg") !important;
-  background-size: 14px 14px !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
   -moz-context-properties: fill, fill-opacity !important;
+  content: url("chrome://global/skin/icons/arrow-right.svg") !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
   fill: #94a3b8 !important;
-  fill-opacity: 0.8 !important;
+  fill-opacity: 0.85 !important;
   margin-inline-start: auto !important;
-  margin-inline-end: 6px !important;
+  margin-inline-end: 8px !important;
+  flex: 0 0 auto !important;
   flex-shrink: 0 !important;
   transition: transform 0.15s ease, fill 0.15s ease, fill-opacity 0.15s ease !important;
 }
 
-.subviewbutton-nav:hover::after,
+#appMenu-popup panelview .subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
+.PanelUI-subView .subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
+.subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
 .subviewbutton-nav[_moz-menuactive="true"]::after,
 .moz-button-subviewbutton-nav:hover::after {
   fill: #ffffff !important;
