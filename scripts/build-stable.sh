@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Rinswa Browser Stable (1.0.0) Build Pipeline
+# Rinswa Browser Stable (1.0.1) Build Pipeline
 # Developed and made by Arindam Makar
 # Target: Windows x64 Standalone Executable & Installer
 # ==============================================================================
@@ -20,7 +20,7 @@ export DISABLE_TELEMETRY=1
 export MOZ_NOSPAM=1
 
 echo "======================================================="
-echo "     RINSWA BROWSER STABLE (v1.0.0) BUILD SYSTEM"
+echo "     RINSWA BROWSER STABLE (v1.0.1) BUILD SYSTEM"
 echo "        Developed and made by Arindam Makar"
 echo "======================================================="
 echo "Active Python: $(command -v python) ($(python --version 2>&1 || true))"
@@ -46,7 +46,7 @@ run_bootstrap() {
 
 run_prepare() {
     echo ""
-    echo "[Step 2/4] Applying Rinswa branding, Cyber-Glass UI, and v1.0.0 settings..."
+    echo "[Step 2/4] Applying Rinswa branding, Cyber-Glass UI, and v1.0.1 settings..."
     cd "$PROJECT_DIR"
     export MOZ_SRC_DIR="$MOZ_DIR"
     ./build.sh prepare
@@ -55,7 +55,7 @@ run_prepare() {
 
 run_compile() {
     echo ""
-    echo "[Step 3/4] Compiling Gecko Engine into Rinswa Stable v1.0.0..."
+    echo "[Step 3/4] Compiling Gecko Engine into Rinswa Stable v1.0.1..."
     cd "$MOZ_DIR"
     python ./mach build -j16
     echo ">> Step 3 (Compilation) complete."

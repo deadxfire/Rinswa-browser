@@ -78,6 +78,22 @@
       "browser.startup.homepage.abouthome_cache.enabled": {
         "Value": false,
         "Status": "default"
+      },
+      "app.support.baseURL": {
+        "Value": "https://deadxfire.github.io/Rinswa-Browser-Support/support.html?topic=",
+        "Status": "locked"
+      },
+      "browser.shell.customIcon.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.shell.customIcon.id": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "browser.preferences.moreFromMozilla": {
+        "Value": false,
+        "Status": "locked"
       }
     }
   }

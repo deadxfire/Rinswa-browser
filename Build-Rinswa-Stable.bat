@@ -1,19 +1,19 @@
 @echo off
-title Rinswa Browser Stable v1.0.0 - Build System
+title Rinswa Browser Stable v1.0.1 - Build System
 color 0B
 
 echo =======================================================
-echo          RINSWA BROWSER STABLE (v1.0.0) BUILD
+echo          RINSWA BROWSER STABLE (v1.0.1) BUILD
 echo          Developed and made by Arindam Makar
 echo =======================================================
 echo.
-echo Version:   1.0.0 Stable (Official Release Engine)
+echo Version:   1.0.1 Stable (Official Release Engine)
 echo Directory: rinswa-stable\
 echo Output:    rinswa-stable\obj-rinswa\dist\
 echo.
 echo What this script will do:
 echo 1. Verify modern Firefox Stable engine (157.0.1 source).
-echo 2. Set version to 1.0.0 Stable and remove Nightly/experimental flags.
+echo 2. Set version to 1.0.1 Stable and remove Nightly/experimental flags.
 echo 3. Inject custom Rinswa branding, Cyber-Glass theme, and icons.
 echo 4. Compile the full Gecko engine.
 echo 5. Package the standalone installer (.exe) into rinswa-stable\obj-rinswa\dist\

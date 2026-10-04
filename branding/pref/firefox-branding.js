@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// Rinswa Branding Preferences - Official Stable v1.0.0
+// Rinswa Branding Preferences - Official Stable v1.0.1
 pref("startup.homepage_override_url", "https://deadxfire.github.io/Rinswa-Browser-Support/");
 pref("startup.homepage_welcome_url", "https://deadxfire.github.io/Rinswa-Browser-Support/");
 pref("startup.homepage_welcome_url.additional", "");
@@ -17,8 +17,8 @@ pref("app.update.checkInstallTime.days", 2);
 pref("app.update.badgeWaitTime", 0);
 pref("devtools.selfxss.count", 5);
 
-// Support & Help Links
-pref("app.support.baseURL", "https://deadxfire.github.io/Rinswa-Browser-Support/support.html");
+// Support & Help Links (appends topic cleanly without 404)
+pref("app.support.baseURL", "https://deadxfire.github.io/Rinswa-Browser-Support/support.html?topic=");
 pref("app.feedback.baseURL", "https://github.com/deadxfire/Rinswa-browser/issues");
 
 // Web Compatibility: Ensure Firefox compatibility token is included in the User-Agent header
@@ -40,3 +40,6 @@ pref("browser.startup.homepage.abouthome_cache.enabled", false);
 // Auto-enable bundled distribution extensions (uBlock Origin) on first run
 pref("extensions.autoDisableScopes", 0);
 pref("extensions.enabledScopes", 15);
+
+// Disable custom browser icon picker in Appearance settings (only Rinswa icon is supported)
+pref("browser.shell.customIcon.enabled", false);

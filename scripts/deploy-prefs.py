@@ -15,7 +15,7 @@ for t in targets:
     shutil.copyfile(src, t)
     print(f"Copied to {t}")
 
-user_prefs = """// Rinswa Stable v1.0.0 Web Compatibility & Clean Home Settings
+user_prefs = """// Rinswa Stable v1.0.1 Web Compatibility & Clean Home Settings
 user_pref("general.useragent.compatMode.firefox", true);
 user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
 user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);

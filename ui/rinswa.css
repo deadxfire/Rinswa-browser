@@ -405,7 +405,11 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Completely hide promo/sync banners, profile widgets & clutter */
+/* Completely eradicate blank violet promo boxes, FxA sync, banners & clutter */
+#appMenu-popup .panel-banner-item,
+#appMenu-popup .panel-banner,
+#appMenu-popup [class*="panel-banner"],
+#appMenu-popup [class*="banner"],
 #appMenu-addon-banners,
 #appMenu-update-banner,
 #appMenu-menu-message,
@@ -415,12 +419,42 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
 #appMenu-fxa-signed-out-row,
 #appMenu-nova-fxa-label,
 #appMenu-fxa-sign-in-promo,
+#appMenu-fxa-sign-in-promo *,
 #appMenu-create-profile-button,
 #appMenu-profiles-button,
 #appMenu-fxa-separator,
 #appMenu-referrals-button,
-#appMenu-referrals-separator {
+#appMenu-referrals-separator,
+:root #appMenu-fxa-sign-in-promo,
+:root #appMenu-fxa-status2,
+:root #appMenu-update-banner,
+panelview #appMenu-fxa-sign-in-promo,
+panelview #appMenu-fxa-status2 {
   display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Remove "More from Rinswa / Mozilla" from Settings */
+#category-more-from-mozilla,
+#moreFromMozillaCategory-header,
+#moreFromMozillaCategory,
+[data-category="paneMoreFromMozilla"],
+#paneMoreFromMozilla,
+setting-group[groupid="moreFromMozillaPromo"],
+setting-group[groupid="moreFromMozillaProducts"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* Compact, Uniformly Aligned Menu Items */
@@ -643,5 +677,20 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
 #PanelUI-menu-button[open],
 #PanelUI-menu-button:hover {
   background: rgba(99, 102, 241, 0.18) !important;
+}
+
+/* Complete Removal of Custom Browser Icon Setting (Rinswa uses its official icon exclusively) */
+#browser-icon-box-group,
+#browser-icon-button,
+#current-browser-icon,
+setting-group[groupid="browserIconEntry"],
+setting-group[groupid="browserIconBasic"],
+setting-group[groupid="browserIconBonus"],
+[data-subcategory="browserIcon"],
+#category-browserIcon,
+#browserIcon {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 

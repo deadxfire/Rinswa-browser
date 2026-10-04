@@ -3,7 +3,7 @@
 ## Versioning Strategy
 Rinswa clearly delineates its UI/feature version from the underlying Gecko engine. This ensures users are never misled about their exact security patch level and know exactly what standard they are browsing with.
 * **Format:** `Rinswa {RinswaVersion} (Firefox Base: {FirefoxVersion})`
-* **Example:** `Rinswa 1.0.0 (Firefox Base: 128.0esr)`
+* **Example:** `Rinswa 1.0.1 (Firefox Base: 157.0.1)`
 * Displayed natively in `about:rinswa` (which overrides `about:dialog`).
 
 ## Update System
