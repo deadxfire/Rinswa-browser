@@ -9,7 +9,13 @@ export PATH="/c/Program Files/Git/cmd:/c/Users/arind/AppData/Local/Python/python
 COMMAND=$1
 CONFIG_DIR="$(pwd)/config"
 BRANDING_DIR="$(pwd)/branding"
-MOZ_SRC_DIR="${MOZ_SRC_DIR:-$(pwd)/mozilla-central}"
+if [ -z "$MOZ_SRC_DIR" ]; then
+    if [ -d "$(pwd)/rinswa-stable" ]; then
+        MOZ_SRC_DIR="$(pwd)/rinswa-stable"
+    else
+        MOZ_SRC_DIR="$(pwd)/mozilla-central"
+    fi
+fi
 
 detect_architecture() {
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')

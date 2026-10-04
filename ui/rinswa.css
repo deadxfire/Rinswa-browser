@@ -414,6 +414,7 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
 #appMenu-update-banner,
 #appMenu-menu-message,
 #appMenu-fxa-status2,
+#appMenu-fxa-status2 *,
 #appMenu-fxa-label2,
 #appMenu-fxa-text,
 #appMenu-fxa-signed-out-row,
@@ -425,6 +426,10 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
 #appMenu-fxa-separator,
 #appMenu-referrals-button,
 #appMenu-referrals-separator,
+#appMenu-popup [hidden="true"],
+#appMenu-popup [collapsed="true"],
+#appMenu-popup [hidden],
+#appMenu-popup [collapsed],
 :root #appMenu-fxa-sign-in-promo,
 :root #appMenu-fxa-status2,
 :root #appMenu-update-banner,
@@ -457,11 +462,12 @@ setting-group[groupid="moreFromMozillaProducts"] {
   pointer-events: none !important;
 }
 
-/* Compact, Uniformly Aligned Menu Items */
-#appMenu-popup .subviewbutton {
+/* Compact, Uniformly Aligned Menu Items - ONLY genuine menu row toolbarbuttons */
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):not(#appMenu-update-banner):not(#appMenu-create-profile-button):not(#appMenu-profiles-button):not([hidden="true"]):not([collapsed="true"]) {
   display: flex !important;
   align-items: center !important;
   min-height: 27px !important;
+  height: 27px !important;
   padding: 3px 8px !important;
   margin: 1px 3px !important;
   border-radius: 7px !important;
@@ -475,15 +481,15 @@ setting-group[groupid="moreFromMozillaProducts"] {
   transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-#appMenu-popup .subviewbutton:hover,
-#appMenu-popup .subviewbutton[_moz-menuactive="true"] {
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):hover,
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item)[_moz-menuactive="true"] {
   background: rgba(99, 102, 241, 0.2) !important;
   color: #ffffff !important;
   transform: translateX(1px) !important;
 }
 
 /* Dedicated, Perfectly Aligned 16px Icon Slot */
-#appMenu-popup .subviewbutton > .toolbarbutton-icon {
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-icon {
   display: -moz-inline-box !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -499,12 +505,12 @@ setting-group[groupid="moreFromMozillaProducts"] {
   transition: opacity 0.15s ease, fill 0.15s ease !important;
 }
 
-#appMenu-popup .subviewbutton:hover > .toolbarbutton-icon {
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):hover > .toolbarbutton-icon {
   opacity: 1 !important;
   fill: #a5b4fc !important;
 }
 
-#appMenu-popup .subviewbutton > .toolbarbutton-text {
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-text {
   flex: 1 !important;
   text-align: start !important;
   overflow: hidden !important;
@@ -513,7 +519,7 @@ setting-group[groupid="moreFromMozillaProducts"] {
 }
 
 /* Keyboard Shortcut Accelerator Text */
-#appMenu-popup .subviewbutton > .toolbarbutton-accel {
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-accel {
   margin-inline-start: auto !important;
   color: #818cf8 !important;
   font-size: 10.5px !important;
@@ -619,37 +625,77 @@ setting-group[groupid="moreFromMozillaProducts"] {
 /* Compact Zoom Controls Bar */
 #appMenu-zoom-controls {
   display: flex !important;
+  flex-direction: row !important;
   align-items: center !important;
+  justify-content: space-between !important;
   padding: 2px 8px !important;
   margin: 2px 3px !important;
   background: rgba(255, 255, 255, 0.03) !important;
   border: 1px solid rgba(255, 255, 255, 0.06) !important;
   border-radius: 8px !important;
   min-height: 28px !important;
+  height: 28px !important;
   box-sizing: border-box !important;
   width: calc(100% - 6px) !important;
+  max-width: calc(100% - 6px) !important;
 }
+#appMenu-zoom-controls > label.toolbarbutton-text,
 #appMenu-zoom-controls > label {
-  flex: 1 !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
   color: #cbd5e1 !important;
   font-size: 12px !important;
   font-weight: 500 !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  text-align: start !important;
 }
+#appMenu-zoom-controls > .subviewbutton,
 #appMenu-zoomReduce-button2,
 #appMenu-zoomReset-button2,
 #appMenu-zoomEnlarge-button2,
 #appMenu-fullscreen-button2 {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+  padding: 2px !important;
+  margin: 0 1px !important;
+  box-sizing: border-box !important;
+  border-radius: 6px !important;
   background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 6px !important;
   color: #f8fafc !important;
-  padding: 2px 6px !important;
-  margin: 0 1px !important;
-  min-width: 24px !important;
-  height: 22px !important;
   font-size: 11px !important;
+  transform: none !important;
   transition: all 0.15s ease !important;
 }
+#appMenu-zoom-controls > #appMenu-zoomReset-button2,
+#appMenu-zoomReset-button2 {
+  width: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  padding: 1px 4px !important;
+  font-weight: 600 !important;
+}
+#appMenu-zoom-controls > .subviewbutton > .toolbarbutton-icon,
+#appMenu-zoomReduce-button2 > .toolbarbutton-icon,
+#appMenu-zoomEnlarge-button2 > .toolbarbutton-icon,
+#appMenu-fullscreen-button2 > .toolbarbutton-icon {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  fill: currentColor !important;
+}
+#appMenu-zoom-controls > .subviewbutton:hover,
 #appMenu-zoomReduce-button2:hover,
 #appMenu-zoomReset-button2:hover,
 #appMenu-zoomEnlarge-button2:hover,
@@ -657,6 +703,7 @@ setting-group[groupid="moreFromMozillaProducts"] {
   background: rgba(99, 102, 241, 0.25) !important;
   border-color: rgba(129, 140, 248, 0.5) !important;
   color: #ffffff !important;
+  transform: none !important;
 }
 
 /* Compact Separators */

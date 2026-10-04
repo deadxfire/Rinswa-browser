@@ -16,6 +16,7 @@
       ]
     },
     "NewTabPage": true,
+    "AppUpdateURL": "https://raw.githubusercontent.com/deadxfire/Rinswa-browser/main/update.xml",
     "FirefoxHome": {
       "Search": true,
       "TopSites": true,
