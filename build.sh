@@ -74,6 +74,12 @@ prepare_source() {
     cp "$BRANDING_DIR/icons/default.ico"  "$DEST/firefox64.ico"
     cp "$BRANDING_DIR/icons/document.ico" "$DEST/document.ico"
 
+    if [ -f "$BRANDING_DIR/wizHeader.bmp" ]; then
+        cp "$BRANDING_DIR/wizHeader.bmp"    "$DEST/wizHeader.bmp"
+        cp "$BRANDING_DIR/wizHeaderRTL.bmp" "$DEST/wizHeaderRTL.bmp"
+        cp "$BRANDING_DIR/wizWatermark.bmp" "$DEST/wizWatermark.bmp"
+    fi
+
     for f in default16 default22 default24 default32 default48 default64 default128 default256 \
              VisualElements_150 VisualElements_70 PrivateBrowsing_150 PrivateBrowsing_70; do
         cp "$GEN/$f.png" "$DEST/$f.png"

@@ -58,7 +58,46 @@ Save-Resized 192 192 'about.png'
 Save-Resized 150 150 'VisualElements_150.png'
 Save-Resized 70  70  'VisualElements_70.png'
 Save-Resized 150 150 'PrivateBrowsing_150.png'
-Save-Resized 70  70  'PrivateBrowsing_70.png'
+# --- Generate Installer Bitmaps (wizHeader.bmp, wizHeaderRTL.bmp, wizWatermark.bmp) ---
+$brandingDir = Join-Path $root 'branding'
+
+# 1. wizHeader.bmp (150x57, white background, logo on right)
+$hdrBmp = New-Object System.Drawing.Bitmap(150, 57, [System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
+$gHdr = [System.Drawing.Graphics]::FromImage($hdrBmp)
+$gHdr.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+$gHdr.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality
+$gHdr.Clear([System.Drawing.Color]::White)
+$gHdr.DrawImage($source, 98, 5, 46, 46)
+$gHdr.Dispose()
+$hdrBmp.Save((Join-Path $brandingDir 'wizHeader.bmp'), [System.Drawing.Imaging.ImageFormat]::Bmp)
+$hdrBmp.Dispose()
+
+# 2. wizHeaderRTL.bmp (150x57, white background, logo on left)
+$hdrRtlBmp = New-Object System.Drawing.Bitmap(150, 57, [System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
+$gRtl = [System.Drawing.Graphics]::FromImage($hdrRtlBmp)
+$gRtl.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+$gRtl.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality
+$gRtl.Clear([System.Drawing.Color]::White)
+$gRtl.DrawImage($source, 6, 5, 46, 46)
+$gRtl.Dispose()
+$hdrRtlBmp.Save((Join-Path $brandingDir 'wizHeaderRTL.bmp'), [System.Drawing.Imaging.ImageFormat]::Bmp)
+$hdrRtlBmp.Dispose()
+
+# 3. wizWatermark.bmp (164x314, Cyber-Glass gradient, prominent logo)
+$wmBmp = New-Object System.Drawing.Bitmap(164, 314, [System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
+$gWm = [System.Drawing.Graphics]::FromImage($wmBmp)
+$gWm.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+$gWm.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality
+$rect = New-Object System.Drawing.Rectangle(0, 0, 164, 314)
+$gradBrush = New-Object System.Drawing.Drawing2D.LinearGradientBrush($rect, [System.Drawing.Color]::FromArgb(13, 18, 32), [System.Drawing.Color]::FromArgb(20, 24, 45), 90)
+$gWm.FillRectangle($gradBrush, $rect)
+$gradBrush.Dispose()
+$logoSize = 126
+$xPos = [int]((164 - $logoSize) / 2)
+$gWm.DrawImage($source, $xPos, 78, $logoSize, $logoSize)
+$gWm.Dispose()
+$wmBmp.Save((Join-Path $brandingDir 'wizWatermark.bmp'), [System.Drawing.Imaging.ImageFormat]::Bmp)
+$wmBmp.Dispose()
 
 $source.Dispose()
-Write-Host "Rinswa branding assets written to $outDir"
+Write-Host "Rinswa branding assets written to $outDir and $brandingDir"
