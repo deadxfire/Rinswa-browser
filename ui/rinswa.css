@@ -327,15 +327,67 @@ panel::part(content) {
   -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
 }
 
-menuitem, menumenu {
+menuitem, menu {
   border-radius: 8px !important;
   margin: 2px 4px !important;
+  padding: 5px 8px !important;
+  color: #e2e8f0 !important;
   transition: all 0.15s ease !important;
 }
 
-menuitem:hover, menuitem[_moz-menuactive="true"] {
+menuitem:hover, menuitem[_moz-menuactive="true"],
+menu:hover, menu[_moz-menuactive="true"],
+menu[open="true"] {
   background: linear-gradient(90deg, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.2) 100%) !important;
   color: #ffffff !important;
+}
+
+/* Universal Submenu Arrow Indicator for Classic Context & Bar Menus */
+menupopup > menu,
+menupopup menu {
+  position: relative !important;
+}
+
+menupopup > menu::after,
+menupopup menu::after {
+  content: "" !important;
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  background-image: url("chrome://global/skin/icons/arrow-right.svg") !important;
+  background-size: 14px 14px !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  -moz-context-properties: fill, fill-opacity !important;
+  fill: #94a3b8 !important;
+  fill-opacity: 0.85 !important;
+  margin-inline-start: auto !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.15s ease, fill 0.15s ease, fill-opacity 0.15s ease !important;
+}
+
+menupopup > menu:hover::after,
+menupopup > menu[_moz-menuactive="true"]::after,
+menupopup > menu[open="true"]::after,
+menupopup menu:hover::after,
+menupopup menu[_moz-menuactive="true"]::after,
+menupopup menu[open="true"]::after {
+  fill: #ffffff !important;
+  fill-opacity: 1 !important;
+  transform: translateX(2px) !important;
+}
+
+menupopup > menu:-moz-locale-dir(rtl)::after,
+menupopup menu:-moz-locale-dir(rtl)::after {
+  background-image: url("chrome://global/skin/icons/arrow-left.svg") !important;
+  transform: none !important;
+}
+
+menupopup > menu:-moz-locale-dir(rtl):hover::after,
+menupopup menu:-moz-locale-dir(rtl):hover::after {
+  transform: translateX(-2px) !important;
 }
 
 /* Window Control Buttons */
@@ -366,12 +418,7 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
   --panel-border-radius: 16px !important;
   --panel-padding: 4px !important;
   --panel-shadow-margin: 0px !important;
-  --panel-width: 305px !important;
   color-scheme: dark !important;
-  width: 305px !important;
-  min-width: 305px !important;
-  max-width: 305px !important;
-  overflow-x: hidden !important;
 }
 
 #appMenu-popup::part(content),
@@ -385,31 +432,119 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.25) !important;
   color: #f1f5f9 !important;
   padding: 4px !important;
-  width: 305px !important;
-  min-width: 305px !important;
-  max-width: 305px !important;
   box-sizing: border-box !important;
-  overflow-x: hidden !important;
 }
 
-/* Eliminate all horizontal scrollbars across all panel containers */
-#appMenu-popup panelview,
-#appMenu-popup .panel-subview-body,
-#appMenu-popup panelmultiview,
-#appMenu-popup scrollbox,
-#appMenu-popup .arrowscrollbox-scrollbox {
+/* App menu main view and subview sizing */
+#appMenu-popup panelview {
   background: transparent !important;
   background-color: transparent !important;
   color: #f1f5f9 !important;
-  overflow-x: hidden !important;
   box-sizing: border-box !important;
-  width: 100% !important;
-  max-width: 100% !important;
+}
+
+#appMenu-mainView {
+  width: 320px !important;
+  min-width: 320px !important;
+}
+
+#appMenu-popup panelview:not(#appMenu-mainView) {
+  min-width: 320px !important;
+}
+
+#appMenu-popup .panel-subview-body {
+  background: transparent !important;
+  color: #f1f5f9 !important;
+  box-sizing: border-box !important;
+  padding: 4px 6px !important;
 }
 
 #appMenu-popup scrollbox {
   scrollbar-width: thin !important;
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent !important;
+}
+
+/* Subview Navigation Header & Back Button */
+#appMenu-popup .panel-header {
+  display: flex !important;
+  align-items: center !important;
+  padding: 6px 8px !important;
+  min-height: 34px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin-bottom: 4px !important;
+}
+
+#appMenu-popup .panel-header > h1 {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #f8fafc !important;
+  margin: 0 !important;
+  padding: 0 6px !important;
+  flex: 1 !important;
+  text-align: start !important;
+}
+
+#appMenu-popup .subviewbutton-back {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
+  border-radius: 6px !important;
+  padding: 4px !important;
+  margin: 0 !important;
+  color: #cbd5e1 !important;
+  background: transparent !important;
+  -moz-context-properties: fill !important;
+  fill: currentColor !important;
+  transition: all 0.15s ease !important;
+}
+
+#appMenu-popup .subviewbutton-back:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+/* Tab Groups Subview & Empty State */
+#appMenu-tabGroupsListView,
+#toolbar-tabGroupsListView {
+  min-width: 320px !important;
+  max-width: 360px !important;
+}
+
+tab-groups-list .tab-groups-list-empty-state {
+  padding: 16px 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+tab-groups-list .tab-groups-list-empty-state-image {
+  max-width: 160px !important;
+  height: auto !important;
+  margin-bottom: 12px !important;
+}
+
+tab-groups-list .tab-groups-list-empty-state-header {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #f8fafc !important;
+  margin: 0 0 6px 0 !important;
+}
+
+tab-groups-list .tab-groups-list-empty-state-description {
+  font-size: 12px !important;
+  color: #94a3b8 !important;
+  line-height: 1.4 !important;
+  margin: 0 0 16px 0 !important;
+  max-width: 280px !important;
+}
+
+tab-groups-list .tab-groups-list-empty-state moz-button {
+  margin: 0 auto !important;
 }
 
 /* Header with Rinswa emblem and title */
@@ -514,8 +649,8 @@ setting-group[groupid="moreFromMozillaProducts"] {
 #appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):not(#appMenu-update-banner):not(#appMenu-create-profile-button):not(#appMenu-profiles-button):not(#appMenu-referrals-button):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]) {
   display: flex !important;
   align-items: center !important;
-  min-height: 27px !important;
-  height: 27px !important;
+  min-height: 28px !important;
+  height: auto !important;
   padding: 3px 8px !important;
   margin: 1px 3px !important;
   border-radius: 7px !important;
@@ -655,22 +790,63 @@ setting-group[groupid="moreFromMozillaProducts"] {
   letter-spacing: 0.4px !important;
 }
 
-/* Submenu Arrow Indicator */
-#appMenu-popup .subviewbutton-nav::after {
+/* Universal Submenu Arrow for Panel Subviews across the entire browser */
+.subviewbutton-nav:not(.subviewbutton-nav-down)::after,
+.moz-button-subviewbutton-nav::after {
   content: "" !important;
-  width: 12px !important;
-  height: 12px !important;
-  background-image: url("chrome://global/skin/icons/arrow-right-12.svg") !important;
-  background-repeat: no-repeat !important;
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  background-image: url("chrome://global/skin/icons/arrow-right.svg") !important;
+  background-size: 14px 14px !important;
   background-position: center !important;
-  -moz-context-properties: fill !important;
+  background-repeat: no-repeat !important;
+  -moz-context-properties: fill, fill-opacity !important;
   fill: #94a3b8 !important;
-  margin-inline-start: 6px !important;
-  opacity: 0.7 !important;
+  fill-opacity: 0.8 !important;
+  margin-inline-start: auto !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.15s ease, fill 0.15s ease, fill-opacity 0.15s ease !important;
 }
-#appMenu-popup .subviewbutton-nav:hover::after {
+
+.subviewbutton-nav:hover::after,
+.subviewbutton-nav[_moz-menuactive="true"]::after,
+.moz-button-subviewbutton-nav:hover::after {
   fill: #ffffff !important;
-  opacity: 1 !important;
+  fill-opacity: 1 !important;
+  transform: translateX(2px) !important;
+}
+
+.subviewbutton-nav:-moz-locale-dir(rtl)::after,
+.moz-button-subviewbutton-nav:-moz-locale-dir(rtl)::after {
+  background-image: url("chrome://global/skin/icons/arrow-left.svg") !important;
+  transform: none !important;
+}
+
+.subviewbutton-nav:-moz-locale-dir(rtl):hover::after,
+.moz-button-subviewbutton-nav:-moz-locale-dir(rtl):hover::after {
+  transform: translateX(-2px) !important;
+}
+
+/* Down arrow for dropdown subviews */
+.subviewbutton-nav-down::after {
+  content: "" !important;
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  background-image: url("chrome://global/skin/icons/arrow-down.svg") !important;
+  background-size: 14px 14px !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  -moz-context-properties: fill, fill-opacity !important;
+  fill: #94a3b8 !important;
+  fill-opacity: 0.8 !important;
+  margin-inline-start: auto !important;
+  flex-shrink: 0 !important;
 }
 
 /* Compact Zoom Controls Bar */
