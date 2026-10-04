@@ -14,7 +14,7 @@ Developed and maintained by **[Arindam Makar](https://github.com/deadxfire)**
 [![License](https://img.shields.io/badge/license-MPL_2.0-blueviolet?style=for-the-badge)](LICENSE)
 [![Adblocker](https://img.shields.io/badge/adblocker-uBlock_Origin_Bundled-red?style=for-the-badge&logo=ublockorigin)](https://github.com/gorhill/uBlock)
 
-[Features](#key-features) • [Architecture](#repository-structure) • [Building from Source](#building-from-source) • [Privacy Policy](#privacy--security-first) • [License](#license)
+[Features](#key-features) • [Architecture](#repository-structure) • [Building from Source](#building-from-source) • [Update & Build Guide](docs/UPDATING_AND_BUILDING.md) • [Privacy Policy](#privacy--security-first) • [License](#license)
 
 ---
 
@@ -77,6 +77,8 @@ Rinswa-browser/
 ---
 
 ## Building from Source
+
+> For a complete, step-by-step walkthrough on building the installer, merging upstream Firefox engine updates, and publishing releases, see the **[Updating & Building Guide](docs/UPDATING_AND_BUILDING.md)**.
 
 ### Prerequisites
 
