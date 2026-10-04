@@ -3,9 +3,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 // Rinswa Branding Preferences - Official Stable v1.0.0
-pref("startup.homepage_override_url", "");
-pref("startup.homepage_welcome_url", "");
+pref("startup.homepage_override_url", "https://deadxfire.github.io/Rinswa-Browser-Support/");
+pref("startup.homepage_welcome_url", "https://deadxfire.github.io/Rinswa-Browser-Support/");
 pref("startup.homepage_welcome_url.additional", "");
+pref("browser.startup.homepage", "https://deadxfire.github.io/Rinswa-Browser-Support/");
 pref("app.update.channel", "release");
 pref("app.update.interval", 86400);
 pref("app.update.promptWaitTime", 86400);
