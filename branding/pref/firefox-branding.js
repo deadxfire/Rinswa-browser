@@ -17,7 +17,7 @@ pref("app.update.badgeWaitTime", 0);
 pref("devtools.selfxss.count", 5);
 
 // Support & Help Links
-pref("app.support.baseURL", "https://deadxfire.github.io/Rinswa-browser/docs/support.html");
+pref("app.support.baseURL", "https://deadxfire.github.io/Rinswa-Browser-Support/support.html");
 pref("app.feedback.baseURL", "https://github.com/deadxfire/Rinswa-browser/issues");
 
 // Web Compatibility: Ensure Firefox compatibility token is included in the User-Agent header
