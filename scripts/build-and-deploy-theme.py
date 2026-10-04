@@ -17,10 +17,22 @@ source_destinations = [
     os.path.join(root, "rinswa-stable", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "skin", "classic", "browser", "browser.css"),
 ]
 
+prefix_imports = """/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://browser/skin/browser-shared.css");
+@import url("chrome://browser/skin/contextmenu.css");
+
+"""
+
 for s_dest in source_destinations:
     if os.path.exists(os.path.dirname(s_dest)):
         with open(s_dest, "w", encoding="utf-8") as f:
-            f.write(css)
+            if s_dest.endswith("browser.css"):
+                f.write(prefix_imports + css)
+            else:
+                f.write(css)
         print("Updated source CSS:", s_dest)
 
 # Deploy to all active user profiles

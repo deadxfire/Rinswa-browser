@@ -6,10 +6,14 @@ Welcome to the **Rinswa Browser 1.0.3 Stable** release! Powered by the modern, b
 
 ### 🚀 Key Improvements & Highlights in v1.0.3
 
-* **💎 High-Contrast Light Mode Tab Text Readability:**
-  - Resolved low-contrast tab labels when running in light mode or with the default theme under light appearance.
-  - Active tabs now render with pure white text (`#ffffff`), glowing cyan accents, and clear drop shadows. Inactive tabs feature crisp bright slate text (`#cbd5e1`), ensuring 100% legibility over obsidian-glass gradients in all environments.
-  - Close buttons, new tab buttons, and navigation bar controls retain high-contrast light colors in light mode.
+* **💎 Universal Theme Compatibility & High-Contrast Light Mode:**
+  - Full support for selecting any theme (built-in Light, Dark, Alpenglow, or custom themes from addons.mozilla.org) while preserving Rinswa Cyber-Glass Glossy Ribbon as the signature default theme out of the box.
+  - In Light Theme and bright background themes, all tab text (`#15141a` / `#3b3a3e`), toolbar icons, URL bar inputs, window controls, and auxiliary buttons dynamically switch to high-contrast dark slate, guaranteeing 100% legibility on white/light surfaces.
+  - Active tabs cleanly elevate with pure white backgrounds (`#ffffff`) and refined borders in light mode.
+
+* **📋 All Tabs Menu (`#alltabs-button`) Tab Title Visibility:**
+  - Resolved an issue in the "All Tabs" popup dropdown where tab titles were crushed and hidden next to the favicon.
+  - Tab items now render with full title text, proper truncation ellipsis, favicons, and dedicated 24px close and audio buttons.
 
 * **🎯 App Menu Layout & Visual Overhaul (Matching Target Design):**
   - Expanded panel width to 360px so keyboard shortcuts are never clipped.
@@ -34,3 +38,13 @@ Welcome to the **Rinswa Browser 1.0.3 Stable** release! Powered by the modern, b
 | :--- | :--- | :--- | :--- |
 | **`rinswa-1.0.3.en-US.win64.installer.exe`** | Standalone Release Installer | Windows x64 (64-bit) | ~96.7 MB |
 | **`rinswa-1.0.3.en-US.win64.zip`** | Standalone Portable Archive | Windows x64 (64-bit) | ~149.4 MB |
+
+---
+
+### 🔐 SHA-256 Checksums
+
+```text
+F84E61629B256CCDC1EA82E313006B20D2EF2C647C1ADCEA90D7B2AF4FF41052  rinswa-1.0.3.en-US.win64.installer.exe
+86F55F31FD166A0287B6F5DF237D21166EAE2CBDFE41161D320896A8DAB5FADB  rinswa-1.0.3.en-US.win64.zip
+```
+

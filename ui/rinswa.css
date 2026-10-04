@@ -36,8 +36,8 @@
   --rinswa-radius-input: 12px;
 }
 
-/* Overwrite default Gecko toolbar design tokens across all themes and modes */
-:root {
+/* Overwrite default Gecko toolbar design tokens for Default Rinswa theme */
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) {
   --toolbar-bgcolor: var(--rinswa-bg-base) !important;
   --toolbar-color: var(--rinswa-fg-primary) !important;
   --toolbox-non-lwt-bgcolor: var(--rinswa-bg-base) !important;
@@ -50,10 +50,37 @@
   --lwt-toolbar-field-color: #f8fafc !important;
 }
 
+/* Explicit Light Theme & Bright Lightweight Theme Design Tokens */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"],
+:root[lwtheme]:not([lwtheme-brighttext]),
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) {
+  --toolbar-bgcolor: rgba(255, 255, 255, 0.9) !important;
+  --toolbar-color: #15141a !important;
+  --tab-selected-bgcolor: #ffffff !important;
+  --tab-selected-textcolor: #15141a !important;
+  --tab-text-color: #3b3a3e !important;
+  --toolbarbutton-icon-fill: #15141a !important;
+  --toolbarbutton-icon-fill-attention: #2563eb !important;
+  --toolbar-field-background-color: #ffffff !important;
+  --toolbar-field-color: #15141a !important;
+  --toolbar-field-text-color: #15141a !important;
+  --toolbar-field-border-color: rgba(0, 0, 0, 0.18) !important;
+  --lwt-toolbar-field-background-color: #ffffff !important;
+  --lwt-toolbar-field-color: #15141a !important;
+  --tab-loading-fill: #2563eb !important;
+}
+
 /* ==========================================================================
    1. NAVIGATION TOOLBOX & HEADER
    ========================================================================== */
 #navigator-toolbox {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-bottom: 2px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Default Theme Header: Signature Glossy Ribbon SVGs and Obsidian Gradient */
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #navigator-toolbox {
   background-color: #0b0718 !important;
   background-image:
     url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDMyMCAxNDQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogIDxkZWZzPg0KICAgIDwhLS0gQ3lhbiB0byBSb3lhbCBCbHVlIGdyYWRpZW50IC0tPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmliYm9uLWN5YW4tYmx1ZSIgeDE9IjAlIiB5MT0iMTAwJSIgeDI9IjEwMCUiIHkyPSIwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDBmMmZlIiBzdG9wLW9wYWNpdHk9IjAuOTUiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iNDUlIiBzdG9wLWNvbG9yPSIjMDA3MmZmIiBzdG9wLW9wYWNpdHk9IjAuOSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI4NSUiIHN0b3AtY29sb3I9IiM2MzY2ZjEiIHN0b3Atb3BhY2l0eT0iMC40Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM2MzY2ZjEiIHN0b3Atb3BhY2l0eT0iMCIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQoNCiAgICA8IS0tIFJveWFsIEJsdWUgdG8gSW5kaWdvIGdyYWRpZW50IC0tPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmliYm9uLWJsdWUtaW5kaWdvIiB4MT0iMCUiIHkxPSIxMDAlIiB4Mj0iMTAwJSIgeTI9IjEwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDA3MmZmIiBzdG9wLW9wYWNpdHk9IjAuOSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM2MzY2ZjEiIHN0b3Atb3BhY2l0eT0iMC44NSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI4NSUiIHN0b3AtY29sb3I9IiNhODU1ZjciIHN0b3Atb3BhY2l0eT0iMC40Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNhODU1ZjciIHN0b3Atb3BhY2l0eT0iMCIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQoNCiAgICA8IS0tIEluZGlnbyB0byBQdXJwbGUgJiBNYWdlbnRhIGdyYWRpZW50IC0tPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmliYm9uLWluZGlnby1tYWdlbnRhIiB4MT0iNSUiIHkxPSIxMDAlIiB4Mj0iOTUlIiB5Mj0iMCUiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYzNjZmMSIgc3RvcC1vcGFjaXR5PSIwLjg4Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjQ1JSIgc3RvcC1jb2xvcj0iI2E4NTVmNyIgc3RvcC1vcGFjaXR5PSIwLjgyIi8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjgwJSIgc3RvcC1jb2xvcj0iI2VjNDg5OSIgc3RvcC1vcGFjaXR5PSIwLjg1Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZjc1OGMiIHN0b3Atb3BhY2l0eT0iMCIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQoNCiAgICA8IS0tIFZpdmlkIE1hZ2VudGEgdG8gUGVhY2gvQ29yYWwgZmxhcmUgLS0+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJyaWJib24tbWFnZW50YS1mbGFyZSIgeDE9IjAlIiB5MT0iMTAwJSIgeDI9IjgwJSIgeTI9IjAlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNlYzQ4OTkiIHN0b3Atb3BhY2l0eT0iMC44NSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiNmZjc1OGMiIHN0b3Atb3BhY2l0eT0iMC43NSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmY5YTc2IiBzdG9wLW9wYWNpdHk9IjAiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KDQogICAgPCEtLSBEZWVwIENvc21pYyBWaW9sZXQgYmFzZSBjdXJ2ZSAtLT4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJpYmJvbi1jb3NtaWMtYmFzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmQxMjU0IiBzdG9wLW9wYWNpdHk9IjAuODUiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjMWIwYjM2IiBzdG9wLW9wYWNpdHk9IjAuNiIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMGUwNjFlIiBzdG9wLW9wYWNpdHk9IjAiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KDQogICAgPCEtLSBHbG9zc3kgU3BlY3VsYXIgU2hlZW4gLS0+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJyaWJib24tZ2xvc3MiIHgxPSIxMCUiIHkxPSIxMDAlIiB4Mj0iOTAlIiB5Mj0iMTAlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC44Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjM1JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+DQogICAgPC9saW5lYXJHcmFkaWVudD4NCiAgPC9kZWZzPg0KDQogIDwhLS0gRGVlcCBiYXNlIGNvc21pYyBzaGFkb3cvZGVwdGggd2F2ZSAtLT4NCiAgPHBhdGggZD0iTTAgMCBDNTAgMTQgMTEwIDQ4IDE0NSA5NiBDMTc1IDEzMiAyMTAgMTQwIDI3MCAxNDQgTDAgMTQ0IFoiIGZpbGw9InVybCgjcmliYm9uLWNvc21pYy1iYXNlKSIvPg0KDQogIDwhLS0gQmFjayBSaWJib246IEluZGlnbyB0byBNYWdlbnRhIHN3ZWVwIC0tPg0KICA8cGF0aCBkPSJNMCAxOCBDNjAgMjQgMTI1IDYwIDE2MCAxMDggQzE4NSAxMzggMjIwIDE0MiAyNzAgMTQ0IEwxOTUgMTQ0IEMxNTUgMTM4IDEyMCAxMjAgOTYgOTIgQzY1IDU2IDMwIDMwIDAgMjggWiIgZmlsbD0idXJsKCNyaWJib24taW5kaWdvLW1hZ2VudGEpIi8+DQoNCiAgPCEtLSBNaWRkbGUgUmliYm9uOiBCbHVlIHRvIEluZGlnbyBzd2VlcCAtLT4NCiAgPHBhdGggZD0iTTAgNDggQzUyIDUyIDEwNSA4NCAxMzUgMTIyIEMxNTIgMTQwIDE3OCAxNDMgMjE1IDE0NCBMMTUwIDE0NCBDMTIwIDE0MCA5NiAxMzAgNzggMTA0IEM1NCA3NCAyNSA1NCAwIDUyIFoiIGZpbGw9InVybCgjcmliYm9uLWJsdWUtaW5kaWdvKSIvPg0KDQogIDwhLS0gRm9yZSBSaWJib246IEVsZWN0cmljIEN5YW4gdG8gUm95YWwgQmx1ZSBoaWdobGlnaHQgd2F2ZSAtLT4NCiAgPHBhdGggZD0iTTAgNzYgQzQyIDc4IDgyIDEwMiAxMDggMTMyIEMxMjAgMTQyIDEzOCAxNDQgMTYyIDE0NCBMMTA4IDE0NCBDODYgMTQyIDcwIDEzNCA1NSAxMTYgQzM2IDkyIDE4IDgwIDAgNzggWiIgZmlsbD0idXJsKCNyaWJib24tY3lhbi1ibHVlKSIvPg0KDQogIDwhLS0gQ29yYWwgTWFnZW50YSBBY2NlbnQgRmxhcmUgb24gdGhlIGxlYWRpbmcgY3Jlc3QgLS0+DQogIDxwYXRoIGQ9Ik0wIDEwMiBDMjggMTA0IDU2IDEyMCA3NCAxNDAgQzgyIDE0MyA5MiAxNDQgMTA4IDE0NCBMNjIgMTQ0IEM0NiAxNDIgMzQgMTM2IDIyIDEyNiBDMTIgMTEyIDUgMTA2IDAgMTA0IFoiIGZpbGw9InVybCgjcmliYm9uLW1hZ2VudGEtZmxhcmUpIi8+DQoNCiAgPCEtLSBHbG9zc3kgM0Qgc3BlY3VsYXIgaGlnaGxpZ2h0IGN1cnZlcyAtLT4NCiAgPHBhdGggZD0iTTAgNzYgQzQyIDc4IDgyIDEwMiAxMDggMTMyIEMxMjAgMTQyIDEzOCAxNDQgMTYyIDE0NCIgc3Ryb2tlPSJ1cmwoI3JpYmJvbi1nbG9zcykiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz4NCiAgPHBhdGggZD0iTTAgNDggQzUyIDUyIDEwNSA4NCAxMzUgMTIyIEMxNTIgMTQwIDE3OCAxNDMgMjE1IDE0NCIgc3Ryb2tlPSJ1cmwoI3JpYmJvbi1nbG9zcykiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNzUiLz4NCiAgPHBhdGggZD0iTTAgMTggQzYwIDI0IDEyNSA2MCAxNjAgMTA4IEMxODUgMTM4IDIyMCAxNDIgMjcwIDE0NCIgc3Ryb2tlPSJ1cmwoI3JpYmJvbi1nbG9zcykiIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNSIvPg0KPC9zdmc+"),
@@ -62,9 +89,18 @@
   background-position: left top, right top, center !important;
   background-repeat: no-repeat, no-repeat, no-repeat !important;
   background-size: auto 144px, auto 144px, 100% 100% !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-  padding-bottom: 2px !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* User-Selected & Lightweight Themes: Allow Custom Background Colors & Images */
+:root[lwtheme] #navigator-toolbox,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #navigator-toolbox {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+:root[lwtheme] body {
+  background-color: var(--lwt-accent-color, var(--toolbox-background-color)) !important;
+  background-image: var(--toolbox-background-image) !important;
 }
 
 #titlebar {
@@ -101,15 +137,18 @@
 
 .tab-background {
   border-radius: var(--rinswa-radius-tab) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tab-background {
   border: 1px solid rgba(255, 255, 255, 0.06) !important;
   background: rgba(255, 255, 255, 0.035) !important;
   backdrop-filter: blur(12px) !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Active / Selected Tab with Signature Multicolour Glow */
-.tabbrowser-tab[selected="true"] .tab-background {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background {
   background: rgba(45, 23, 84, 0.85) !important;
   border: 1px solid rgba(168, 85, 247, 0.45) !important;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
@@ -117,7 +156,7 @@
 }
 
 /* Active Tab Neon Bottom Indicator Line */
-.tabbrowser-tab[selected="true"] .tab-background::after {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background::after {
   content: "" !important;
   position: absolute !important;
   bottom: 0 !important;
@@ -130,9 +169,46 @@
 }
 
 /* Tab Hover Effect */
-.tabbrowser-tab:hover:not([selected="true"]) .tab-background {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:hover:not(:is([selected], [visuallyselected])) .tab-background {
   background: rgba(255, 255, 255, 0.075) !important;
   border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* User-Selected Theme Tabs: Follow active theme styles */
+:root[lwtheme] .tab-background,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tab-background {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+:root[lwtheme] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background {
+  background: var(--tab-selected-bgcolor, var(--tab-background-color-selected, rgba(255, 255, 255, 0.85))) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Light Theme Active & Hover Tab Backgrounds */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background,
+:root[lwtheme]:not([lwtheme-brighttext]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab:hover:not(:is([selected], [visuallyselected])) .tab-background,
+:root[lwtheme]:not([lwtheme-brighttext]) .tabbrowser-tab:hover:not(:is([selected], [visuallyselected])) .tab-background,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tabbrowser-tab:hover:not(:is([selected], [visuallyselected])) .tab-background {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+:root[lwtheme] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background::after,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background::after {
+  display: none !important;
 }
 
 /* Hide default Firefox red/blue tab top-line */
@@ -140,47 +216,192 @@
   display: none !important;
 }
 
-/* Ensure High-Contrast Tab Text Readability Across All Modes (Light, Dark, and Default) */
-#TabsToolbar,
-#tabbrowser-tabs,
-.tabbrowser-tab,
-.tab-content {
+/* Ensure High-Contrast Tab Text Readability Across All Modes */
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #TabsToolbar,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #tabbrowser-tabs,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tab-content {
   color: #cbd5e1 !important;
 }
 
 .tab-label,
 .tab-text {
-  color: #cbd5e1 !important;
   font-weight: 500 !important;
   letter-spacing: 0.15px !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75) !important;
   transition: color 0.15s ease !important;
 }
 
-.tabbrowser-tab:hover:not([selected="true"]) .tab-label,
-.tabbrowser-tab:hover:not([selected="true"]) .tab-text {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tab-label,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tab-text {
+  color: #cbd5e1 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75) !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:hover:not(:is([selected], [visuallyselected])) .tab-label,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:hover:not(:is([selected], [visuallyselected])) .tab-text {
   color: #f8fafc !important;
 }
 
-.tabbrowser-tab[selected="true"] .tab-label,
-.tabbrowser-tab[selected="true"] .tab-text {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-label,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-text {
   color: #ffffff !important;
   font-weight: 600 !important;
   text-shadow: 0 0 12px rgba(0, 242, 254, 0.5), 0 1px 3px rgba(0, 0, 0, 0.9) !important;
 }
 
-.tab-secondary-label {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tab-secondary-label {
   color: #94a3b8 !important;
   opacity: 0.9 !important;
 }
 
-.tabbrowser-tab[selected="true"] .tab-secondary-label {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-secondary-label {
   color: #cbd5e1 !important;
   opacity: 1 !important;
 }
 
+/* User themes: let theme control tab text colors */
+:root[lwtheme] #TabsToolbar,
+:root[lwtheme] #tabbrowser-tabs,
+:root[lwtheme] .tabbrowser-tab,
+:root[lwtheme] .tab-content,
+:root[lwtheme] .tab-label,
+:root[lwtheme] .tab-text,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #TabsToolbar,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #tabbrowser-tabs,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tabbrowser-tab,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tab-content,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tab-label,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tab-text {
+  color: var(--tab-text-color, inherit) !important;
+  text-shadow: none !important;
+}
+
+:root[lwtheme] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-label,
+:root[lwtheme] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-text,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-label,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-text {
+  color: var(--tab-selected-textcolor, var(--tab-text-color-selected, inherit)) !important;
+  text-shadow: none !important;
+}
+
+/* Explicit Light Theme & Bright Lightweight Theme Tab Text (Guaranteed Dark High-Contrast Text) */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #TabsToolbar,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #tabbrowser-tabs,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tab-content,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tab-label,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tab-text,
+:root[lwtheme]:not([lwtheme-brighttext]) #TabsToolbar,
+:root[lwtheme]:not([lwtheme-brighttext]) #tabbrowser-tabs,
+:root[lwtheme]:not([lwtheme-brighttext]) .tabbrowser-tab,
+:root[lwtheme]:not([lwtheme-brighttext]) .tab-content,
+:root[lwtheme]:not([lwtheme-brighttext]) .tab-label,
+:root[lwtheme]:not([lwtheme-brighttext]) .tab-text,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #TabsToolbar,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #tabbrowser-tabs,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tabbrowser-tab,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tab-content,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tab-label,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tab-text {
+  color: #3b3a3e !important;
+  text-shadow: none !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-label,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-text,
+:root[lwtheme]:not([lwtheme-brighttext]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-label,
+:root[lwtheme]:not([lwtheme-brighttext]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-text,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-label,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-text {
+  color: #15141a !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tab-secondary-label,
+:root[lwtheme]:not([lwtheme-brighttext]) .tab-secondary-label,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tab-secondary-label {
+  color: #64748b !important;
+  opacity: 0.9 !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-secondary-label,
+:root[lwtheme]:not([lwtheme-brighttext]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-secondary-label,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-secondary-label {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+
+/* Light Theme Tab Close Button */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tab-close-button,
+:root[lwtheme]:not([lwtheme-brighttext]) .tab-close-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tab-close-button {
+  fill: #475569 !important;
+  color: #475569 !important;
+  opacity: 0.8 !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tab-close-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) .tab-close-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tab-close-button:hover {
+  fill: #15141a !important;
+  color: #15141a !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  opacity: 1 !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-close-button,
+:root[lwtheme]:not([lwtheme-brighttext]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-close-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-close-button {
+  fill: #15141a !important;
+  color: #15141a !important;
+  opacity: 0.9 !important;
+}
+
+/* Light Theme Tab Bar Auxiliary Buttons (+) and Scroll Chevrons */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #tabs-newtab-button,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #new-tab-button,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #alltabs-button,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #tabbrowser-tabs toolbarbutton,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tab-icon-sound,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tab-icon-overlay,
+:root[lwtheme]:not([lwtheme-brighttext]) #tabs-newtab-button,
+:root[lwtheme]:not([lwtheme-brighttext]) #new-tab-button,
+:root[lwtheme]:not([lwtheme-brighttext]) #alltabs-button,
+:root[lwtheme]:not([lwtheme-brighttext]) #tabbrowser-tabs toolbarbutton,
+:root[lwtheme]:not([lwtheme-brighttext]) .tab-icon-sound,
+:root[lwtheme]:not([lwtheme-brighttext]) .tab-icon-overlay,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #tabs-newtab-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #new-tab-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #alltabs-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #tabbrowser-tabs toolbarbutton,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tab-icon-sound,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tab-icon-overlay {
+  fill: #15141a !important;
+  color: #15141a !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #tabs-newtab-button:hover,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #new-tab-button:hover,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #alltabs-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #tabs-newtab-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #new-tab-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #alltabs-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #tabs-newtab-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #new-tab-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #alltabs-button:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.16) !important;
+  color: #000000 !important;
+  fill: #000000 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
 /* Tab Close Button & Icon visibility */
-.tab-close-button {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tab-close-button {
   fill: #cbd5e1 !important;
   color: #cbd5e1 !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
@@ -188,20 +409,20 @@
   transition: all 0.15s ease !important;
 }
 
-.tab-close-button:hover {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tab-close-button:hover {
   fill: #ffffff !important;
   color: #ffffff !important;
   background-color: rgba(255, 255, 255, 0.2) !important;
   opacity: 1 !important;
 }
 
-.tabbrowser-tab[selected="true"] .tab-close-button {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-close-button {
   fill: #f8fafc !important;
   color: #f8fafc !important;
   opacity: 0.9 !important;
 }
 
-.tabbrowser-tab[selected="true"] .tab-close-button:hover {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-close-button:hover {
   fill: #ffffff !important;
   color: #ffffff !important;
   background-color: rgba(255, 255, 255, 0.25) !important;
@@ -209,12 +430,12 @@
 }
 
 /* Tab Bar Auxiliary Buttons (+) and Scroll Chevrons */
-#tabs-newtab-button,
-#new-tab-button,
-#alltabs-button,
-#tabbrowser-tabs toolbarbutton,
-.tab-icon-sound,
-.tab-icon-overlay {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #tabs-newtab-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #new-tab-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #alltabs-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #tabbrowser-tabs toolbarbutton,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tab-icon-sound,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .tab-icon-overlay {
   fill: #cbd5e1 !important;
   color: #cbd5e1 !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
@@ -223,33 +444,103 @@
 #tabs-newtab-button,
 #new-tab-button {
   border-radius: 10px !important;
-  background: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   margin: 3px 6px !important;
   transition: all 0.2s ease !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #tabs-newtab-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #new-tab-button {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 #tabs-newtab-button:hover,
 #new-tab-button:hover,
 #alltabs-button:hover {
+  transform: scale(1.05) !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #tabs-newtab-button:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #new-tab-button:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #alltabs-button:hover {
   background: rgba(99, 102, 241, 0.25) !important;
   border-color: rgba(129, 140, 248, 0.5) !important;
   color: #ffffff !important;
   fill: #ffffff !important;
-  transform: scale(1.05) !important;
   box-shadow: 0 0 12px rgba(56, 189, 248, 0.3) !important;
 }
 
 /* Navigation Toolbar Icons (Back, Forward, Refresh, Menu) */
-#nav-bar toolbarbutton:not(#urlbar-search-button),
-#back-button,
-#forward-button,
-#reload-button,
-#stop-button,
-#PanelUI-menu-button {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #nav-bar toolbarbutton:not(#urlbar-search-button),
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #back-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #forward-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #reload-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #stop-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PanelUI-menu-button {
   color: #f1f5f9 !important;
   fill: #f1f5f9 !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+:root[lwtheme] #nav-bar toolbarbutton:not(#urlbar-search-button),
+:root[lwtheme] #back-button,
+:root[lwtheme] #forward-button,
+:root[lwtheme] #reload-button,
+:root[lwtheme] #stop-button,
+:root[lwtheme] #PanelUI-menu-button,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #nav-bar toolbarbutton:not(#urlbar-search-button),
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #back-button,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #forward-button,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #reload-button,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #stop-button,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #PanelUI-menu-button {
+  color: var(--toolbarbutton-icon-fill, var(--toolbar-color, inherit)) !important;
+  fill: var(--toolbarbutton-icon-fill, var(--toolbar-color, currentColor)) !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+/* Light Theme Navigation Toolbar Buttons */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #nav-bar toolbarbutton:not(#urlbar-search-button),
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #back-button,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #forward-button,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #reload-button,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #stop-button,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #PanelUI-menu-button,
+:root[lwtheme]:not([lwtheme-brighttext]) #nav-bar toolbarbutton:not(#urlbar-search-button),
+:root[lwtheme]:not([lwtheme-brighttext]) #back-button,
+:root[lwtheme]:not([lwtheme-brighttext]) #forward-button,
+:root[lwtheme]:not([lwtheme-brighttext]) #reload-button,
+:root[lwtheme]:not([lwtheme-brighttext]) #stop-button,
+:root[lwtheme]:not([lwtheme-brighttext]) #PanelUI-menu-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #nav-bar toolbarbutton:not(#urlbar-search-button),
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #back-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #forward-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #reload-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #stop-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #PanelUI-menu-button {
+  color: #15141a !important;
+  fill: #15141a !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #back-button:hover,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #forward-button:hover,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #reload-button:hover,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #stop-button:hover,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #PanelUI-menu-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #back-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #forward-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #reload-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #stop-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #PanelUI-menu-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #back-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #forward-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #reload-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #stop-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #PanelUI-menu-button:hover {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: #000000 !important;
+  fill: #000000 !important;
 }
 
 /* ==========================================================================
@@ -269,25 +560,83 @@
 
 #urlbar-background {
   border-radius: var(--rinswa-radius-input) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #urlbar-background {
   background: rgba(15, 23, 42, 0.72) !important;
   backdrop-filter: blur(16px) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Address Bar Focused with Multicolour Ribbon Glow */
-#urlbar[focused="true"] > #urlbar-background {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #urlbar[focused="true"] > #urlbar-background {
   background: rgba(15, 23, 42, 0.95) !important;
   border: 1px solid rgba(245, 158, 11, 0.6) !important;
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2), 0 0 16px rgba(245, 158, 11, 0.25) !important;
 }
 
 #urlbar-input {
-  color: #f8fafc !important;
   font-size: 13.5px !important;
   font-weight: 500 !important;
   padding-left: 8px !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #urlbar-input {
+  color: #f8fafc !important;
+}
+
+/* User-Selected Theme URL Bar Styles */
+:root[lwtheme] #urlbar-background,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #urlbar-background {
+  background: var(--toolbar-field-background-color, rgba(255, 255, 255, 0.8)) !important;
+  border: 1px solid var(--toolbar-field-border-color, rgba(0, 0, 0, 0.15)) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+:root[lwtheme] #urlbar-input,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #urlbar-input {
+  color: var(--toolbar-field-text-color, inherit) !important;
+}
+
+:root[lwtheme] #urlbar[focused="true"] > #urlbar-background,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #urlbar[focused="true"] > #urlbar-background {
+  background: var(--toolbar-field-background-color-focus, var(--toolbar-field-background-color)) !important;
+  border-color: var(--toolbar-field-border-color-focus, Highlight) !important;
+}
+
+:root[lwtheme] #urlbar[focused="true"] #urlbar-input,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #urlbar[focused="true"] #urlbar-input {
+  color: var(--toolbar-field-text-color-focus, var(--toolbar-field-text-color)) !important;
+}
+
+/* Light Theme URL Bar Overrides */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #urlbar-background,
+:root[lwtheme]:not([lwtheme-brighttext]) #urlbar-background,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #urlbar-background {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.18) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #urlbar-input,
+:root[lwtheme]:not([lwtheme-brighttext]) #urlbar-input,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #urlbar-input {
+  color: #15141a !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #identity-box,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #tracking-protection-icon-container,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #star-button-box,
+:root[lwtheme]:not([lwtheme-brighttext]) #identity-box,
+:root[lwtheme]:not([lwtheme-brighttext]) #tracking-protection-icon-container,
+:root[lwtheme]:not([lwtheme-brighttext]) #star-button-box,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #identity-box,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #tracking-protection-icon-container,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #star-button-box {
+  color: #15141a !important;
+  fill: #15141a !important;
 }
 
 /* Security & Shield Badges */
@@ -316,16 +665,37 @@
    ========================================================================== */
 #back-button, #forward-button, #reload-button, #stop-button {
   border-radius: 10px !important;
-  background: rgba(255, 255, 255, 0.035) !important;
-  border: 1px solid rgba(255, 255, 255, 0.06) !important;
   margin: 2px 3px !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-#back-button:hover, #forward-button:hover, #reload-button:hover, #stop-button:hover {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #back-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #forward-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #reload-button,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #stop-button {
+  background: rgba(255, 255, 255, 0.035) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #back-button:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #forward-button:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #reload-button:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #stop-button:hover {
   background: rgba(99, 102, 241, 0.18) !important;
   border-color: rgba(129, 140, 248, 0.35) !important;
   color: #38bdf8 !important;
+  transform: translateY(-1px) !important;
+}
+
+:root[lwtheme] #back-button:hover,
+:root[lwtheme] #forward-button:hover,
+:root[lwtheme] #reload-button:hover,
+:root[lwtheme] #stop-button:hover,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #back-button:hover,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #forward-button:hover,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #reload-button:hover,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #stop-button:hover {
+  background: var(--toolbarbutton-hover-background, rgba(255, 255, 255, 0.15)) !important;
   transform: translateY(-1px) !important;
 }
 
@@ -339,12 +709,34 @@
 }
 
 /* Floating Bookmarks Quick Action Dock */
-#PersonalToolbar {
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar {
   background: rgba(10, 15, 30, 0.6) !important;
   backdrop-filter: blur(16px) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
   padding: 4px 12px !important;
+}
+
+:root[lwtheme] #PersonalToolbar,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #PersonalToolbar {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border: none !important;
+}
+
+/* Light Theme Floating Bookmarks Personal Toolbar */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #PersonalToolbar,
+:root[lwtheme]:not([lwtheme-brighttext]) #PersonalToolbar,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #PersonalToolbar {
+  background: transparent !important;
+  color: #15141a !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #PersonalToolbar toolbarbutton,
+:root[lwtheme]:not([lwtheme-brighttext]) #PersonalToolbar toolbarbutton,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #PersonalToolbar toolbarbutton {
+  color: #15141a !important;
+  fill: #15141a !important;
 }
 
 toolbarbutton.bookmark-item {
@@ -503,6 +895,30 @@ menupopup menu:-moz-locale-dir(rtl):hover::after {
   transition: all 0.2s ease !important;
 }
 
+/* Light Theme Titlebar / Window Control Buttons */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .titlebar-button,
+:root[lwtheme]:not([lwtheme-brighttext]) .titlebar-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .titlebar-button {
+  color: #15141a !important;
+  stroke: #15141a !important;
+  fill: #15141a !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .titlebar-button:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) .titlebar-button:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .titlebar-button:hover {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .titlebar-close:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) .titlebar-close:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .titlebar-close:hover {
+  background-color: #ef4444 !important;
+  color: white !important;
+  stroke: white !important;
+  fill: white !important;
+}
+
 .titlebar-button:hover {
   background-color: rgba(255, 255, 255, 0.1) !important;
 }
@@ -577,7 +993,7 @@ menupopup menu:-moz-locale-dir(rtl):hover::after {
 #appMenu-multiView > .panel-viewcontainer > .panel-viewstack,
 #appMenu-popup panelview,
 #appMenu-mainView,
-.PanelUI-subView {
+#appMenu-popup .PanelUI-subView {
   width: 360px !important;
   min-width: 360px !important;
   max-width: 360px !important;
@@ -600,7 +1016,7 @@ menupopup menu:-moz-locale-dir(rtl):hover::after {
 }
 
 #appMenu-popup .panel-subview-body,
-.PanelUI-subView .panel-subview-body {
+#appMenu-popup .PanelUI-subView .panel-subview-body {
   background: transparent !important;
   color: #f1f5f9 !important;
   box-sizing: border-box !important;
@@ -803,7 +1219,7 @@ setting-group[groupid="moreFromMozillaProducts"] {
 
 /* Compact, Uniformly Aligned Menu Items - ONLY genuine, visible menu row toolbarbuttons */
 #appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.subviewbutton-back):not(.panel-banner-item):not(#appMenu-update-banner):not(#appMenu-create-profile-button):not(#appMenu-profiles-button):not(#appMenu-referrals-button):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]),
-.PanelUI-subView toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.subviewbutton-back):not(.panel-banner-item):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]) {
+#appMenu-popup .PanelUI-subView toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.subviewbutton-back):not(.panel-banner-item):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]) {
   display: flex !important;
   align-items: center !important;
   min-height: 30px !important;
@@ -854,7 +1270,7 @@ setting-group[groupid="moreFromMozillaProducts"] {
 }
 
 #appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-text,
-.PanelUI-subView toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-text {
+#appMenu-popup .PanelUI-subView toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-text {
   flex: 1 1 auto !important;
   min-width: 0 !important;
   text-align: start !important;
@@ -876,7 +1292,7 @@ setting-group[groupid="moreFromMozillaProducts"] {
 #appMenu-quit-button2::after { content: "Ctrl+Shift+Q" !important; }
 
 #appMenu-popup panelview toolbarbutton.subviewbutton[shortcut]::after,
-.PanelUI-subView toolbarbutton.subviewbutton[shortcut]::after,
+#appMenu-popup .PanelUI-subView toolbarbutton.subviewbutton[shortcut]::after,
 #appMenu-new-tab-button2::after,
 #appMenu-new-window-button2::after,
 #appMenu-new-private-window-button2::after,
@@ -979,8 +1395,8 @@ setting-group[groupid="moreFromMozillaProducts"] {
 #appMenu-more-button2::after,
 #appMenu-help-button2::after,
 #appMenu-popup panelview .subviewbutton-nav:not(.subviewbutton-nav-down)::after,
-.PanelUI-subView .subviewbutton-nav:not(.subviewbutton-nav-down)::after,
-.subviewbutton-nav:not(.subviewbutton-nav-down)::after {
+#appMenu-popup .PanelUI-subView .subviewbutton-nav:not(.subviewbutton-nav-down)::after,
+#appMenu-popup .subviewbutton-nav:not(.subviewbutton-nav-down)::after {
   content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 3 11 8 6 13'/></svg>") !important;
   display: flex !important;
   align-items: center !important;
@@ -1002,8 +1418,8 @@ setting-group[groupid="moreFromMozillaProducts"] {
 #appMenu-more-button2:hover::after,
 #appMenu-help-button2:hover::after,
 #appMenu-popup panelview .subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
-.PanelUI-subView .subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
-.subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
+#appMenu-popup .PanelUI-subView .subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
+#appMenu-popup .subviewbutton-nav:not(.subviewbutton-nav-down):hover::after,
 .subviewbutton-nav[_moz-menuactive="true"]::after {
   content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 3 11 8 6 13'/></svg>") !important;
   transform: translateX(2px) !important;
@@ -1159,3 +1575,141 @@ setting-group[groupid="browserIconBonus"],
   pointer-events: none !important;
 }
 
+
+
+/* ==========================================================================
+   ALL TABS MENU & TAB MANAGER LIST POPUP
+   Ensures tab labels, favicons, mute, and close buttons render with full fidelity
+   ========================================================================== */
+#allTabsMenu-allTabsView,
+#allTabsMenu-hiddenTabsView,
+#allTabsMenu-containerTabsView {
+  min-width: 320px !important;
+  max-width: 440px !important;
+}
+
+#allTabsMenu-allTabsView-tabs {
+  width: 100% !important;
+}
+
+.all-tabs-item {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 8px !important;
+  margin: 1px 0 !important;
+  padding: 2px 4px !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.all-tabs-item:hover {
+  background: rgba(99, 102, 241, 0.18) !important;
+}
+
+.all-tabs-item[selected] {
+  background: rgba(99, 102, 241, 0.28) !important;
+}
+
+.all-tabs-item > .all-tabs-button {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  display: flex !important;
+  align-items: center !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px 6px !important;
+  margin: 0 !important;
+  color: #f1f5f9 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.all-tabs-item > .all-tabs-button > .toolbarbutton-icon {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  margin-inline-end: 8px !important;
+  flex-shrink: 0 !important;
+  -moz-context-properties: fill, stroke !important;
+}
+
+.all-tabs-item > .all-tabs-button > .toolbarbutton-text {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  display: block !important;
+  text-align: start !important;
+  color: inherit !important;
+}
+
+.all-tabs-item > .all-tabs-secondary-button {
+  width: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  flex: 0 0 24px !important;
+  padding: 3px !important;
+  margin: 0 2px !important;
+  border-radius: 6px !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 0.6 !important;
+  color: #cbd5e1 !important;
+  fill: #cbd5e1 !important;
+  -moz-context-properties: fill, stroke !important;
+  transition: all 0.15s ease !important;
+}
+
+.all-tabs-item:hover > .all-tabs-secondary-button {
+  opacity: 1 !important;
+}
+
+.all-tabs-item > .all-tabs-close-button:hover {
+  background: rgba(239, 68, 68, 0.25) !important;
+  color: #ef4444 !important;
+  fill: #ef4444 !important;
+}
+
+.all-tabs-item > .all-tabs-mute-button:hover {
+  background: rgba(99, 102, 241, 0.25) !important;
+  color: #38bdf8 !important;
+  fill: #38bdf8 !important;
+}
+
+/* Light Theme All Tabs Menu Overrides */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .all-tabs-item > .all-tabs-button,
+:root[lwtheme]:not([lwtheme-brighttext]) .all-tabs-item > .all-tabs-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .all-tabs-item > .all-tabs-button {
+  color: #15141a !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .all-tabs-item > .all-tabs-secondary-button,
+:root[lwtheme]:not([lwtheme-brighttext]) .all-tabs-item > .all-tabs-secondary-button,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .all-tabs-item > .all-tabs-secondary-button {
+  color: #475569 !important;
+  fill: #475569 !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .all-tabs-item:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) .all-tabs-item:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .all-tabs-item:hover {
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .all-tabs-item[selected],
+:root[lwtheme]:not([lwtheme-brighttext]) .all-tabs-item[selected],
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .all-tabs-item[selected] {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
