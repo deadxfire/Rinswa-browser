@@ -88,7 +88,7 @@ def get_current_rinswa_version(root_dir):
             v = f.read().strip()
             if v:
                 return v
-    return "1.0.2"
+    return "1.0.3"
 
 def suggest_next_version(ver_str):
     parts = ver_str.split(".")

@@ -12,7 +12,7 @@ MOZ_DIR="$PROJECT_DIR/rinswa-stable"
 CONFIG_FILE="$PROJECT_DIR/config/mozconfig.windows"
 
 # Dynamically load version from version.txt
-VERSION="1.0.2"
+VERSION="1.0.3"
 if [ -f "$MOZ_DIR/browser/config/version.txt" ]; then
     VERSION=$(tr -d '\r\n ' < "$MOZ_DIR/browser/config/version.txt")
 fi

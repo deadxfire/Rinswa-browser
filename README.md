@@ -8,7 +8,7 @@
 
 Developed and maintained by **[Arindam Makar](https://github.com/deadxfire)**
 
-[![Version](https://img.shields.io/badge/version-1.0.2_Stable-00d2ff?style=for-the-badge&logo=firefox)](https://github.com/deadxfire/Rinswa-browser/releases)
+[![Version](https://img.shields.io/badge/version-1.0.3_Stable-00d2ff?style=for-the-badge&logo=firefox)](https://github.com/deadxfire/Rinswa-browser/releases)
 [![Engine](https://img.shields.io/badge/engine-Gecko_157.0.1-orange?style=for-the-badge&logo=mozilla)](https://github.com/deadxfire/Rinswa-browser)
 [![Platform](https://img.shields.io/badge/platform-Windows_x64-blue?style=for-the-badge&logo=windows)](https://github.com/deadxfire/Rinswa-browser)
 [![License](https://img.shields.io/badge/license-MPL_2.0-blueviolet?style=for-the-badge)](LICENSE)
