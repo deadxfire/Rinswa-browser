@@ -20,5 +20,5 @@ ac_add_options --disable-debug
 # Predictable output folder for the installer
 mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-rinswa
 
-# Prevent memory and stack exhaustion during heavy parallel compilation
+# Utilize full multi-core performance for parallel compilation
 mk_add_options MOZ_MAKE_FLAGS="-j16"
