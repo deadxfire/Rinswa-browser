@@ -802,8 +802,8 @@ setting-group[groupid="moreFromMozillaProducts"] {
 }
 
 /* Compact, Uniformly Aligned Menu Items - ONLY genuine, visible menu row toolbarbuttons */
-#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):not(#appMenu-update-banner):not(#appMenu-create-profile-button):not(#appMenu-profiles-button):not(#appMenu-referrals-button):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]),
-.PanelUI-subView toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]) {
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.subviewbutton-back):not(.panel-banner-item):not(#appMenu-update-banner):not(#appMenu-create-profile-button):not(#appMenu-profiles-button):not(#appMenu-referrals-button):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]),
+.PanelUI-subView toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.subviewbutton-back):not(.panel-banner-item):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]) {
   display: flex !important;
   align-items: center !important;
   min-height: 30px !important;
@@ -832,7 +832,7 @@ setting-group[groupid="moreFromMozillaProducts"] {
 }
 
 /* Dedicated, Perfectly Aligned 16px Icon Slot */
-#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-icon {
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.subviewbutton-back) > .toolbarbutton-icon {
   display: -moz-inline-box !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -848,7 +848,7 @@ setting-group[groupid="moreFromMozillaProducts"] {
   transition: opacity 0.15s ease, fill 0.15s ease !important;
 }
 
-#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):hover > .toolbarbutton-icon {
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.subviewbutton-back):hover > .toolbarbutton-icon {
   opacity: 1 !important;
   fill: #a5b4fc !important;
 }
