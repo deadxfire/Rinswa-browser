@@ -16,6 +16,10 @@ pref("app.update.checkInstallTime.days", 2);
 pref("app.update.badgeWaitTime", 0);
 pref("devtools.selfxss.count", 5);
 
+// Support & Help Links
+pref("app.support.baseURL", "https://deadxfire.github.io/Rinswa-browser/docs/support.html");
+pref("app.feedback.baseURL", "https://github.com/deadxfire/Rinswa-browser/issues");
+
 // Web Compatibility: Ensure Firefox compatibility token is included in the User-Agent header
 // so major search engines and web apps (Google, YouTube, Cloudflare) serve modern rich interfaces
 pref("general.useragent.compatMode.firefox", true);
