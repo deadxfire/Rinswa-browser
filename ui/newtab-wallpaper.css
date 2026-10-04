@@ -3,18 +3,25 @@
    Official Rinswa Stable v1.0.1
    ========================================================================== */
 
-/* 1. Full-screen fixed Alpine Sunset Wallpaper (with support for dynamic user wallpaper and color) */
+/* 1. Full-screen fixed Wallpaper Container (with instant custom wallpaper support & zero flash) */
 :root {
   --rinswa-default-wallpaper: url("../wallpaper.png"), url("chrome://newtab/content/wallpaper.png"), url("chrome://branding/content/wallpaper.png");
 }
 
-html,
+html {
+  background-color: var(--newtab-wallpaper-color, #0b0f19) !important;
+  background-image: none !important; /* CRITICAL: Never set background-image on html, eliminates background flash */
+  min-height: 100vh !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 body,
 body.activity-stream {
   background-color: var(--newtab-wallpaper-color, #0b0f19) !important;
-  background-image: var(--newtab-wallpaper, var(--rinswa-default-wallpaper)) !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: var(--newtab-wallpaper-backgroundPosition, center center) !important;
   background-attachment: fixed !important;
   background-repeat: no-repeat !important;
   min-height: 100vh !important;
@@ -24,9 +31,26 @@ body.activity-stream {
   overflow-x: hidden !important;
 }
 
-/* When user chooses a solid color wallpaper or a theme without image */
+/* 2. Default Alpine Sunset Wallpaper:
+   ONLY applied when user is on default (NO custom wallpaper chosen) */
+html[data-default-wallpaper="true"] body,
+body[data-default-wallpaper="true"],
+html:not([data-has-custom-wallpaper="true"]):not([style*="--newtab-wallpaper"]) body:not([data-has-custom-wallpaper="true"]):not([style*="--newtab-wallpaper"]):not(.lightWallpaper):not(.darkWallpaper) {
+  background-image: var(--newtab-wallpaper, var(--rinswa-default-wallpaper)) !important;
+}
+
+/* 3. Custom Wallpaper (Instant zero-flicker render) */
+html[data-has-custom-wallpaper="true"] body,
+html[style*="--newtab-wallpaper"] body,
+body[data-has-custom-wallpaper="true"],
+body[style*="--newtab-wallpaper"] {
+  background-image: var(--newtab-wallpaper) !important;
+}
+
+/* 4. When user chooses a solid color wallpaper or a theme without image */
 body.activity-stream.lightWallpaper:not([style*="--newtab-wallpaper"]),
-body.activity-stream.darkWallpaper:not([style*="--newtab-wallpaper"]) {
+body.activity-stream.darkWallpaper:not([style*="--newtab-wallpaper"]),
+html[data-has-custom-wallpaper="true"] body:not([style*="--newtab-wallpaper"]):not([data-default-wallpaper="true"]) {
   background-image: none !important;
   background-color: var(--newtab-wallpaper-color, #0b0f19) !important;
 }

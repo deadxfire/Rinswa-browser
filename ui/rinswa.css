@@ -315,28 +315,34 @@ browser[type="content"] {
 
 /* Glassmorphism Context Menus & Popups */
 menupopup, panel {
-  --panel-background-color: rgba(15, 23, 42, 0.96) !important;
-  --panel-background: rgba(15, 23, 42, 0.96) !important;
+  --panel-background-color: rgba(18, 14, 34, 0.72) !important;
+  --panel-background: rgba(18, 14, 34, 0.72) !important;
   --panel-color: #f1f5f9 !important;
   --panel-text-color: #f1f5f9 !important;
-  --panel-border-color: rgba(129, 140, 248, 0.25) !important;
-  --panel-border-radius: 12px !important;
+  --panel-border-color: rgba(255, 255, 255, 0.16) !important;
+  --panel-border-radius: 14px !important;
+  --panel-shadow-margin: 0px !important;
+  --panel-box-shadow-margin: 0px !important;
+  -moz-window-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
   color-scheme: dark !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(28px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
 }
 
 menupopup::part(content),
 panel::part(content) {
-  background: rgba(15, 23, 42, 0.96) !important;
-  background-color: rgba(15, 23, 42, 0.96) !important;
+  background: rgba(18, 14, 34, 0.72) !important;
+  background-color: rgba(18, 14, 34, 0.72) !important;
   color: #f1f5f9 !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: var(--panel-border-radius, 12px) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(24px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: var(--panel-border-radius, 14px) !important;
+  box-shadow: none !important;
+  -moz-window-shadow: none !important;
+  filter: none !important;
+  backdrop-filter: blur(28px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
 }
 
 menuitem, menu {
@@ -418,39 +424,51 @@ menupopup menu:-moz-locale-dir(rtl):hover::after {
 
 /* ==========================================================================
    RINSWA BROWSER - ULTRA MODERN APP MENU (HAMBURGER POPUP)
-   Matching the modular Cyber-Glass design & user mockup
+   Crystal Frosted Glass Theme (Zero Shadow & True Glassmorphism)
    ========================================================================== */
 
 #appMenu-popup {
-  --panel-background-color: rgba(13, 18, 30, 0.96) !important;
-  --panel-background: rgba(13, 18, 30, 0.96) !important;
+  --panel-background-color: rgba(18, 13, 34, 0.72) !important;
+  --panel-background: rgba(18, 13, 34, 0.72) !important;
   --panel-color: #f1f5f9 !important;
   --panel-text-color: #f1f5f9 !important;
-  --panel-border-color: rgba(255, 255, 255, 0.14) !important;
+  --panel-border-color: rgba(255, 255, 255, 0.16) !important;
   --panel-border-radius: 16px !important;
   --panel-padding: 4px !important;
   --panel-shadow-margin: 0px !important;
+  --panel-box-shadow-margin: 0px !important;
+  -moz-window-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
   color-scheme: dark !important;
 }
 
 #appMenu-popup::part(content),
 #appMenu-popup > .panel-arrowcontainer > .panel-arrowcontent {
-  background: rgba(13, 18, 30, 0.96) !important;
-  background-color: rgba(13, 18, 30, 0.96) !important;
-  backdrop-filter: blur(32px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  background: linear-gradient(155deg, rgba(28, 19, 54, 0.75) 0%, rgba(14, 10, 28, 0.70) 100%) !important;
+  background-color: rgba(18, 13, 34, 0.72) !important;
+  backdrop-filter: blur(32px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 16px !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.25) !important;
+  box-shadow: none !important;
+  -moz-window-shadow: none !important;
+  filter: none !important;
   color: #f1f5f9 !important;
   padding: 4px !important;
   box-sizing: border-box !important;
 }
 
 /* App menu main view and subview sizing */
-#appMenu-popup panelview {
+#appMenu-popup panelview,
+#appMenu-popup .panel-viewcontainer,
+#appMenu-popup .panel-viewstack,
+#appMenu-popup .PanelUI-subView,
+#appMenu-popup .panel-subview-body {
   background: transparent !important;
   background-color: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
   color: #f1f5f9 !important;
   box-sizing: border-box !important;
 }
