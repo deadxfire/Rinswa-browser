@@ -29,8 +29,10 @@
   --rinswa-radius-pill: 9999px;
   --rinswa-radius-tab: 10px;
   --rinswa-radius-input: 12px;
+}
 
-  /* Overwrite default Gecko toolbar design tokens */
+/* Overwrite default Gecko toolbar design tokens ONLY when custom theme is not active */
+:root:not([lwtheme]) {
   --toolbar-bgcolor: var(--rinswa-bg-base) !important;
   --toolbar-color: var(--rinswa-fg-primary) !important;
   --toolbox-non-lwt-bgcolor: var(--rinswa-bg-base) !important;
@@ -44,7 +46,7 @@
 /* ==========================================================================
    1. NAVIGATION TOOLBOX & HEADER
    ========================================================================== */
-#navigator-toolbox {
+:root:not([lwtheme]) #navigator-toolbox {
   background: linear-gradient(180deg, #060913 0%, #0b0f1d 100%) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
   padding-bottom: 2px !important;
@@ -301,12 +303,28 @@ browser[type="content"] {
 
 /* Glassmorphism Context Menus & Popups */
 menupopup, panel {
-  --panel-background: rgba(15, 23, 42, 0.9) !important;
+  --panel-background-color: rgba(15, 23, 42, 0.96) !important;
+  --panel-background: rgba(15, 23, 42, 0.96) !important;
+  --panel-color: #f1f5f9 !important;
+  --panel-text-color: #f1f5f9 !important;
   --panel-border-color: rgba(129, 140, 248, 0.25) !important;
   --panel-border-radius: 12px !important;
+  color-scheme: dark !important;
   backdrop-filter: blur(24px) !important;
   -webkit-backdrop-filter: blur(24px) !important;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2) !important;
+}
+
+menupopup::part(content),
+panel::part(content) {
+  background: rgba(15, 23, 42, 0.96) !important;
+  background-color: rgba(15, 23, 42, 0.96) !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: var(--panel-border-radius, 12px) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
 }
 
 menuitem, menumenu {
@@ -340,20 +358,26 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
    ========================================================================== */
 
 #appMenu-popup {
-  --panel-background: rgba(13, 18, 30, 0.95) !important;
-  --panel-border-color: rgba(255, 255, 255, 0.12) !important;
+  --panel-background-color: rgba(13, 18, 30, 0.96) !important;
+  --panel-background: rgba(13, 18, 30, 0.96) !important;
+  --panel-color: #f1f5f9 !important;
+  --panel-text-color: #f1f5f9 !important;
+  --panel-border-color: rgba(255, 255, 255, 0.14) !important;
   --panel-border-radius: 16px !important;
   --panel-padding: 4px !important;
   --panel-shadow-margin: 0px !important;
   --panel-width: 305px !important;
+  color-scheme: dark !important;
   width: 305px !important;
   min-width: 305px !important;
   max-width: 305px !important;
   overflow-x: hidden !important;
 }
 
+#appMenu-popup::part(content),
 #appMenu-popup > .panel-arrowcontainer > .panel-arrowcontent {
-  background: rgba(13, 18, 30, 0.95) !important;
+  background: rgba(13, 18, 30, 0.96) !important;
+  background-color: rgba(13, 18, 30, 0.96) !important;
   backdrop-filter: blur(32px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
@@ -374,6 +398,9 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
 #appMenu-popup panelmultiview,
 #appMenu-popup scrollbox,
 #appMenu-popup .arrowscrollbox-scrollbox {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #f1f5f9 !important;
   overflow-x: hidden !important;
   box-sizing: border-box !important;
   width: 100% !important;
@@ -405,7 +432,32 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Completely eradicate blank violet promo boxes, FxA sync, banners & clutter */
+/* Completely eradicate blank gaps, hidden items, FxA sync, banners & clutter */
+#appMenu-popup [hidden],
+#appMenu-popup [hidden="true"],
+#appMenu-popup [hidden=""],
+#appMenu-popup [collapsed],
+#appMenu-popup [collapsed="true"],
+#appMenu-popup panelview [hidden],
+#appMenu-popup panelview [hidden="true"],
+#appMenu-popup panelview [hidden=""],
+#appMenu-popup panelview [collapsed],
+#appMenu-popup panelview [collapsed="true"],
+#appMenu-popup panelview toolbarbutton[hidden],
+#appMenu-popup panelview toolbarbutton[hidden="true"],
+#appMenu-popup panelview toolbarbutton[hidden=""],
+#appMenu-popup panelview toolbarbutton[collapsed],
+#appMenu-popup panelview toolbarbutton[collapsed="true"],
+#appMenu-popup panelview toolbarseparator[hidden],
+#appMenu-popup panelview toolbarseparator[hidden="true"],
+#appMenu-popup panelview toolbarseparator[hidden=""],
+#appMenu-popup panelview toolbarseparator[collapsed],
+#appMenu-popup panelview toolbarseparator[collapsed="true"],
+#appMenu-popup panelview toolbarbutton.subviewbutton[hidden],
+#appMenu-popup panelview toolbarbutton.subviewbutton[hidden="true"],
+#appMenu-popup panelview toolbarbutton.subviewbutton[hidden=""],
+#appMenu-popup panelview toolbarbutton.subviewbutton[collapsed],
+#appMenu-popup panelview toolbarbutton.subviewbutton[collapsed="true"],
 #appMenu-popup .panel-banner-item,
 #appMenu-popup .panel-banner,
 #appMenu-popup [class*="panel-banner"],
@@ -426,10 +478,6 @@ menuitem:hover, menuitem[_moz-menuactive="true"] {
 #appMenu-fxa-separator,
 #appMenu-referrals-button,
 #appMenu-referrals-separator,
-#appMenu-popup [hidden="true"],
-#appMenu-popup [collapsed="true"],
-#appMenu-popup [hidden],
-#appMenu-popup [collapsed],
 :root #appMenu-fxa-sign-in-promo,
 :root #appMenu-fxa-status2,
 :root #appMenu-update-banner,
@@ -462,8 +510,8 @@ setting-group[groupid="moreFromMozillaProducts"] {
   pointer-events: none !important;
 }
 
-/* Compact, Uniformly Aligned Menu Items - ONLY genuine menu row toolbarbuttons */
-#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):not(#appMenu-update-banner):not(#appMenu-create-profile-button):not(#appMenu-profiles-button):not([hidden="true"]):not([collapsed="true"]) {
+/* Compact, Uniformly Aligned Menu Items - ONLY genuine, visible menu row toolbarbuttons */
+#appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton):not(.panel-banner-item):not(#appMenu-update-banner):not(#appMenu-create-profile-button):not(#appMenu-profiles-button):not(#appMenu-referrals-button):not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]) {
   display: flex !important;
   align-items: center !important;
   min-height: 27px !important;
@@ -478,6 +526,9 @@ setting-group[groupid="moreFromMozillaProducts"] {
   box-sizing: border-box !important;
   width: calc(100% - 6px) !important;
   max-width: calc(100% - 6px) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
@@ -706,12 +757,14 @@ setting-group[groupid="moreFromMozillaProducts"] {
   transform: none !important;
 }
 
-/* Compact Separators */
-#appMenu-popup toolbarseparator {
+/* Compact Separators - ONLY genuine, visible separators */
+#appMenu-popup toolbarseparator:not([hidden]):not([hidden="true"]):not([hidden=""]):not([collapsed]):not([collapsed="true"]):not(#appMenu-fxa-separator):not(#appMenu-referrals-separator) {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-bottom: none !important;
   margin: 2px 6px !important;
   padding: 0 !important;
+  height: 1px !important;
+  min-height: 1px !important;
 }
 
 /* Top Toolbar Capsule Buttons */

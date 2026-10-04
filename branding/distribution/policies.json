@@ -95,6 +95,62 @@
       "browser.preferences.moreFromMozilla": {
         "Value": false,
         "Status": "locked"
+      },
+      "browser.smartwindow.enabled": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.smartwindow.firstrun.hasCompleted": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.smartwindow.isDefaultWindow": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.smartwindow.autoTabGrouping.enabled": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.tabs.groups.enabled": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.tabs.groups.smart.enabled": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.tabs.groups.alternateMenu": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.tabs.groups.smart.userEnabled": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.tabs.groups.smart.optin": {
+        "Value": true,
+        "Status": "default"
+      },
+      "places.semanticHistory.smartwindow.featureGate": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.newtabpage.activity-stream.newtabWallpapers.enabled": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.enabled": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.library.enabled": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.newtabpage.activity-stream.newtabWallpapers.user.enabled": {
+        "Value": true,
+        "Status": "default"
       }
     }
   }

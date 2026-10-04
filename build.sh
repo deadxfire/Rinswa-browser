@@ -104,9 +104,11 @@ prepare_source() {
             echo "  content/branding/wallpaper.png" >> "$DEST/content/jar.mn"
         fi
     fi
-    if [ -f "$BRANDING_DIR/distribution/policies.json" ]; then
+    if [ -d "$BRANDING_DIR/distribution" ]; then
         mkdir -p "$DEST/distribution"
-        cp "$BRANDING_DIR/distribution/policies.json" "$DEST/distribution/policies.json"
+        cp -r "$BRANDING_DIR/distribution/"* "$DEST/distribution/"
+        mkdir -p "$MOZ_SRC_DIR/obj-rinswa/dist/bin/distribution"
+        cp -r "$BRANDING_DIR/distribution/"* "$MOZ_SRC_DIR/obj-rinswa/dist/bin/distribution/"
     fi
 
     # Installer (NSIS) names shown in the setup wizard and Add/Remove Programs.
@@ -136,6 +138,12 @@ prepare_source() {
             echo "/* ===== RINSWA UI OVERRIDES (injected by build.sh) ===== */"
             cat "$ROOT_DIR/ui/rinswa.css"
         } >> "$BROWSER_CSS"
+
+        local OBJ_BROWSER_CSS="$MOZ_SRC_DIR/obj-rinswa/dist/bin/browser/chrome/browser/skin/classic/browser/browser.css"
+        if [ -f "$OBJ_BROWSER_CSS" ] && [ ! "$BROWSER_CSS" -ef "$OBJ_BROWSER_CSS" ]; then
+            cp -f "$BROWSER_CSS" "$OBJ_BROWSER_CSS"
+            echo "Directly synced browser.css to $OBJ_BROWSER_CSS"
+        fi
     else
         echo "Warning: $BROWSER_CSS not found; Rinswa UI theme not applied."
     fi

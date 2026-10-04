@@ -43,3 +43,22 @@ pref("extensions.enabledScopes", 15);
 
 // Disable custom browser icon picker in Appearance settings (only Rinswa icon is supported)
 pref("browser.shell.customIcon.enabled", false);
+
+// Smart Window & Tab Groups (Default enabled for official Rinswa experience)
+pref("browser.smartwindow.enabled", true);
+pref("browser.smartwindow.firstrun.hasCompleted", true);
+pref("browser.smartwindow.isDefaultWindow", true);
+pref("browser.smartwindow.autoTabGrouping.enabled", true);
+pref("browser.tabs.groups.enabled", true);
+pref("browser.tabs.groups.smart.enabled", true);
+pref("browser.tabs.groups.alternateMenu", true);
+pref("browser.tabs.groups.smart.userEnabled", true);
+pref("browser.tabs.groups.smart.optin", true);
+pref("places.semanticHistory.smartwindow.featureGate", true);
+
+// Wallpaper & Theme Customization
+pref("browser.newtabpage.activity-stream.newtabWallpapers.enabled", true);
+pref("browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.enabled", true);
+pref("browser.newtabpage.activity-stream.newtabWallpapers.customWallpaper.library.enabled", true);
+pref("browser.newtabpage.activity-stream.newtabWallpapers.user.enabled", true);
+

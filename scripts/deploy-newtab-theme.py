@@ -20,6 +20,12 @@ wallpaper_dests = [
     os.path.join(ROOT_DIR, "mozilla-central", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "builtin-addons", "newtab", "data", "css", "nova", "wallpaper.png"),
     os.path.join(ROOT_DIR, "mozilla-central", "obj-rinswa", "dist", "xpi-stage", "newtab", "data", "wallpaper.png"),
     os.path.join(ROOT_DIR, "mozilla-central", "obj-rinswa", "dist", "xpi-stage", "newtab", "data", "css", "wallpaper.png"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "content", "branding", "wallpaper.png"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "builtin-addons", "newtab", "data", "wallpaper.png"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "builtin-addons", "newtab", "data", "css", "wallpaper.png"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "builtin-addons", "newtab", "data", "css", "nova", "wallpaper.png"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "xpi-stage", "newtab", "data", "wallpaper.png"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "xpi-stage", "newtab", "data", "css", "wallpaper.png"),
 ]
 
 for dest in wallpaper_dests:
@@ -33,6 +39,7 @@ wordmark_dests = [
     os.path.join(ROOT_DIR, "mozilla-central", "browser", "branding", "rinswa", "content", "firefox-wordmark.svg"),
     os.path.join(ROOT_DIR, "rinswa-stable", "browser", "branding", "rinswa", "content", "firefox-wordmark.svg"),
     os.path.join(ROOT_DIR, "mozilla-central", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "content", "branding", "firefox-wordmark.svg"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "content", "branding", "firefox-wordmark.svg"),
 ]
 
 for dest in wordmark_dests:
@@ -48,6 +55,12 @@ css_targets = [
     os.path.join(ROOT_DIR, "mozilla-central", "obj-rinswa", "browser", "extensions", "newtab", "css", "nova", "activity-stream.css"),
     os.path.join(ROOT_DIR, "mozilla-central", "obj-rinswa", "dist", "xpi-stage", "newtab", "data", "css", "activity-stream.css"),
     os.path.join(ROOT_DIR, "mozilla-central", "obj-rinswa", "dist", "xpi-stage", "newtab", "data", "css", "nova", "activity-stream.css"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "builtin-addons", "newtab", "data", "css", "activity-stream.css"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "builtin-addons", "newtab", "data", "css", "nova", "activity-stream.css"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "browser", "extensions", "newtab", "css", "activity-stream.css"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "browser", "extensions", "newtab", "css", "nova", "activity-stream.css"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "xpi-stage", "newtab", "data", "css", "activity-stream.css"),
+    os.path.join(ROOT_DIR, "rinswa-stable", "obj-rinswa", "dist", "xpi-stage", "newtab", "data", "css", "nova", "activity-stream.css"),
     os.path.join(ROOT_DIR, "mozilla-central", "browser", "extensions", "newtab", "content-src", "styles", "activity-stream.scss"),
     os.path.join(ROOT_DIR, "mozilla-central", "browser", "extensions", "newtab", "content-src", "styles", "nova", "activity-stream.scss"),
     os.path.join(ROOT_DIR, "rinswa-stable", "browser", "extensions", "newtab", "content-src", "styles", "activity-stream.scss"),
