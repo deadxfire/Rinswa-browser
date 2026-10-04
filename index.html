@@ -1,10 +1,2559 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=https://github.com/deadxfire/Rinswa-browser/">
-    <title>Redirecting...</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rinswa Browser - The Cyber-Glass Web Browser</title>
+  <meta name="description" content="A fast, private, and stunning modern web browser built on the Gecko engine. Featuring Cyber-Glass UI, built-in uBlock Origin adblocker, and Alpine Sunset custom wallpapers.">
+  <meta name="author" content="Arindam Makar">
+  <meta name="keywords" content="Rinswa Browser, Gecko Browser, Cyber Glass, Private Browser, Adblocker, Open Source Browser, Firefox fork">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Rinswa Browser - Cyber-Glass Web Browser">
+  <meta property="og:description" content="Fast, private, and visually breathtaking. Built on Gecko with native adblocking, smart tab grouping, and zero telemetry.">
+  <meta property="og:image" content="Glossy%20Multicolour%20Ribbon%20R%20Emblem.png">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Glossy%20Multicolour%20Ribbon%20R%20Emblem.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       RINSWA BROWSER - CYBER-GLASS DESIGN TOKENS
+       ========================================================================== */
+    :root {
+      --bg-base: #060913;
+      --bg-surface: #0b0f1d;
+      --bg-card: rgba(18, 24, 43, 0.75);
+      --bg-card-hover: rgba(28, 38, 66, 0.85);
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(99, 102, 241, 0.35);
+
+      /* Signature Ribbon Colors */
+      --rinswa-red: #ef4444;
+      --rinswa-orange: #f59e0b;
+      --rinswa-green: #10b981;
+      --rinswa-blue: #3b82f6;
+      --rinswa-purple: #8b5cf6;
+      --rinswa-cyan: #06b6d4;
+      --rinswa-ribbon: linear-gradient(90deg, #ef4444, #f59e0b, #10b981, #3b82f6, #8b5cf6);
+      --rinswa-glow: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(139, 92, 246, 0.15) 50%, transparent 75%);
+
+      /* Typography & Text Colors */
+      --fg-primary: #f8fafc;
+      --fg-secondary: #94a3b8;
+      --fg-muted: #64748b;
+
+      /* Radii */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --radius-pill: 9999px;
+
+      /* Transitions */
+      --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--fg-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Ambient Glowing Background Elements */
+    .ambient-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.45;
+    }
+    .ambient-glow-1 {
+      top: -150px;
+      left: 10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #3b82f6 0%, #8b5cf6 60%, transparent 80%);
+      animation: floatGlow 14s ease-in-out infinite alternate;
+    }
+    .ambient-glow-2 {
+      top: 40%;
+      right: -100px;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, #ef4444 0%, #f59e0b 60%, transparent 80%);
+      animation: floatGlow 18s ease-in-out infinite alternate-reverse;
+    }
+    .ambient-glow-3 {
+      bottom: 5%;
+      left: 5%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #10b981 0%, #06b6d4 60%, transparent 80%);
+      animation: floatGlow 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 60px) scale(1.15); }
+    }
+
+    /* Top Ribbon Accent */
+    .top-ribbon-bar {
+      height: 3px;
+      width: 100%;
+      background: var(--rinswa-ribbon);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    /* Typography Utilities */
+    h1, h2, h3, h4, .brand-font {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .code-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .gradient-text {
+      background: var(--rinswa-ribbon);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .cyan-text {
+      color: #38bdf8;
+    }
+
+    /* Navigation Bar */
+    header.site-header {
+      position: sticky;
+      top: 3px;
+      width: 100%;
+      z-index: 999;
+      background: rgba(6, 9, 19, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: var(--transition-normal);
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--fg-primary);
+    }
+
+    .brand-logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      filter: drop-shadow(0 2px 10px rgba(59, 130, 246, 0.4));
+      transition: transform var(--transition-fast);
+    }
+    .brand-logo:hover img {
+      transform: scale(1.08) rotate(4deg);
+    }
+
+    .brand-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .badge-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-pill);
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: #60a5fa;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--fg-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color var(--transition-fast);
+      position: relative;
+    }
+    .nav-link:hover {
+      color: var(--fg-primary);
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: var(--rinswa-ribbon);
+      transition: width var(--transition-fast);
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      border: 1px solid transparent;
+      outline: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+      box-shadow: 0 6px 25px rgba(59, 130, 246, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--fg-primary);
+      border-color: var(--border-subtle);
+      backdrop-filter: blur(10px);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .btn-ribbon {
+      background: var(--bg-surface);
+      position: relative;
+      color: #ffffff;
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      z-index: 1;
+    }
+    .btn-ribbon::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: var(--rinswa-ribbon);
+      border-radius: calc(var(--radius-md) + 2px);
+      z-index: -1;
+      opacity: 0.85;
+      transition: opacity var(--transition-fast);
+    }
+    .btn-ribbon:hover::before {
+      opacity: 1;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero {
+      padding: 5rem 0 3.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-badge-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.35rem 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-pill);
+      margin-bottom: 1.75rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-badge-text {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--fg-secondary);
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5.5vw, 4.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-desc {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: var(--fg-secondary);
+      max-width: 780px;
+      margin: 0 auto 2.5rem;
+      font-weight: 400;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      backdrop-filter: blur(12px);
+      transition: transform var(--transition-normal), border-color var(--transition-normal);
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .stat-val {
+      font-size: 1.85rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-lbl {
+      font-size: 0.85rem;
+      color: var(--fg-secondary);
+    }
+
+    /* ==========================================================================
+       INTERACTIVE BROWSER SHOWCASE & STYLE SELECTOR
+       ========================================================================== */
+    .showcase-section {
+      padding: 4.5rem 0;
+      position: relative;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 750px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--fg-secondary);
+      font-size: 1.05rem;
+    }
+
+    /* Control Panel for Browser Styles */
+    .simulator-controls {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.75rem;
+      margin-bottom: 1.75rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .control-lbl {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--fg-muted);
+    }
+
+    .control-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .style-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      padding: 0.4rem 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--fg-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all var(--transition-fast);
+      user-select: none;
+    }
+    .style-pill:hover {
+      color: var(--fg-primary);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .style-pill.active {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: #3b82f6;
+      color: #93c5fd;
+      font-weight: 600;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.35);
+    }
+
+    .toggle-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-switch {
+      width: 44px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-pill);
+      position: relative;
+      transition: background var(--transition-fast);
+    }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+      top: 3px;
+      left: 3px;
+      transition: transform var(--transition-fast);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    .toggle-switch.active {
+      background: #10b981;
+    }
+    .toggle-switch.active::after {
+      transform: translateX(20px);
+    }
+
+    /* THE BROWSER CHROME FRAME */
+    .browser-frame {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 40px rgba(59, 130, 246, 0.15);
+      transition: all var(--transition-slow);
+      position: relative;
+      backdrop-filter: blur(25px);
+    }
+
+    /* Theme Styles for Browser Frame */
+    .browser-frame.theme-cyber-dark {
+      --b-bg-base: #060913;
+      --b-bg-surface: #0b0f1d;
+      --b-bg-bar: rgba(11, 15, 29, 0.85);
+      --b-bg-tab: rgba(18, 24, 43, 0.6);
+      --b-bg-tab-active: rgba(30, 41, 70, 0.9);
+      --b-fg: #f8fafc;
+      --b-fg-sub: #94a3b8;
+      --b-border: rgba(255, 255, 255, 0.08);
+      --b-omnibar: rgba(18, 24, 43, 0.75);
+    }
+
+    .browser-frame.theme-light-glass {
+      --b-bg-base: #e2e8f0;
+      --b-bg-surface: #f1f5f9;
+      --b-bg-bar: rgba(255, 255, 255, 0.85);
+      --b-bg-tab: rgba(226, 232, 240, 0.75);
+      --b-bg-tab-active: #ffffff;
+      --b-fg: #0f172a;
+      --b-fg-sub: #475569;
+      --b-border: rgba(15, 23, 42, 0.12);
+      --b-omnibar: #ffffff;
+    }
+
+    .browser-frame.theme-midnight-oled {
+      --b-bg-base: #000000;
+      --b-bg-surface: #050505;
+      --b-bg-bar: rgba(10, 10, 10, 0.95);
+      --b-bg-tab: rgba(20, 20, 20, 0.8);
+      --b-bg-tab-active: #151515;
+      --b-fg: #ffffff;
+      --b-fg-sub: #888888;
+      --b-border: rgba(255, 255, 255, 0.1);
+      --b-omnibar: #0d0d0d;
+    }
+
+    .browser-frame.theme-sunset-glow {
+      --b-bg-base: #1a0f1d;
+      --b-bg-surface: #24142b;
+      --b-bg-bar: rgba(36, 20, 43, 0.88);
+      --b-bg-tab: rgba(50, 26, 61, 0.6);
+      --b-bg-tab-active: rgba(85, 37, 102, 0.85);
+      --b-fg: #fdf4ff;
+      --b-fg-sub: #d8b4fe;
+      --b-border: rgba(244, 114, 182, 0.2);
+      --b-omnibar: rgba(50, 26, 61, 0.8);
+    }
+
+    .browser-frame.theme-neon-cyber {
+      --b-bg-base: #050b14;
+      --b-bg-surface: #0a1424;
+      --b-bg-bar: rgba(10, 20, 36, 0.9);
+      --b-bg-tab: rgba(14, 28, 51, 0.6);
+      --b-bg-tab-active: rgba(22, 45, 82, 0.85);
+      --b-fg: #e0f2fe;
+      --b-fg-sub: #38bdf8;
+      --b-border: rgba(6, 182, 212, 0.3);
+      --b-omnibar: rgba(14, 28, 51, 0.9);
+    }
+
+    /* Window Titlebar */
+    .b-titlebar {
+      background: var(--b-bg-bar);
+      border-bottom: 1px solid var(--b-border);
+      padding: 0.65rem 1rem 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      user-select: none;
+      transition: background var(--transition-fast);
+    }
+
+    .b-tabstrip {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.35rem;
+      flex: 1;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .b-tabstrip::-webkit-scrollbar { display: none; }
+
+    .b-group-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.25rem 0.55rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.35rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(139, 92, 246, 0.25);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      color: #c084fc;
+      transition: all var(--transition-fast);
+    }
+
+    .b-tab {
+      background: var(--b-bg-tab);
+      color: var(--b-fg-sub);
+      padding: 0.55rem 1rem;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-bottom: none;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+      max-width: 220px;
+    }
+    .b-tab:hover {
+      background: var(--b-bg-tab-active);
+      color: var(--b-fg);
+    }
+    .b-tab.active {
+      background: var(--b-bg-tab-active);
+      color: var(--b-fg);
+      font-weight: 600;
+      border-color: var(--b-border);
+      position: relative;
+    }
+    .b-tab.active::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--rinswa-ribbon);
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .b-tab-icon {
+      width: 14px;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .b-tab-close {
+      margin-left: auto;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .b-tab-close:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .b-tab-new {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--b-fg-sub);
+      cursor: pointer;
+      margin-bottom: 0.3rem;
+      transition: var(--transition-fast);
+    }
+    .b-tab-new:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--b-fg);
+    }
+
+    /* Window Controls */
+    .b-window-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.45rem;
+    }
+    .b-win-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: opacity var(--transition-fast);
+    }
+    .b-win-close { background: #ef4444; }
+    .b-win-min { background: #f59e0b; }
+    .b-win-max { background: #10b981; }
+    .b-win-btn:hover { opacity: 0.8; }
+
+    /* Browser Navigation Toolbar */
+    .b-toolbar {
+      background: var(--b-bg-bar);
+      border-bottom: 1px solid var(--b-border);
+      padding: 0.55rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .b-nav-btns {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .b-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--b-fg-sub);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all var(--transition-fast);
+    }
+    .b-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--b-fg);
+    }
+    .b-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* Omnibar */
+    .b-omnibar {
+      flex: 1;
+      height: 36px;
+      background: var(--b-omnibar);
+      border: 1px solid var(--b-border);
+      border-radius: 12px;
+      padding: 0 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+      transition: all var(--transition-fast);
+    }
+    .b-omnibar:focus-within {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    }
+
+    .b-ssl-lock {
+      color: #10b981;
+      display: flex;
+      align-items: center;
+    }
+    .b-ssl-lock svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .b-url-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--b-fg);
+      font-size: 0.86rem;
+      font-family: inherit;
+    }
+
+    .b-ublock-action {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #f87171;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: var(--transition-fast);
+    }
+    .b-ublock-action:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: #ef4444;
+    }
+    .b-ublock-action.disabled {
+      background: rgba(148, 163, 184, 0.1);
+      border-color: rgba(148, 163, 184, 0.2);
+      color: #94a3b8;
+    }
+
+    /* uBlock Interactive Popup Card */
+    .b-ublock-popup {
+      position: absolute;
+      top: 48px;
+      right: 0;
+      width: 280px;
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      padding: 1rem;
+      z-index: 100;
+      display: none;
+      color: #f8fafc;
+      text-align: left;
+    }
+    .b-ublock-popup.open {
+      display: block;
+      animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: translateY(-8px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .popup-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .popup-stat {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ef4444;
+      text-align: center;
+      margin: 0.5rem 0;
+      font-family: 'Outfit', sans-serif;
+    }
+    .popup-sub {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+    .popup-toggle-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ef4444;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.75rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+      transition: all var(--transition-fast);
+    }
+    .popup-toggle-btn.off {
+      background: #475569;
+      box-shadow: none;
+    }
+
+    /* THE SIMULATED BROWSER VIEWPORT */
+    .b-viewport {
+      min-height: 480px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 0.5s ease-in-out;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Viewport Overlay */
+    .b-viewport-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(6, 9, 19, 0.4);
+      backdrop-filter: blur(1px);
+      z-index: 1;
+    }
+
+    .b-content-panel {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      padding: 2.5rem 2rem;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .b-content-panel.active {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Tab 1: Clean Alpine Sunset New Tab */
+    .newtab-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .newtab-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.6));
+    }
+    .newtab-clock {
+      font-size: 2.75rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .newtab-searchbar {
+      width: 100%;
+      max-width: 580px;
+      height: 48px;
+      background: rgba(18, 24, 43, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      padding: 0 1.25rem;
+      gap: 0.75rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      margin-bottom: 2rem;
+      transition: all var(--transition-fast);
+    }
+    .newtab-searchbar:focus-within {
+      border-color: #38bdf8;
+      box-shadow: 0 10px 35px rgba(56, 189, 248, 0.3);
+      transform: scale(1.01);
+    }
+    .newtab-search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      font-size: 0.95rem;
+    }
+
+    .newtab-topsites {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.25rem;
+      width: 100%;
+      max-width: 650px;
+    }
+
+    .topsite-item {
+      background: rgba(18, 24, 43, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 0.9rem 0.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+      text-decoration: none;
+      color: #f8fafc;
+      backdrop-filter: blur(14px);
+      transition: all var(--transition-normal);
+      cursor: pointer;
+    }
+    .topsite-item:hover {
+      background: rgba(30, 41, 70, 0.85);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    .topsite-icon {
+      font-size: 1.4rem;
+    }
+    .topsite-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* Tab 2: Settings & Adblocker */
+    .pref-view {
+      width: 100%;
+      max-width: 720px;
+      background: rgba(11, 15, 29, 0.92);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+      text-align: left;
+    }
+    .pref-title {
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.75rem;
+    }
+    .pref-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .pref-row:last-child { border-bottom: none; }
+    .pref-lbl-main {
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 0.2rem;
+    }
+    .pref-lbl-sub {
+      font-size: 0.78rem;
+      color: var(--fg-secondary);
+    }
+
+    /* Tab 3: Smart Window Groups */
+    .groups-view {
+      width: 100%;
+      max-width: 720px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+    .group-card {
+      background: rgba(11, 15, 29, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      backdrop-filter: blur(20px);
+      text-align: left;
+    }
+    .group-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+    }
+    .gt-purple { background: rgba(139, 92, 246, 0.2); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.4); }
+    .gt-emerald { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .gt-blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+
+    .group-tab-item {
+      font-size: 0.8rem;
+      color: var(--fg-secondary);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .group-tab-item:last-child { border-bottom: none; }
+
+    /* Tab 4: Engine Specs */
+    .specs-view {
+      width: 100%;
+      max-width: 680px;
+      background: rgba(11, 15, 29, 0.92);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      backdrop-filter: blur(25px);
+      text-align: left;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .spec-item {
+      background: rgba(18, 24, 43, 0.7);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .spec-name { font-size: 0.78rem; color: var(--fg-muted); text-transform: uppercase; }
+    .spec-val { font-size: 1.15rem; font-weight: 700; color: #38bdf8; font-family: 'JetBrains Mono', monospace; }
+
+    /* ==========================================================================
+       FEATURES SECTION
+       ========================================================================== */
+    .features-section {
+      padding: 5rem 0;
+      position: relative;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 1.75rem;
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: transparent;
+      transition: background var(--transition-fast);
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 102, 241, 0.45);
+      background: var(--bg-card-hover);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(59, 130, 246, 0.15);
+    }
+    .feature-card:hover::before {
+      background: var(--rinswa-ribbon);
+    }
+
+    .feature-icon-wrap {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-lg);
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+      color: #60a5fa;
+    }
+
+    .feature-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-desc {
+      color: var(--fg-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .feature-tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1.25rem;
+    }
+    .ft-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--fg-secondary);
+    }
+
+    /* ==========================================================================
+       COMPARISON TABLE SECTION
+       ========================================================================== */
+    .compare-section {
+      padding: 4.5rem 0;
+    }
+
+    .table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow-x: auto;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    table.compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .compare-table th, .compare-table td {
+      padding: 1.15rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .compare-table th {
+      background: rgba(11, 15, 29, 0.8);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--fg-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .compare-table th.highlight-col {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border-bottom: 2px solid #3b82f6;
+    }
+
+    .compare-table td.highlight-col {
+      background: rgba(59, 130, 246, 0.05);
+      font-weight: 600;
+    }
+
+    .compare-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .check-yes {
+      color: #10b981;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .check-no {
+      color: #ef4444;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* ==========================================================================
+       DOWNLOAD & RELEASE MATRIX
+       ========================================================================== */
+    .download-section {
+      padding: 5rem 0;
+      position: relative;
+    }
+
+    .download-card-main {
+      background: linear-gradient(145deg, rgba(18, 24, 43, 0.85), rgba(11, 15, 29, 0.95));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-xl);
+      padding: 3rem 2.5rem;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.15);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .download-card-main { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .dl-info-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .dl-logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .dl-title {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .dl-version-tag {
+      font-size: 0.82rem;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-pill);
+      display: inline-block;
+      margin-top: 0.25rem;
+    }
+
+    .dl-desc {
+      color: var(--fg-secondary);
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .dl-buttons-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn-download-hero {
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      color: #ffffff;
+      padding: 1rem 1.75rem;
+      border-radius: var(--radius-lg);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+      transition: all var(--transition-normal);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-download-hero:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+      box-shadow: 0 12px 35px rgba(59, 130, 246, 0.6);
+      transform: translateY(-3px);
+    }
+
+    .dl-btn-sub {
+      font-size: 0.78rem;
+      opacity: 0.8;
+      font-weight: 400;
+    }
+
+    .checksum-box {
+      background: rgba(6, 9, 19, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--fg-secondary);
+    }
+
+    .checksum-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--fg-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .checksum-hash {
+      word-break: break-all;
+      color: #38bdf8;
+    }
+
+    /* ==========================================================================
+       BUILD TERMINAL CODE SECTION
+       ========================================================================== */
+    .build-section {
+      padding: 4rem 0;
+    }
+
+    .terminal-card {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+    }
+
+    .terminal-header {
+      background: #0f1524;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .term-dots {
+      display: flex;
+      gap: 0.45rem;
+    }
+    .term-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .td-red { background: #ef4444; }
+    .td-yellow { background: #f59e0b; }
+    .td-green { background: #10b981; }
+
+    .term-tabs {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .term-tab {
+      background: transparent;
+      border: none;
+      color: var(--fg-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .term-tab:hover { color: var(--fg-primary); }
+    .term-tab.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+
+    .t-comment { color: #64748b; }
+    .t-cmd { color: #38bdf8; font-weight: 600; }
+    .t-arg { color: #f59e0b; }
+    .t-out { color: #10b981; }
+
+    /* ==========================================================================
+       SITE FOOTER
+       ========================================================================== */
+    footer.site-footer {
+      background: #04060c;
+      border-top: 1px solid var(--border-subtle);
+      padding: 4rem 0 2.5rem;
+      margin-top: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 850px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 550px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    .footer-brand p {
+      color: var(--fg-secondary);
+      font-size: 0.92rem;
+      margin-top: 0.75rem;
+      max-width: 320px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.95rem;
+      margin-bottom: 1.15rem;
+      color: var(--fg-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .footer-col a {
+      color: var(--fg-secondary);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color var(--transition-fast);
+    }
+    .footer-col a:hover {
+      color: #38bdf8;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.84rem;
+      color: var(--fg-muted);
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Top Ribbon Accent Line -->
+  <div class="top-ribbon-bar"></div>
+
+  <!-- Ambient Glowing Blobs -->
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+  <div class="ambient-glow ambient-glow-3"></div>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <img src="Glossy%20Multicolour%20Ribbon%20R%20Emblem.png" alt="Rinswa Logo">
+        <span class="brand-name">RINSWA</span>
+        <span class="badge-pill">v1.0.2 Stable</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#showcase" class="nav-link">Interactive Demo</a></li>
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#comparison" class="nav-link">Comparison</a></li>
+        <li><a href="#build" class="nav-link">Build Guide</a></li>
+        <li><a href="#download" class="nav-link">Download</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://github.com/deadxfire/Rinswa-browser" target="_blank" rel="noopener" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="#download" class="btn btn-primary">
+          Get Rinswa
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="hero-badge-wrap">
+      <span class="hero-badge-dot"></span>
+      <span class="hero-badge-text">Rinswa v1.0.2 Stable Release Engine is Ready</span>
+    </div>
+
+    <h1 class="hero-title">
+      The Next-Gen <span class="gradient-text">Cyber-Glass</span> Web Browser
+    </h1>
+
+    <p class="hero-desc">
+      A lightning-fast, privacy-hardened browser built directly on modern Gecko. Zero sponsored telemetry, built-in uBlock Origin adblocker, smart window tab grouping, and dynamic Alpine Sunset glass aesthetics.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#download" class="btn btn-ribbon" style="padding: 0.85rem 1.85rem; font-size: 1.05rem;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+        </svg>
+        Download for Windows x64
+      </a>
+      <a href="#showcase" class="btn btn-secondary" style="padding: 0.85rem 1.85rem; font-size: 1.05rem;">
+        ⚡ Test Interactive Simulator
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-val gradient-text">100%</div>
+        <div class="stat-lbl">Privacy First (0 Telemetry)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val cyan-text">uBlock</div>
+        <div class="stat-lbl">Native Adblocker Bundled</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" style="color: #a855f7;">Gecko 157+</div>
+        <div class="stat-lbl">Multi-Process Stable Engine</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" style="color: #10b981;">Cyber-Glass</div>
+        <div class="stat-lbl">Dynamic Themes & Wallpapers</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Browser Showcase & Style Playground -->
+  <section id="showcase" class="showcase-section container">
+    <div class="section-head">
+      <span class="section-tag">Interactive Simulator</span>
+      <h2 class="section-title">Experience the Cyber-Glass Interface</h2>
+      <p class="section-sub">
+        Explore Rinswa's custom interface right here. Switch between dark/light glass themes, test the native adblocker shield, preview dynamic Alpine Sunset wallpapers, and inspect smart window tab groups.
+      </p>
+    </div>
+
+    <!-- Simulator Customizer Controls -->
+    <div class="simulator-controls">
+      <!-- Theme Presets -->
+      <div class="control-group">
+        <span class="control-lbl">Browser Style Preset</span>
+        <div class="control-pills">
+          <button class="style-pill active" onclick="setBrowserTheme('theme-cyber-dark', this)">
+            🌌 Cyber-Glass Dark
+          </button>
+          <button class="style-pill" onclick="setBrowserTheme('theme-light-glass', this)">
+            ☀️ Windows Light Glass
+          </button>
+          <button class="style-pill" onclick="setBrowserTheme('theme-midnight-oled', this)">
+            🖤 Midnight OLED
+          </button>
+          <button class="style-pill" onclick="setBrowserTheme('theme-sunset-glow', this)">
+            🌅 Alpine Sunset Glow
+          </button>
+          <button class="style-pill" onclick="setBrowserTheme('theme-neon-cyber', this)">
+            ⚡ Neon Cyberpunk
+          </button>
+        </div>
+      </div>
+
+      <!-- Wallpaper Presets -->
+      <div class="control-group">
+        <span class="control-lbl">New Tab Wallpaper</span>
+        <div class="control-pills">
+          <button class="style-pill active" onclick="setWallpaper('Rinswa Alpine Sunset Wallpaper.png', this)">
+            🌄 Alpine Sunset
+          </button>
+          <button class="style-pill" onclick="setWallpaper('cosmic', this)">
+            🌌 Deep Nebula
+          </button>
+          <button class="style-pill" onclick="setWallpaper('aurora', this)">
+            ✨ Emerald Aurora
+          </button>
+          <button class="style-pill" onclick="setWallpaper('slate', this)">
+            ⬛ Minimal Slate
+          </button>
+        </div>
+      </div>
+
+      <!-- Feature Toggles -->
+      <div class="control-group">
+        <span class="control-lbl">Feature Simulator</span>
+        <div style="display: flex; gap: 1.25rem; align-items: center; margin-top: 0.2rem;">
+          <div class="toggle-switch-wrap" onclick="toggleSimAdblock()">
+            <div id="sim-adblock-toggle" class="toggle-switch active"></div>
+            <span style="font-size: 0.85rem; font-weight: 500;">uBlock Origin Shield</span>
+          </div>
+          <div class="toggle-switch-wrap" onclick="toggleSimTabGroups()">
+            <div id="sim-groups-toggle" class="toggle-switch active"></div>
+            <span style="font-size: 0.85rem; font-weight: 500;">Smart Tab Groups</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE LIVE SIMULATED BROWSER WINDOW -->
+    <div id="browser-mockup" class="browser-frame theme-cyber-dark">
+
+      <!-- Window Titlebar with Tabs -->
+      <div class="b-titlebar">
+        <div class="b-tabstrip">
+          <div id="smart-group-pill" class="b-group-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+            </svg>
+            Workspace: Core
+          </div>
+
+          <!-- Tab 1 -->
+          <div id="tab-btn-1" class="b-tab active" onclick="switchSimTab(1, 'rinswa://newtab')">
+            <span class="b-tab-icon">🌄</span>
+            <span>Rinswa Clean Home</span>
+            <span class="b-tab-close">×</span>
+          </div>
+
+          <!-- Tab 2 -->
+          <div id="tab-btn-2" class="b-tab" onclick="switchSimTab(2, 'about:preferences#privacy')">
+            <span class="b-tab-icon">🛡️</span>
+            <span>Settings & Adblocker</span>
+            <span class="b-tab-close">×</span>
+          </div>
+
+          <!-- Tab 3 -->
+          <div id="tab-btn-3" class="b-tab" onclick="switchSimTab(3, 'rinswa://smartwindow')">
+            <span class="b-tab-icon">📑</span>
+            <span>Smart Tab Groups</span>
+            <span class="b-tab-close">×</span>
+          </div>
+
+          <!-- Tab 4 -->
+          <div id="tab-btn-4" class="b-tab" onclick="switchSimTab(4, 'about:performance')">
+            <span class="b-tab-icon">⚡</span>
+            <span>Gecko Engine Specs</span>
+            <span class="b-tab-close">×</span>
+          </div>
+
+          <div class="b-tab-new" title="New Tab" onclick="switchSimTab(1, 'rinswa://newtab')">+</div>
+        </div>
+
+        <!-- Windows Control Buttons -->
+        <div class="b-window-controls">
+          <div class="b-win-btn b-win-min" title="Minimize"></div>
+          <div class="b-win-btn b-win-max" title="Maximize"></div>
+          <div class="b-win-btn b-win-close" title="Close"></div>
+        </div>
+      </div>
+
+      <!-- Navigation & Omnibar Toolbar -->
+      <div class="b-toolbar">
+        <div class="b-nav-btns">
+          <button class="b-btn" title="Back" onclick="simNavigateBack()">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          </button>
+          <button class="b-btn" title="Forward">
+            <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </button>
+          <button class="b-btn" title="Reload" onclick="simReload()">
+            <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+          </button>
+        </div>
+
+        <!-- Omnibar -->
+        <div class="b-omnibar">
+          <div class="b-ssl-lock">
+            <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          </div>
+          <input id="sim-url-input" class="b-url-input" type="text" value="rinswa://newtab" onkeydown="handleSimUrl(event)">
+        </div>
+
+        <!-- uBlock Origin Interactive Shield -->
+        <div style="position: relative;">
+          <div id="sim-ublock-badge" class="b-ublock-action" onclick="toggleUblockPopup()" title="uBlock Origin Active Protection">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+            </svg>
+            <span id="ublock-counter-text">48</span>
+          </div>
+
+          <!-- Popup menu -->
+          <div id="ublock-popup" class="b-ublock-popup">
+            <div class="popup-header">
+              <div class="popup-title">
+                <span style="color:#ef4444;">🛡️</span> uBlock Origin
+              </div>
+              <span style="font-size:0.75rem; color:#10b981; font-weight:600;">Bundled Native</span>
+            </div>
+            <div id="popup-power" class="popup-toggle-btn" onclick="toggleUblockPower()">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42A7.92 7.92 0 0120 12c0 4.42-3.58 8-8 8s-8-3.58-8-8c0-2.38 1.04-4.52 2.7-6.02L5.28 4.56A9.94 9.94 0 002 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-2.88-1.22-5.48-3.17-7.33z"/>
+              </svg>
+            </div>
+            <div id="popup-stat-number" class="popup-stat">48</div>
+            <div class="popup-sub">trackers & advertisements blocked on this page</div>
+            <div style="font-size:0.75rem; color:#94a3b8; border-top:1px solid rgba(255,255,255,0.08); padding-top:0.6rem;">
+              ✓ EasyList, EasyPrivacy & Peter Lowe active<br>
+              ✓ Integrated in Gecko <code>policies.json</code>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VIEWPORT (Dynamic Wallpaper & Views) -->
+      <div id="sim-viewport" class="b-viewport" style="background-image: url('Rinswa Alpine Sunset Wallpaper.png');">
+        <div class="b-viewport-overlay"></div>
+
+        <!-- View 1: Alpine Sunset New Tab -->
+        <div id="view-panel-1" class="b-content-panel active">
+          <div class="newtab-logo-wrap">
+            <img src="Glossy%20Multicolour%20Ribbon%20R%20Emblem.png" alt="Rinswa Emblem" class="newtab-logo">
+            <div id="sim-clock" class="newtab-clock">19:42</div>
+          </div>
+
+          <div class="newtab-searchbar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#94a3b8">
+              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <input class="newtab-search-input" type="text" placeholder="Search the web privately or enter address..." onkeydown="handleSearchInput(event)">
+          </div>
+
+          <!-- Shortcuts -->
+          <div class="newtab-topsites">
+            <div class="topsite-item" onclick="switchSimTab(1, 'https://github.com/deadxfire/Rinswa-browser')">
+              <span class="topsite-icon">🐙</span>
+              <span class="topsite-title">GitHub</span>
+            </div>
+            <div class="topsite-item" onclick="switchSimTab(1, 'https://reddit.com')">
+              <span class="topsite-icon">💬</span>
+              <span class="topsite-title">Reddit</span>
+            </div>
+            <div class="topsite-item" onclick="switchSimTab(1, 'https://youtube.com')">
+              <span class="topsite-icon">▶️</span>
+              <span class="topsite-title">YouTube</span>
+            </div>
+            <div class="topsite-item" onclick="switchSimTab(1, 'https://wikipedia.org')">
+              <span class="topsite-icon">📚</span>
+              <span class="topsite-title">Wikipedia</span>
+            </div>
+            <div class="topsite-item" onclick="switchSimTab(1, 'https://news.ycombinator.com')">
+              <span class="topsite-icon">⚡</span>
+              <span class="topsite-title">Hacker News</span>
+            </div>
+            <div class="topsite-item" onclick="switchSimTab(2, 'about:preferences')">
+              <span class="topsite-icon">⚙️</span>
+              <span class="topsite-title">Settings</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 2: Settings & Adblocker (about:preferences) -->
+        <div id="view-panel-2" class="b-content-panel">
+          <div class="pref-view">
+            <div class="pref-title">
+              <span>Settings ❯ Privacy & Security</span>
+              <span class="badge-pill" style="color:#10b981; border-color:#10b981;">Telemetry Stripped</span>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pref-lbl-main">Built-in Ad Blocker (uBlock Origin)</div>
+                <div class="pref-lbl-sub">Block banner ads, video sponsorships, popups, and crypto miners natively.</div>
+              </div>
+              <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pref-lbl-main">Enhanced Tracking Protection</div>
+                <div class="pref-lbl-sub">Strict mode active. Third-party cookies, fingerprinting, and cryptominers blocked.</div>
+              </div>
+              <span class="badge-pill" style="color:#38bdf8;">Strict Mode</span>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pref-lbl-main">Dynamic New Tab Wallpapers</div>
+                <div class="pref-lbl-sub">Alpine Sunset wallpaper enabled with custom user wallpaper picker support.</div>
+              </div>
+              <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pref-lbl-main">Mozilla Telemetry & Data Collection</div>
+                <div class="pref-lbl-sub">Pings to telemetry.mozilla.org, crash reports, and Pocket feeds severed in engine.</div>
+              </div>
+              <span class="badge-pill" style="color:#ef4444; border-color:#ef4444;">Severed & Disabled</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 3: Smart Window & Tab Groups -->
+        <div id="view-panel-3" class="b-content-panel">
+          <div class="groups-view">
+            <div class="group-card">
+              <span class="group-tag gt-purple">Dev & Engineering</span>
+              <div class="group-tab-item">📁 GitHub - deadxfire/Rinswa-browser</div>
+              <div class="group-tab-item">📖 MDN Web Docs - CSS Backdrop</div>
+              <div class="group-tab-item">⚡ SpiderMonkey Engine Specs</div>
+            </div>
+
+            <div class="group-card">
+              <span class="group-tag gt-emerald">Privacy & Research</span>
+              <div class="group-tab-item">🛡️ uBlock Origin Filter Rules</div>
+              <div class="group-tab-item">🔍 DuckDuckGo Search Result</div>
+              <div class="group-tab-item">📊 Electronic Frontier Foundation</div>
+            </div>
+
+            <div class="group-card">
+              <span class="group-tag gt-blue">Multimedia & Social</span>
+              <div class="group-tab-item">▶️ 4K Ambient Relaxing Stream</div>
+              <div class="group-tab-item">💬 Reddit r/browsers Discussion</div>
+              <div class="group-tab-item">🎵 Spotify Web Player</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 4: Gecko Engine Specs -->
+        <div id="view-panel-4" class="b-content-panel">
+          <div class="specs-view">
+            <h3 style="font-size:1.2rem; margin-bottom: 0.5rem;">Gecko Engine Diagnostics (Rinswa Stable)</h3>
+            <p style="color:var(--fg-secondary); font-size:0.85rem;">Official Mozilla Gecko release core compiled with custom standalone installer.</p>
+            
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="spec-name">Gecko Base Engine</div>
+                <div class="spec-val">157.0.1 Stable</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-name">JavaScript Engine</div>
+                <div class="spec-val">SpiderMonkey JIT</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-name">Telemetry Pings</div>
+                <div class="spec-val" style="color:#ef4444;">0 Bytes / Blocked</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-name">Adblocker In-Tree</div>
+                <div class="spec-val" style="color:#10b981;">Bundled XPI</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Architecture Features Section -->
+  <section id="features" class="features-section container">
+    <div class="section-head">
+      <span class="section-tag">Core Capabilities</span>
+      <h2 class="section-title">Engineered to Outperform</h2>
+      <p class="section-sub">
+        Every component of Rinswa Browser has been tuned for raw responsiveness, uncompromising security, and breathtaking aesthetics.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card">
+        <div class="feature-icon-wrap">🎨</div>
+        <h3 class="feature-title">Cyber-Glass Design System</h3>
+        <p class="feature-desc">
+          Say goodbye to flat, generic browser chrome. Rinswa features deep frosted glassmorphism, glowing multi-color ribbon accents, high-contrast dark/light adaptability, and Alpine Sunset new tab aesthetics.
+        </p>
+        <div class="feature-tag-list">
+          <span class="ft-tag">Backdrop Filter</span>
+          <span class="ft-tag">Shadow DOM</span>
+          <span class="ft-tag">High Contrast Fix</span>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="background:rgba(239,68,68,0.15); border-color:rgba(239,68,68,0.3); color:#ef4444;">🛡️</div>
+        <h3 class="feature-title">Native uBlock Origin Bundled</h3>
+        <p class="feature-desc">
+          No manual addon installation needed. uBlock Origin is baked directly into the standalone installer package manifest, pinned to the navbar, and controllable directly from browser settings.
+        </p>
+        <div class="feature-tag-list">
+          <span class="ft-tag">Ad Blocking</span>
+          <span class="ft-tag">Anti-Mining</span>
+          <span class="ft-tag">about:preferences</span>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="background:rgba(16,185,129,0.15); border-color:rgba(16,185,129,0.3); color:#10b981;">🚫</div>
+        <h3 class="feature-title">Zero Sponsored Telemetry</h3>
+        <p class="feature-desc">
+          Unlike commercial browsers, Rinswa strips out Pocket, sponsored tiles, telemetry reporting endpoints, and advertising pings. Your browsing habits remain strictly on your machine.
+        </p>
+        <div class="feature-tag-list">
+          <span class="ft-tag">Pocket Removed</span>
+          <span class="ft-tag">Zero Telemetry</span>
+          <span class="ft-tag">Local Privacy</span>
+        </div>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="background:rgba(139,92,246,0.15); border-color:rgba(139,92,246,0.3); color:#a855f7;">📑</div>
+        <h3 class="feature-title">Smart Window & Tab Groups</h3>
+        <p class="feature-desc">
+          Organize heavy multitasking sessions into color-coded workspace groups. The native smart window switcher lets you isolate workspaces and reduce memory footprint effortlessly.
+        </p>
+        <div class="feature-tag-list">
+          <span class="ft-tag">Auto Grouping</span>
+          <span class="ft-tag">Smart Switcher</span>
+          <span class="ft-tag">Organized Tabs</span>
+        </div>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="background:rgba(245,158,11,0.15); border-color:rgba(245,158,11,0.3); color:#f59e0b;">🌄</div>
+        <h3 class="feature-title">Dynamic Alpine Sunset New Tab</h3>
+        <p class="feature-desc">
+          A tranquil, uncluttered starting page featuring the high-resolution Alpine Sunset wallpaper, glowing minimalist clock, private search bar, and full support for custom user wallpapers and colors.
+        </p>
+        <div class="feature-tag-list">
+          <span class="ft-tag">Custom Wallpaper</span>
+          <span class="ft-tag">Clean Top Sites</span>
+          <span class="ft-tag">No Ads</span>
+        </div>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="feature-card">
+        <div class="feature-icon-wrap" style="background:rgba(6,182,212,0.15); border-color:rgba(6,182,212,0.3); color:#06b6d4;">⚙️</div>
+        <h3 class="feature-title">1-Click Automated Upstream Tracking</h3>
+        <p class="feature-desc">
+          Stay continuously current with Mozilla's security patches. The included <code>Check-Firefox-Update.bat</code> checks upstream Firefox releases, bumps versions, and transitions into <code>Build-Rinswa-Stable.bat</code>.
+        </p>
+        <div class="feature-tag-list">
+          <span class="ft-tag">MozillaBuild</span>
+          <span class="ft-tag">Mach Engine</span>
+          <span class="ft-tag">NSIS Installer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section id="comparison" class="compare-section container">
+    <div class="section-head">
+      <span class="section-tag">Comparison</span>
+      <h2 class="section-title">How Rinswa Compares</h2>
+      <p class="section-sub">
+        See why discerning developers and privacy enthusiasts choose Rinswa over stock options.
+      </p>
+    </div>
+
+    <div class="table-card">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature / Capability</th>
+            <th class="highlight-col">Rinswa Browser</th>
+            <th>Stock Firefox</th>
+            <th>Google Chrome</th>
+            <th>Microsoft Edge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Native Bundled uBlock Origin</strong></td>
+            <td class="highlight-col"><span class="check-yes">✓ Pre-installed</span></td>
+            <td><span class="check-no">✗ Manual</span></td>
+            <td><span class="check-no">✗ Manifest v3 Limited</span></td>
+            <td><span class="check-no">✗ Manual</span></td>
+          </tr>
+          <tr>
+            <td><strong>Sponsored Content & Pocket</strong></td>
+            <td class="highlight-col"><span class="check-yes">✓ Completely Removed</span></td>
+            <td><span class="check-no">✗ Included by default</span></td>
+            <td><span class="check-no">✗ Sponsored Feeds</span></td>
+            <td><span class="check-no">✗ Heavy MSN News Ads</span></td>
+          </tr>
+          <tr>
+            <td><strong>Cyber-Glass Aesthetic UI</strong></td>
+            <td class="highlight-col"><span class="check-yes">✓ Native Cyber-Glass</span></td>
+            <td><span class="check-no">✗ Standard Flat UI</span></td>
+            <td><span class="check-no">✗ Standard Material</span></td>
+            <td><span class="check-no">✗ Standard Fluent</span></td>
+          </tr>
+          <tr>
+            <td><strong>Dynamic Alpine Sunset Wallpapers</strong></td>
+            <td class="highlight-col"><span class="check-yes">✓ Built-in & Custom</span></td>
+            <td><span class="check-no">✗ Limited Colors</span></td>
+            <td><span class="check-no">✗ Basic Themes</span></td>
+            <td><span class="check-no">✗ Daily Bing Only</span></td>
+          </tr>
+          <tr>
+            <td><strong>Engine Telemetry Pings</strong></td>
+            <td class="highlight-col"><span class="check-yes">✓ Severed in Code</span></td>
+            <td><span class="check-no">✗ Enabled</span></td>
+            <td><span class="check-no">✗ Extensive Google Pings</span></td>
+            <td><span class="check-no">✗ Extensive Diagnostic Data</span></td>
+          </tr>
+          <tr>
+            <td><strong>100% Open Source (MPL 2.0)</strong></td>
+            <td class="highlight-col"><span class="check-yes">✓ Full Source Public</span></td>
+            <td><span class="check-yes">✓ Public</span></td>
+            <td><span class="check-no">✗ Proprietary</span></td>
+            <td><span class="check-no">✗ Proprietary</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Download & Release Section -->
+  <section id="download" class="download-section container">
+    <div class="download-card-main">
+      <div>
+        <div class="dl-info-head">
+          <img src="Glossy%20Multicolour%20Ribbon%20R%20Emblem.png" alt="Rinswa Logo" class="dl-logo">
+          <div>
+            <h2 class="dl-title">Download Rinswa</h2>
+            <span class="dl-version-tag">v1.0.2 Stable Release</span>
+          </div>
+        </div>
+        <p class="dl-desc">
+          Get the standalone Windows installer executable. Packaged with the modern Gecko engine, bundled uBlock Origin, and verified for 64-bit systems.
+        </p>
+
+        <div class="dl-buttons-wrap">
+          <a href="https://github.com/deadxfire/Rinswa-browser/releases/download/v1.0.2/rinswa-1.0.2.en-US.win64.installer.exe" class="btn-download-hero">
+            <div>
+              <div>Download Installer (.exe)</div>
+              <div class="dl-btn-sub">Windows 10 / 11 (64-bit) • 96.7 MB</div>
+            </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+            </svg>
+          </a>
+
+          <a href="https://github.com/deadxfire/Rinswa-browser/releases/tag/v1.0.2" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:0.85rem 1.25rem;">
+            📦 View GitHub Release & Portable Zip Archive
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="checksum-box">
+          <div class="checksum-head">
+            <span>SHA-256 Checksum</span>
+            <button class="copy-btn" onclick="copyHash()">Copy</button>
+          </div>
+          <div id="hash-text" class="checksum-hash">
+            a8077b56e92677acff83e17de857ea0279ff1f88ecba6a9a5b891c876fde1747
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; color: var(--fg-secondary); font-size: 0.88rem;">
+          <strong style="color: var(--fg-primary);">System Requirements:</strong>
+          <ul style="margin-left: 1.25rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.35rem;">
+            <li>Windows 10 / 11 (64-bit)</li>
+            <li>4 GB RAM (8 GB recommended)</li>
+            <li>500 MB free storage space</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Build Pipeline & Terminal Section -->
+  <section id="build" class="build-section container">
+    <div class="section-head">
+      <span class="section-tag">Developer Quickstart</span>
+      <h2 class="section-title">Build Rinswa from Source</h2>
+      <p class="section-sub">
+        Rinswa provides fully automated batch and shell pipelines that compile Gecko into a standalone Windows installer.
+      </p>
+    </div>
+
+    <div class="terminal-card">
+      <div class="terminal-header">
+        <div class="term-dots">
+          <div class="term-dot td-red"></div>
+          <div class="term-dot td-yellow"></div>
+          <div class="term-dot td-green"></div>
+        </div>
+        <div class="term-tabs">
+          <button class="term-tab active" onclick="switchTermTab(1, this)">1-Click Upstream & Version Tool</button>
+          <button class="term-tab" onclick="switchTermTab(2, this)">Compile & Package Installer</button>
+          <button class="term-tab" onclick="switchTermTab(3, this)">Manual MozillaBuild Shell</button>
+        </div>
+        <button class="copy-btn" onclick="copyTermCode()">Copy Command</button>
+      </div>
+
+      <div id="term-content" class="terminal-body">
+<span class="t-comment">:: 1. Check upstream Firefox release & bump Rinswa version</span>
+<span class="t-cmd">Check-Firefox-Update.bat</span>
+
+<span class="t-out">[*] Querying Mozilla official release API...</span>
+<span class="t-out">[OK] Base engine is up-to-date with Mozilla release branch!</span>
+<span class="t-out">[OK] Updated version.txt, update.xml, and branding assets to v1.0.2</span>
+<span class="t-comment">:: Automatically prompts to start Build-Rinswa-Stable.bat</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display:flex; align-items:center; gap:0.6rem;">
+            <img src="Glossy%20Multicolour%20Ribbon%20R%20Emblem.png" alt="Rinswa Emblem" style="width:30px; height:30px; border-radius:6px;">
+            <span class="brand-font" style="font-size:1.2rem; font-weight:800;">RINSWA BROWSER</span>
+          </div>
+          <p>
+            Developed and maintained by <strong><a href="https://github.com/deadxfire" target="_blank" rel="noopener" style="color:#60a5fa; text-decoration:none;">Arindam Makar</a></strong>.
+            A next-generation browser built on Gecko with uncompromising aesthetic beauty and absolute privacy.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#showcase">Interactive Simulator</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#comparison">Browser Comparison</a></li>
+            <li><a href="#download">Download Installer</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="docs/UPDATING_AND_BUILDING.md">Updating & Build Guide</a></li>
+            <li><a href="https://github.com/deadxfire/Rinswa-browser/releases">Release Notes</a></li>
+            <li><a href="update.xml">Update XML Feed</a></li>
+            <li><a href="LICENSE">MPL 2.0 License</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/deadxfire/Rinswa-browser" target="_blank" rel="noopener">GitHub Repository</a></li>
+            <li><a href="https://github.com/deadxfire/Rinswa-browser/issues" target="_blank" rel="noopener">Report an Issue</a></li>
+            <li><a href="https://github.com/deadxfire/Rinswa-browser/discussions" target="_blank" rel="noopener">Discussions</a></li>
+            <li><a href="https://github.com/deadxfire" target="_blank" rel="noopener">Author Profile</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 <strong>Arindam Makar</strong>. Released under the Mozilla Public License 2.0 (MPL-2.0).
+        </div>
+        <div>
+          Gecko™ and Firefox™ are trademarks of the Mozilla Foundation. Rinswa is an independent open-source project.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Interactivity -->
+  <script>
+    // 1. Clock Update
+    function updateSimClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const el = document.getElementById('sim-clock');
+      if (el) el.textContent = `${h}:${m}`;
+    }
+    updateSimClock();
+    setInterval(updateSimClock, 1000);
+
+    // 2. Tab Switching inside Browser Simulator
+    function switchSimTab(index, url) {
+      // Update Tab Headers
+      for (let i = 1; i <= 4; i++) {
+        const tab = document.getElementById(`tab-btn-${i}`);
+        const panel = document.getElementById(`view-panel-${i}`);
+        if (tab) tab.classList.remove('active');
+        if (panel) panel.classList.remove('active');
+      }
+
+      const activeTab = document.getElementById(`tab-btn-${index}`);
+      const activePanel = document.getElementById(`view-panel-${index}`);
+      if (activeTab) activeTab.classList.add('active');
+      if (activePanel) activePanel.classList.add('active');
+
+      // Update Omnibar
+      const urlInput = document.getElementById('sim-url-input');
+      if (urlInput) urlInput.value = url;
+    }
+
+    // 3. Theme Preset Switching
+    function setBrowserTheme(themeClass, btn) {
+      const mockup = document.getElementById('browser-mockup');
+      if (!mockup) return;
+
+      mockup.className = `browser-frame ${themeClass}`;
+
+      // Update pill active state
+      const pills = btn.parentElement.querySelectorAll('.style-pill');
+      pills.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // 4. Wallpaper Preset Switching
+    function setWallpaper(type, btn) {
+      const viewport = document.getElementById('sim-viewport');
+      if (!viewport) return;
+
+      if (type === 'Rinswa Alpine Sunset Wallpaper.png') {
+        viewport.style.backgroundImage = "url('Rinswa Alpine Sunset Wallpaper.png')";
+      } else if (type === 'cosmic') {
+        viewport.style.backgroundImage = "linear-gradient(135deg, #090b1c 0%, #171136 50%, #2f124a 100%)";
+      } else if (type === 'aurora') {
+        viewport.style.backgroundImage = "linear-gradient(135deg, #031518 0%, #06312a 50%, #081d2c 100%)";
+      } else if (type === 'slate') {
+        viewport.style.backgroundImage = "linear-gradient(135deg, #0b0f19 0%, #111827 100%)";
+      }
+
+      // Update pill active state
+      const pills = btn.parentElement.querySelectorAll('.style-pill');
+      pills.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // 5. Adblocker Toggle inside Simulator
+    let isAdblockOn = true;
+    function toggleSimAdblock() {
+      const toggle = document.getElementById('sim-adblock-toggle');
+      const badge = document.getElementById('sim-ublock-badge');
+      const count = document.getElementById('ublock-counter-text');
+      const popPower = document.getElementById('popup-power');
+      const popNum = document.getElementById('popup-stat-number');
+
+      isAdblockOn = !isAdblockOn;
+      if (isAdblockOn) {
+        toggle.classList.add('active');
+        badge.classList.remove('disabled');
+        count.textContent = '48';
+        popPower.classList.remove('off');
+        popNum.textContent = '48';
+      } else {
+        toggle.classList.remove('active');
+        badge.classList.add('disabled');
+        count.textContent = 'OFF';
+        popPower.classList.add('off');
+        popNum.textContent = '0';
+      }
+    }
+
+    // 6. Smart Tab Groups Toggle
+    let areGroupsOn = true;
+    function toggleSimTabGroups() {
+      const toggle = document.getElementById('sim-groups-toggle');
+      const pill = document.getElementById('smart-group-pill');
+
+      areGroupsOn = !areGroupsOn;
+      if (areGroupsOn) {
+        toggle.classList.add('active');
+        pill.style.display = 'inline-flex';
+      } else {
+        toggle.classList.remove('active');
+        pill.style.display = 'none';
+      }
+    }
+
+    // 7. uBlock Popup Toggle
+    function toggleUblockPopup() {
+      const popup = document.getElementById('ublock-popup');
+      if (popup) popup.classList.toggle('open');
+    }
+
+    function toggleUblockPower() {
+      toggleSimAdblock();
+    }
+
+    // Close uBlock popup on outside click
+    document.addEventListener('click', (e) => {
+      const badge = document.getElementById('sim-ublock-badge');
+      const popup = document.getElementById('ublock-popup');
+      if (popup && popup.classList.contains('open')) {
+        if (!popup.contains(e.target) && !badge.contains(e.target)) {
+          popup.classList.remove('open');
+        }
+      }
+    });
+
+    // 8. Omnibar Input Handling
+    function handleSimUrl(e) {
+      if (e.key === 'Enter') {
+        const val = e.target.value.trim();
+        if (val.includes('about:pref')) {
+          switchSimTab(2, val);
+        } else if (val.includes('group') || val.includes('smart')) {
+          switchSimTab(3, val);
+        } else if (val.includes('perf') || val.includes('spec')) {
+          switchSimTab(4, val);
+        } else {
+          switchSimTab(1, val);
+        }
+      }
+    }
+
+    function handleSearchInput(e) {
+      if (e.key === 'Enter') {
+        const query = e.target.value.trim();
+        if (query) {
+          const urlInput = document.getElementById('sim-url-input');
+          if (urlInput) urlInput.value = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
+          alert(`Searching for: "${query}" via DuckDuckGo in Rinswa Browser!`);
+        }
+      }
+    }
+
+    function simNavigateBack() {
+      switchSimTab(1, 'rinswa://newtab');
+    }
+
+    function simReload() {
+      const viewport = document.getElementById('sim-viewport');
+      if (viewport) {
+        viewport.style.opacity = '0.4';
+        setTimeout(() => { viewport.style.opacity = '1'; }, 200);
+      }
+    }
+
+    // 9. Checksum Copy
+    function copyHash() {
+      const hash = document.getElementById('hash-text').innerText.trim();
+      navigator.clipboard.writeText(hash).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // 10. Terminal Tabs Switching
+    const termCodeSnippets = {
+      1: `<span class="t-comment">:: 1. Check upstream Firefox release & bump Rinswa version</span>
+<span class="t-cmd">Check-Firefox-Update.bat</span>
+
+<span class="t-out">[*] Querying Mozilla official release API...</span>
+<span class="t-out">[OK] Base engine is up-to-date with Mozilla release branch!</span>
+<span class="t-out">[OK] Updated version.txt, update.xml, and branding assets to v1.0.2</span>
+<span class="t-comment">:: Automatically prompts to start Build-Rinswa-Stable.bat</span>`,
+
+      2: `<span class="t-comment">:: Compile Gecko and generate release installer .exe</span>
+<span class="t-cmd">Build-Rinswa-Stable.bat</span>
+
+<span class="t-out">[Step 1/4] Checking toolchains...</span>
+<span class="t-out">[Step 2/4] Applying Cyber-Glass branding and uBlock policies...</span>
+<span class="t-out">[Step 3/4] Compiling Gecko Engine into Rinswa Stable...</span>
+<span class="t-out">[Step 4/4] Packaging standalone installer into obj-rinswa/dist/install/sea/</span>`,
+
+      3: `<span class="t-comment"># Execute in MozillaBuild MSYS2 environment (C:\\mozilla-build\\start-shell.bat)</span>
+<span class="t-cmd">cd</span> <span class="t-arg">/c/Users/arind/OneDrive/Documents/Project/browser</span>
+<span class="t-cmd">./build.sh</span> <span class="t-arg">prepare</span>
+<span class="t-cmd">cd</span> <span class="t-arg">rinswa-stable</span>
+<span class="t-cmd">python ./mach build</span> <span class="t-arg">-j16</span>
+<span class="t-cmd">python ./mach package</span>`
+    };
+
+    function switchTermTab(idx, btn) {
+      const content = document.getElementById('term-content');
+      if (content && termCodeSnippets[idx]) {
+        content.innerHTML = termCodeSnippets[idx];
+      }
+      const tabs = btn.parentElement.querySelectorAll('.term-tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function copyTermCode() {
+      const content = document.getElementById('term-content').innerText;
+      navigator.clipboard.writeText(content).then(() => {
+        alert('Build commands copied to clipboard!');
+      });
+    }
+  </script>
 </body>
 </html>
