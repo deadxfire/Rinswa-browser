@@ -5,21 +5,26 @@
    ========================================================================== */
 
 :root {
-  /* Core Theme Surface Colors */
-  --rinswa-bg-base: #060913;
-  --rinswa-bg-surface: #0b0f1d;
-  --rinswa-bg-card: rgba(18, 24, 43, 0.75);
-  --rinswa-bg-glass: rgba(255, 255, 255, 0.04);
+  /* Core Theme Deep Obsidian & Glass Surfaces */
+  --rinswa-bg-base: #090616;
+  --rinswa-bg-surface: #120b24;
+  --rinswa-bg-card: rgba(22, 14, 46, 0.82);
+  --rinswa-bg-glass: rgba(255, 255, 255, 0.05);
   --rinswa-border-subtle: rgba(255, 255, 255, 0.08);
-  --rinswa-border-glow: rgba(99, 102, 241, 0.35);
+  --rinswa-border-glow: rgba(0, 242, 254, 0.35);
 
-  /* Signature Multicolour Ribbon Accents */
-  --rinswa-red: #ef4444;
-  --rinswa-orange: #f59e0b;
-  --rinswa-green: #10b981;
-  --rinswa-blue: #3b82f6;
-  --rinswa-purple: #8b5cf6;
-  --rinswa-ribbon-gradient: linear-gradient(90deg, var(--rinswa-red), var(--rinswa-orange), var(--rinswa-green), var(--rinswa-blue), var(--rinswa-purple));
+  /* Master Logo Glossy Multicolour Ribbon Accents */
+  --rinswa-cyan: #00f2fe;
+  --rinswa-sky: #00b4d8;
+  --rinswa-blue: #0072ff;
+  --rinswa-indigo: #6366f1;
+  --rinswa-purple: #a855f7;
+  --rinswa-magenta: #ec4899;
+  --rinswa-coral: #ff758c;
+
+  --rinswa-ribbon-gradient: linear-gradient(90deg, #00f2fe 0%, #0072ff 25%, #6366f1 50%, #a855f7 75%, #ec4899 100%);
+  --rinswa-ribbon-bar: linear-gradient(90deg, #00f2fe, #00b4d8, #0072ff, #6366f1, #a855f7, #ec4899, #ff758c);
+  --rinswa-ribbon-glow: 0 0 16px rgba(0, 242, 254, 0.4), 0 0 24px rgba(236, 72, 153, 0.25);
 
   --rinswa-fg-primary: #f8fafc;
   --rinswa-fg-secondary: #94a3b8;
@@ -36,19 +41,26 @@
   --toolbar-bgcolor: var(--rinswa-bg-base) !important;
   --toolbar-color: var(--rinswa-fg-primary) !important;
   --toolbox-non-lwt-bgcolor: var(--rinswa-bg-base) !important;
-  --tab-selected-bgcolor: rgba(239, 68, 68, 0.15) !important;
+  --tab-selected-bgcolor: rgba(45, 23, 84, 0.85) !important;
   --tab-selected-textcolor: #ffffff !important;
   --toolbarbutton-border-radius: 8px !important;
-  --lwt-toolbar-field-background-color: rgba(15, 23, 42, 0.7) !important;
+  --lwt-toolbar-field-background-color: rgba(24, 15, 48, 0.85) !important;
   --lwt-toolbar-field-color: #f8fafc !important;
 }
 
 /* ==========================================================================
    1. NAVIGATION TOOLBOX & HEADER
    ========================================================================== */
-:root:not([lwtheme]) #navigator-toolbox {
-  background: linear-gradient(180deg, #060913 0%, #0b0f1d 100%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+#navigator-toolbox {
+  background-color: #0b0718 !important;
+  background-image:
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDMyMCAxNDQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogIDxkZWZzPg0KICAgIDwhLS0gQ3lhbiB0byBSb3lhbCBCbHVlIGdyYWRpZW50IC0tPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmliYm9uLWN5YW4tYmx1ZSIgeDE9IjAlIiB5MT0iMTAwJSIgeDI9IjEwMCUiIHkyPSIwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDBmMmZlIiBzdG9wLW9wYWNpdHk9IjAuOTUiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iNDUlIiBzdG9wLWNvbG9yPSIjMDA3MmZmIiBzdG9wLW9wYWNpdHk9IjAuOSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI4NSUiIHN0b3AtY29sb3I9IiM2MzY2ZjEiIHN0b3Atb3BhY2l0eT0iMC40Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM2MzY2ZjEiIHN0b3Atb3BhY2l0eT0iMCIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQoNCiAgICA8IS0tIFJveWFsIEJsdWUgdG8gSW5kaWdvIGdyYWRpZW50IC0tPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmliYm9uLWJsdWUtaW5kaWdvIiB4MT0iMCUiIHkxPSIxMDAlIiB4Mj0iMTAwJSIgeTI9IjEwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDA3MmZmIiBzdG9wLW9wYWNpdHk9IjAuOSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM2MzY2ZjEiIHN0b3Atb3BhY2l0eT0iMC44NSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI4NSUiIHN0b3AtY29sb3I9IiNhODU1ZjciIHN0b3Atb3BhY2l0eT0iMC40Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNhODU1ZjciIHN0b3Atb3BhY2l0eT0iMCIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQoNCiAgICA8IS0tIEluZGlnbyB0byBQdXJwbGUgJiBNYWdlbnRhIGdyYWRpZW50IC0tPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmliYm9uLWluZGlnby1tYWdlbnRhIiB4MT0iNSUiIHkxPSIxMDAlIiB4Mj0iOTUlIiB5Mj0iMCUiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYzNjZmMSIgc3RvcC1vcGFjaXR5PSIwLjg4Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjQ1JSIgc3RvcC1jb2xvcj0iI2E4NTVmNyIgc3RvcC1vcGFjaXR5PSIwLjgyIi8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjgwJSIgc3RvcC1jb2xvcj0iI2VjNDg5OSIgc3RvcC1vcGFjaXR5PSIwLjg1Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZjc1OGMiIHN0b3Atb3BhY2l0eT0iMCIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQoNCiAgICA8IS0tIFZpdmlkIE1hZ2VudGEgdG8gUGVhY2gvQ29yYWwgZmxhcmUgLS0+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJyaWJib24tbWFnZW50YS1mbGFyZSIgeDE9IjAlIiB5MT0iMTAwJSIgeDI9IjgwJSIgeTI9IjAlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNlYzQ4OTkiIHN0b3Atb3BhY2l0eT0iMC44NSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiNmZjc1OGMiIHN0b3Atb3BhY2l0eT0iMC43NSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmY5YTc2IiBzdG9wLW9wYWNpdHk9IjAiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KDQogICAgPCEtLSBEZWVwIENvc21pYyBWaW9sZXQgYmFzZSBjdXJ2ZSAtLT4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJpYmJvbi1jb3NtaWMtYmFzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmQxMjU0IiBzdG9wLW9wYWNpdHk9IjAuODUiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjMWIwYjM2IiBzdG9wLW9wYWNpdHk9IjAuNiIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMGUwNjFlIiBzdG9wLW9wYWNpdHk9IjAiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KDQogICAgPCEtLSBHbG9zc3kgU3BlY3VsYXIgU2hlZW4gLS0+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJyaWJib24tZ2xvc3MiIHgxPSIxMCUiIHkxPSIxMDAlIiB4Mj0iOTAlIiB5Mj0iMTAlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC44Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjM1JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+DQogICAgPC9saW5lYXJHcmFkaWVudD4NCiAgPC9kZWZzPg0KDQogIDwhLS0gRGVlcCBiYXNlIGNvc21pYyBzaGFkb3cvZGVwdGggd2F2ZSAtLT4NCiAgPHBhdGggZD0iTTAgMCBDNTAgMTQgMTEwIDQ4IDE0NSA5NiBDMTc1IDEzMiAyMTAgMTQwIDI3MCAxNDQgTDAgMTQ0IFoiIGZpbGw9InVybCgjcmliYm9uLWNvc21pYy1iYXNlKSIvPg0KDQogIDwhLS0gQmFjayBSaWJib246IEluZGlnbyB0byBNYWdlbnRhIHN3ZWVwIC0tPg0KICA8cGF0aCBkPSJNMCAxOCBDNjAgMjQgMTI1IDYwIDE2MCAxMDggQzE4NSAxMzggMjIwIDE0MiAyNzAgMTQ0IEwxOTUgMTQ0IEMxNTUgMTM4IDEyMCAxMjAgOTYgOTIgQzY1IDU2IDMwIDMwIDAgMjggWiIgZmlsbD0idXJsKCNyaWJib24taW5kaWdvLW1hZ2VudGEpIi8+DQoNCiAgPCEtLSBNaWRkbGUgUmliYm9uOiBCbHVlIHRvIEluZGlnbyBzd2VlcCAtLT4NCiAgPHBhdGggZD0iTTAgNDggQzUyIDUyIDEwNSA4NCAxMzUgMTIyIEMxNTIgMTQwIDE3OCAxNDMgMjE1IDE0NCBMMTUwIDE0NCBDMTIwIDE0MCA5NiAxMzAgNzggMTA0IEM1NCA3NCAyNSA1NCAwIDUyIFoiIGZpbGw9InVybCgjcmliYm9uLWJsdWUtaW5kaWdvKSIvPg0KDQogIDwhLS0gRm9yZSBSaWJib246IEVsZWN0cmljIEN5YW4gdG8gUm95YWwgQmx1ZSBoaWdobGlnaHQgd2F2ZSAtLT4NCiAgPHBhdGggZD0iTTAgNzYgQzQyIDc4IDgyIDEwMiAxMDggMTMyIEMxMjAgMTQyIDEzOCAxNDQgMTYyIDE0NCBMMTA4IDE0NCBDODYgMTQyIDcwIDEzNCA1NSAxMTYgQzM2IDkyIDE4IDgwIDAgNzggWiIgZmlsbD0idXJsKCNyaWJib24tY3lhbi1ibHVlKSIvPg0KDQogIDwhLS0gQ29yYWwgTWFnZW50YSBBY2NlbnQgRmxhcmUgb24gdGhlIGxlYWRpbmcgY3Jlc3QgLS0+DQogIDxwYXRoIGQ9Ik0wIDEwMiBDMjggMTA0IDU2IDEyMCA3NCAxNDAgQzgyIDE0MyA5MiAxNDQgMTA4IDE0NCBMNjIgMTQ0IEM0NiAxNDIgMzQgMTM2IDIyIDEyNiBDMTIgMTEyIDUgMTA2IDAgMTA0IFoiIGZpbGw9InVybCgjcmliYm9uLW1hZ2VudGEtZmxhcmUpIi8+DQoNCiAgPCEtLSBHbG9zc3kgM0Qgc3BlY3VsYXIgaGlnaGxpZ2h0IGN1cnZlcyAtLT4NCiAgPHBhdGggZD0iTTAgNzYgQzQyIDc4IDgyIDEwMiAxMDggMTMyIEMxMjAgMTQyIDEzOCAxNDQgMTYyIDE0NCIgc3Ryb2tlPSJ1cmwoI3JpYmJvbi1nbG9zcykiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz4NCiAgPHBhdGggZD0iTTAgNDggQzUyIDUyIDEwNSA4NCAxMzUgMTIyIEMxNTIgMTQwIDE3OCAxNDMgMjE1IDE0NCIgc3Ryb2tlPSJ1cmwoI3JpYmJvbi1nbG9zcykiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNzUiLz4NCiAgPHBhdGggZD0iTTAgMTggQzYwIDI0IDEyNSA2MCAxNjAgMTA4IEMxODUgMTM4IDIyMCAxNDIgMjcwIDE0NCIgc3Ryb2tlPSJ1cmwoI3JpYmJvbi1nbG9zcykiIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNSIvPg0KPC9zdmc+"),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDMyMCAxNDQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogIDxkZWZzPg0KICAgIDwhLS0gTWFnZW50YSB0byBQdXJwbGUgZ3JhZGllbnQgLS0+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJyaWJib24tcmlnaHQtbWFnZW50YSIgeDE9IjEwMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZWM0ODk5IiBzdG9wLW9wYWNpdHk9IjAuODgiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjYTg1NWY3IiBzdG9wLW9wYWNpdHk9IjAuODIiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjNjM2NmYxIiBzdG9wLW9wYWNpdHk9IjAuNCIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjM2NmYxIiBzdG9wLW9wYWNpdHk9IjAiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KDQogICAgPCEtLSBJbmRpZ28gdG8gQ3lhbiBncmFkaWVudCAtLT4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJpYmJvbi1yaWdodC1jeWFuIiB4MT0iMTAwJSIgeTE9IjEwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDBmMmZlIiBzdG9wLW9wYWNpdHk9IjAuOTIiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iNDUlIiBzdG9wLWNvbG9yPSIjMDA3MmZmIiBzdG9wLW9wYWNpdHk9IjAuODUiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjNjM2NmYxIiBzdG9wLW9wYWNpdHk9IjAuNCIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjM2NmYxIiBzdG9wLW9wYWNpdHk9IjAiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KDQogICAgPCEtLSBEZWVwIENvc21pYyBiYXNlIC0tPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmliYm9uLXJpZ2h0LWNvc21pYyIgeDE9IjEwMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmQxMjU0IiBzdG9wLW9wYWNpdHk9IjAuOCIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI3MCUiIHN0b3AtY29sb3I9IiMxYjBiMzYiIHN0b3Atb3BhY2l0eT0iMC40NSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMGUwNjFlIiBzdG9wLW9wYWNpdHk9IjAiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KDQogICAgPCEtLSBTcGVjdWxhciBHbG9zcyAtLT4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJpYmJvbi1yaWdodC1nbG9zcyIgeDE9IjEwMCUiIHkxPSIwJSIgeDI9IjEwJSIgeTI9IjkwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuNzUiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMiIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI4MCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogIDwvZGVmcz4NCg0KICA8cGF0aCBkPSJNMzIwIDAgQzI3MCAxNCAyMTAgNDggMTc1IDk2IEMxNDUgMTMyIDExMCAxNDAgNTAgMTQ0IEwzMjAgMTQ0IFoiIGZpbGw9InVybCgjcmliYm9uLXJpZ2h0LWNvc21pYykiLz4NCiAgPHBhdGggZD0iTTMyMCAxOCBDMjYwIDI0IDE5NSA2MCAxNjAgMTA4IEMxMzUgMTM4IDEwMCAxNDIgNTAgMTQ0IEwxMjUgMTQ0IEMxNjUgMTM4IDIwMCAxMjAgMjI0IDkyIEMyNTUgNTYgMjkwIDMwIDMyMCAyOCBaIiBmaWxsPSJ1cmwoI3JpYmJvbi1yaWdodC1tYWdlbnRhKSIvPg0KICA8cGF0aCBkPSJNMzIwIDUyIEMyNjggNTQgMjE1IDg2IDE4NSAxMjIgQzE2OCAxNDAgMTQyIDE0MyAxMDUgMTQ0IEwxNzAgMTQ0IEMyMDAgMTQwIDIyNCAxMzAgMjQyIDEwNCBDMjY2IDc0IDI5NSA1NiAzMjAgNTQgWiIgZmlsbD0idXJsKCNyaWJib24tcmlnaHQtY3lhbikiLz4NCiAgPHBhdGggZD0iTTMyMCAxOCBDMjYwIDI0IDE5NSA2MCAxNjAgMTA4IEMxMzUgMTM4IDEwMCAxNDIgNTAgMTQ0IiBzdHJva2U9InVybCgjcmliYm9uLXJpZ2h0LWdsb3NzKSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz4NCiAgPHBhdGggZD0iTTMyMCA1MiBDMjY4IDU0IDIxNSA4NiAxODUgMTIyIEMxNjggMTQwIDE0MiAxNDMgMTA1IDE0NCIgc3Ryb2tlPSJ1cmwoI3JpYmJvbi1yaWdodC1nbG9zcykiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNyIvPg0KPC9zdmc+"),
+    linear-gradient(180deg, #090616 0%, #120b24 50%, #1a1033 100%) !important;
+  background-position: left top, right top, center !important;
+  background-repeat: no-repeat, no-repeat, no-repeat !important;
+  background-size: auto 144px, auto 144px, 100% 100% !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   padding-bottom: 2px !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", Roboto, sans-serif !important;
 }
@@ -96,9 +108,9 @@
 
 /* Active / Selected Tab with Signature Multicolour Glow */
 .tabbrowser-tab[selected="true"] .tab-background {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%) !important;
-  border: 1px solid rgba(245, 158, 11, 0.4) !important;
-  box-shadow: 0 4px 18px rgba(239, 68, 68, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+  background: rgba(45, 23, 84, 0.85) !important;
+  border: 1px solid rgba(168, 85, 247, 0.45) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
   position: relative !important;
 }
 
@@ -107,12 +119,12 @@
   content: "" !important;
   position: absolute !important;
   bottom: 0 !important;
-  left: 10% !important;
-  right: 10% !important;
+  left: 8% !important;
+  right: 8% !important;
   height: 2px !important;
   background: var(--rinswa-ribbon-gradient) !important;
   border-radius: 2px 2px 0 0 !important;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6) !important;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.7), 0 0 4px rgba(236, 72, 153, 0.7) !important;
 }
 
 /* Tab Hover Effect */
@@ -443,13 +455,19 @@ menupopup menu:-moz-locale-dir(rtl):hover::after {
   box-sizing: border-box !important;
 }
 
-#appMenu-mainView {
-  width: 320px !important;
-  min-width: 320px !important;
+#appMenu-mainView,
+#appMenu-popup panelview {
+  width: 380px !important;
+  min-width: 380px !important;
+  max-width: 440px !important;
+  box-sizing: border-box !important;
 }
 
 #appMenu-popup panelview:not(#appMenu-mainView) {
-  min-width: 320px !important;
+  width: 380px !important;
+  min-width: 380px !important;
+  max-width: 440px !important;
+  box-sizing: border-box !important;
 }
 
 #appMenu-popup .panel-subview-body {
@@ -549,22 +567,23 @@ tab-groups-list .tab-groups-list-empty-state moz-button {
 
 /* Header with Rinswa emblem and title */
 #appMenu-mainView .panel-subview-body::before {
-  content: "Rinswa";
+  content: "Rinswa Browser" !important;
   display: flex !important;
   align-items: center !important;
-  min-height: 32px !important;
-  height: 32px !important;
+  min-height: 38px !important;
+  height: 38px !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   color: #f8fafc !important;
   letter-spacing: -0.2px !important;
-  padding-inline-start: 36px !important;
+  padding-inline-start: 40px !important;
   background-image: url("chrome://branding/content/about-logo.png") !important;
   background-repeat: no-repeat !important;
-  background-size: 20px 20px !important;
+  background-size: 24px 24px !important;
   background-position: 8px center !important;
-  margin: 2px 4px 4px 4px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin: 2px 0 6px 0 !important;
+  border-bottom: 2px solid transparent !important;
+  border-image: var(--rinswa-ribbon-bar) 1 !important;
 }
 
 /* Completely eradicate blank gaps, hidden items, FxA sync, banners & clutter */
@@ -651,16 +670,16 @@ setting-group[groupid="moreFromMozillaProducts"] {
   align-items: center !important;
   min-height: 28px !important;
   height: auto !important;
-  padding: 3px 8px !important;
-  margin: 1px 3px !important;
+  padding: 4px 10px !important;
+  margin: 1px 0 !important;
   border-radius: 7px !important;
   color: #cbd5e1 !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   line-height: 1.2 !important;
   box-sizing: border-box !important;
-  width: calc(100% - 6px) !important;
-  max-width: calc(100% - 6px) !important;
+  width: 100% !important;
+  max-width: 100% !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -707,6 +726,7 @@ setting-group[groupid="moreFromMozillaProducts"] {
 /* Keyboard Shortcut Accelerator Text */
 #appMenu-popup panelview toolbarbutton.subviewbutton:not(.toolbaritem-combined-buttons > toolbarbutton) > .toolbarbutton-accel {
   margin-inline-start: auto !important;
+  margin-inline-end: 8px !important;
   color: #818cf8 !important;
   font-size: 10.5px !important;
   font-weight: 500 !important;
@@ -807,6 +827,7 @@ setting-group[groupid="moreFromMozillaProducts"] {
   fill: #94a3b8 !important;
   fill-opacity: 0.8 !important;
   margin-inline-start: auto !important;
+  margin-inline-end: 6px !important;
   flex-shrink: 0 !important;
   transition: transform 0.15s ease, fill 0.15s ease, fill-opacity 0.15s ease !important;
 }
