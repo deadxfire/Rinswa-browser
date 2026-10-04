@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// Rinswa Branding Preferences - Official Stable v1.0.1
+// Rinswa Branding Preferences - Official Stable v1.0.2
 pref("startup.homepage_override_url", "https://deadxfire.github.io/Rinswa-Browser-Support/");
 pref("startup.homepage_welcome_url", "https://deadxfire.github.io/Rinswa-Browser-Support/");
 pref("startup.homepage_welcome_url.additional", "");

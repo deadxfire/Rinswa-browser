@@ -11,6 +11,12 @@ PROJECT_DIR="/c/Users/arind/OneDrive/Documents/Project/browser"
 MOZ_DIR="$PROJECT_DIR/rinswa-stable"
 CONFIG_FILE="$PROJECT_DIR/config/mozconfig.windows"
 
+# Dynamically load version from version.txt
+VERSION="1.0.2"
+if [ -f "$MOZ_DIR/browser/config/version.txt" ]; then
+    VERSION=$(tr -d '\r\n ' < "$MOZ_DIR/browser/config/version.txt")
+fi
+
 # Put Python 3.11 and Git at front of PATH for MSYS2
 export PATH="/c/Program Files/Git/cmd:/c/Users/arind/AppData/Local/Python/pythoncore-3.11-64:$PATH"
 export MOZCONFIG="$CONFIG_FILE"
@@ -20,10 +26,11 @@ export DISABLE_TELEMETRY=1
 export MOZ_NOSPAM=1
 
 echo "======================================================="
-echo "     RINSWA BROWSER STABLE (v1.0.1) BUILD SYSTEM"
+echo "     RINSWA BROWSER STABLE (v$VERSION) BUILD SYSTEM"
 echo "        Developed and made by Arindam Makar"
 echo "======================================================="
 echo "Active Python: $(command -v python) ($(python --version 2>&1 || true))"
+echo "Version:       $VERSION Stable"
 echo "Project Path:  $PROJECT_DIR"
 echo "Source Tree:   $MOZ_DIR"
 echo "Mozconfig:     $MOZCONFIG"
@@ -46,7 +53,7 @@ run_bootstrap() {
 
 run_prepare() {
     echo ""
-    echo "[Step 2/4] Applying Rinswa branding, Cyber-Glass UI, and v1.0.1 settings..."
+    echo "[Step 2/4] Applying Rinswa branding, Cyber-Glass UI, and v$VERSION settings..."
     cd "$PROJECT_DIR"
     export MOZ_SRC_DIR="$MOZ_DIR"
     ./build.sh prepare
@@ -55,7 +62,7 @@ run_prepare() {
 
 run_compile() {
     echo ""
-    echo "[Step 3/4] Compiling Gecko Engine into Rinswa Stable v1.0.1..."
+    echo "[Step 3/4] Compiling Gecko Engine into Rinswa Stable v$VERSION..."
     cd "$MOZ_DIR"
     python ./mach build -j16
     echo ">> Step 3 (Compilation) complete."

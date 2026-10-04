@@ -1,27 +1,33 @@
 @echo off
-title Rinswa Browser Stable v1.0.1 - Build System
+cd /d "%~dp0"
+
+set "RINSWA_VERSION=1.0.2"
+if exist "rinswa-stable\browser\config\version.txt" (
+    set /p RINSWA_VERSION=<"rinswa-stable\browser\config\version.txt"
+)
+set "RINSWA_VERSION=%RINSWA_VERSION: =%"
+
+title Rinswa Browser Stable v%RINSWA_VERSION% - Build System
 color 0B
 
 echo =======================================================
-echo          RINSWA BROWSER STABLE (v1.0.1) BUILD
+echo          RINSWA BROWSER STABLE (v%RINSWA_VERSION%) BUILD
 echo          Developed and made by Arindam Makar
 echo =======================================================
 echo.
-echo Version:   1.0.1 Stable (Official Release Engine)
+echo Version:   %RINSWA_VERSION% Stable (Official Release Engine)
 echo Directory: rinswa-stable\
 echo Output:    rinswa-stable\obj-rinswa\dist\
 echo.
 echo What this script will do:
-echo 1. Verify modern Firefox Stable engine (157.0.1 source).
-echo 2. Set version to 1.0.1 Stable and remove Nightly/experimental flags.
+echo 1. Verify modern Firefox Stable engine source.
+echo 2. Set version to %RINSWA_VERSION% Stable and remove Nightly/experimental flags.
 echo 3. Inject custom Rinswa branding, Cyber-Glass theme, and icons.
 echo 4. Compile the full Gecko engine.
 echo 5. Package the standalone installer (.exe) into rinswa-stable\obj-rinswa\dist\
 echo.
 echo Press any key to start building Rinswa Stable...
 pause >nul
-
-cd /d "%~dp0"
 
 IF NOT EXIST "C:\mozilla-build\start-shell.bat" (
     echo.

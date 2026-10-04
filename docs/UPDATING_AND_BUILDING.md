@@ -85,9 +85,27 @@ rinswa-stable/obj-rinswa/dist/rinswa-<version>.en-US.win64.zip
 
 ---
 
-## Workflow 2: Upstream Firefox Engine Update
+## Workflow 2: Upstream Firefox Engine Update & Version Bump
 
-When Mozilla releases a new version of Firefox (for example, Firefox 158 or a minor security update like 157.0.2 → 157.0.3), follow these steps to incorporate the update into Rinswa.
+### Method A: Automated 1-Click Tool (Recommended)
+
+Simply double-click or run:
+```cmd
+Check-Firefox-Update.bat
+```
+*(or `Check-Firefox-Update-And-Set-Version.bat`)*
+
+**What it does automatically:**
+1. **Checks Mozilla Upstream:** Queries both Mozilla's official release API and the upstream Git repository (`origin/release`). If a new Firefox update exists, it prompts to fetch and merge it automatically.
+2. **Version Management:** Displays the current version, suggests the next semantic version (e.g. `1.0.3`), and updates all required files (`version.txt`, `version_display.txt`, `update.xml`, `README.md`, and preferences).
+3. **Synchronizes Assets:** Automatically deploys branding, Cyber-Glass stylesheets, new tab wallpapers, and enterprise policies.
+4. **Launches Build:** Automatically offers to launch `Build-Rinswa-Stable.bat` to compile the engine and package the installer.
+
+---
+
+### Method B: Manual Upstream Update Steps
+
+When performing manual step-by-step updates or resolving complex conflicts:
 
 ### Step 1: Save Current In-Tree Rinswa Modifications
 Before pulling code from Mozilla, save your local modifications inside `rinswa-stable`:
