@@ -70,6 +70,19 @@ run_package() {
     mkdir -p obj-rinswa/dist/bin/distribution/extensions
     curl -L -s -o obj-rinswa/dist/bin/distribution/extensions/uBlock0@raymondhill.net.xpi "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/addon-607454-latest.xpi"
     
+    # Copy enterprise distribution policies to force-install and pin uBlock Origin to navbar
+    if [ -f "$PROJECT_DIR/branding/distribution/policies.json" ]; then
+        cp "$PROJECT_DIR/branding/distribution/policies.json" obj-rinswa/dist/bin/distribution/policies.json
+    fi
+
+    # Ensure updated Rinswa emblem bitmaps are deployed to instgen before NSIS compiles
+    if [ -f "$PROJECT_DIR/branding/wizHeader.bmp" ]; then
+        mkdir -p obj-rinswa/browser/installer/windows/instgen
+        cp "$PROJECT_DIR/branding/wizHeader.bmp" obj-rinswa/browser/installer/windows/instgen/wizHeader.bmp
+        cp "$PROJECT_DIR/branding/wizHeaderRTL.bmp" obj-rinswa/browser/installer/windows/instgen/wizHeaderRTL.bmp
+        cp "$PROJECT_DIR/branding/wizWatermark.bmp" obj-rinswa/browser/installer/windows/instgen/wizWatermark.bmp
+    fi
+    
     python ./mach package
     echo ">> Step 4 (Packaging) complete."
 }

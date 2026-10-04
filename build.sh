@@ -163,6 +163,19 @@ package_rinswa() {
     mkdir -p obj-rinswa/dist/bin/distribution/extensions
     curl -L -s -o obj-rinswa/dist/bin/distribution/extensions/uBlock0@raymondhill.net.xpi "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/addon-607454-latest.xpi"
     
+    # Copy enterprise distribution policies to force-install and pin uBlock Origin to navbar
+    if [ -f "$BRANDING_DIR/distribution/policies.json" ]; then
+        cp "$BRANDING_DIR/distribution/policies.json" obj-rinswa/dist/bin/distribution/policies.json
+    fi
+
+    # Ensure updated Rinswa emblem bitmaps are deployed to instgen before NSIS compiles
+    if [ -f "$BRANDING_DIR/wizHeader.bmp" ]; then
+        mkdir -p obj-rinswa/browser/installer/windows/instgen
+        cp "$BRANDING_DIR/wizHeader.bmp" obj-rinswa/browser/installer/windows/instgen/wizHeader.bmp
+        cp "$BRANDING_DIR/wizHeaderRTL.bmp" obj-rinswa/browser/installer/windows/instgen/wizHeaderRTL.bmp
+        cp "$BRANDING_DIR/wizWatermark.bmp" obj-rinswa/browser/installer/windows/instgen/wizWatermark.bmp
+    fi
+    
     ./mach package
 }
 

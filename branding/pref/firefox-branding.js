@@ -36,3 +36,7 @@ pref("browser.newtabpage.activity-stream.feeds.snippets", false);
 pref("browser.newtabpage.activity-stream.feeds.topsites", true);
 pref("browser.newtabpage.activity-stream.showSearch", true);
 pref("browser.startup.homepage.abouthome_cache.enabled", false);
+
+// Auto-enable bundled distribution extensions (uBlock Origin) on first run
+pref("extensions.autoDisableScopes", 0);
+pref("extensions.enabledScopes", 15);

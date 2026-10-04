@@ -1,5 +1,20 @@
 {
   "policies": {
+    "ExtensionSettings": {
+      "*": {
+        "installation_mode": "allowed"
+      },
+      "uBlock0@raymondhill.net": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/addon-607454-latest.xpi",
+        "default_area": "navbar"
+      }
+    },
+    "Extensions": {
+      "Install": [
+        "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/addon-607454-latest.xpi"
+      ]
+    },
     "NewTabPage": true,
     "FirefoxHome": {
       "Search": true,
@@ -12,6 +27,14 @@
       "Locked": false
     },
     "Preferences": {
+      "extensions.autoDisableScopes": {
+        "Value": 0,
+        "Status": "default"
+      },
+      "extensions.enabledScopes": {
+        "Value": 15,
+        "Status": "default"
+      },
       "general.useragent.compatMode.firefox": {
         "Value": true,
         "Status": "default"
