@@ -880,6 +880,55 @@ browser[type="content"] {
   letter-spacing: 0.3px !important;
 }
 
+/* AI Window / Chatbot Right Sidebar (#ai-window-box) */
+#ai-window-box {
+  background: var(--rinswa-bg-surface) !important;
+  background-color: var(--rinswa-bg-surface) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  margin: 0 8px 8px 0 !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+#ai-window-box browser,
+#ai-window-box .ai-window-browser-stack {
+  background: transparent !important;
+}
+
+/* Light Theme Sidebars (#sidebar-box and #ai-window-box) */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #sidebar-box,
+:root[lwtheme]:not([lwtheme-brighttext]) #sidebar-box,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #sidebar-box {
+  background: #f8fafc !important;
+  background-color: #f8fafc !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #ai-window-box,
+:root[lwtheme]:not([lwtheme-brighttext]) #ai-window-box,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #ai-window-box {
+  background: #f8fafc !important;
+  background-color: #f8fafc !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 12px !important;
+  margin: 0 8px 8px 0 !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+  color-scheme: light !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #ai-window-box browser,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #ai-window-box .ai-window-browser-stack,
+:root[lwtheme]:not([lwtheme-brighttext]) #ai-window-box browser,
+:root[lwtheme]:not([lwtheme-brighttext]) #ai-window-box .ai-window-browser-stack,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #ai-window-box browser,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #ai-window-box .ai-window-browser-stack {
+  background: #f8fafc !important;
+  background-color: #f8fafc !important;
+}
+
 /* Glassmorphism Context Menus & Popups */
 menupopup, panel {
   --panel-background-color: rgba(18, 14, 34, 0.72) !important;

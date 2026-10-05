@@ -71,6 +71,34 @@ user_content_css = """/* Hide enterprise policies managed notice in Settings */
     display: none !important;
   }
 }
+
+/* AI Window / Chatbot Contrast & Light Mode Fix */
+@-moz-document url-prefix("chrome://browser/content/aiwindow/") {
+  :root {
+    background-color: light-dark(#f8fafc, transparent) !important;
+  }
+  
+  html, body, .ai-window {
+    background-color: light-dark(#f8fafc, transparent) !important;
+  }
+
+  @media (prefers-color-scheme: light) {
+    body,
+    .chat-bubble-assistant,
+    .chat-bubble-assistant .chat-bubble-inner,
+    .assistant-message {
+      color: #0f172a !important;
+    }
+    
+    .disclaimer,
+    smartwindow-footer,
+    .smartwindow-footer-text,
+    [data-l10n-id*="mistake"],
+    [data-l10n-id*="error"] {
+      color: #475569 !important;
+    }
+  }
+}
 """
 
 for p in profile_dirs:
