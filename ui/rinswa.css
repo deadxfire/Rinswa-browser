@@ -915,20 +915,40 @@ panel::part(content) {
 /* ==========================================================================
    UNIFIED EXTENSIONS PANEL (#unified-extensions-panel)
    Responsive, beautifully aligned extensions manager popup matching Cyber-Glass UI
+   Guaranteed crisp white & light-slate readability across all themes (Light / Dark)
    ========================================================================== */
-#unified-extensions-panel {
+#unified-extensions-panel,
+#unified-extensions-panel panelview,
+#unified-extensions-view {
   --panel-width: 380px !important;
   width: 380px !important;
   min-width: 360px !important;
   max-width: 440px !important;
+  --panel-background-color: rgba(18, 14, 34, 0.72) !important;
+  --panel-background: rgba(18, 14, 34, 0.72) !important;
+  --panel-color: #f1f5f9 !important;
+  --panel-text-color: #f1f5f9 !important;
+  --panel-description-color: #94a3b8 !important;
+  --panel-border-color: rgba(255, 255, 255, 0.16) !important;
+  --panel-border-radius: 14px !important;
+  --panel-shortcut-color: #38bdf8 !important;
+  color-scheme: dark !important;
+  color: #f1f5f9 !important;
 }
 
 #unified-extensions-panel::part(content) {
   width: 380px !important;
   min-width: 360px !important;
   max-width: 440px !important;
-  padding: 6px !important;
+  background: linear-gradient(155deg, rgba(28, 19, 54, 0.80) 0%, rgba(14, 10, 28, 0.75) 100%) !important;
+  background-color: rgba(18, 14, 34, 0.72) !important;
+  backdrop-filter: blur(32px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: var(--panel-border-radius, 14px) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), 0 0 1px rgba(255, 255, 255, 0.2) !important;
+  color: #f1f5f9 !important;
+  padding: 6px !important;
   box-sizing: border-box !important;
 }
 
@@ -940,6 +960,9 @@ panel::part(content) {
   width: 100% !important;
   min-width: 100% !important;
   max-width: 100% !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #f1f5f9 !important;
   box-sizing: border-box !important;
 }
 
@@ -953,7 +976,10 @@ panel::part(content) {
 }
 
 #unified-extensions-panel .panel-header > h1,
-#unified-extensions-panel .panel-header > h1 > span {
+#unified-extensions-panel .panel-header > h1 > span,
+#unified-extensions-panel .panel-header label,
+#unified-extensions-panel h1,
+#unified-extensions-panel h2 {
   font-size: 13.5px !important;
   font-weight: 600 !important;
   color: #f8fafc !important;
@@ -977,7 +1003,7 @@ panel::part(content) {
 }
 
 #unified-extensions-panel .unified-extensions-item:hover {
-  background: rgba(99, 102, 241, 0.18) !important;
+  background: rgba(99, 102, 241, 0.22) !important;
 }
 
 #unified-extensions-panel .unified-extensions-item-row-wrapper {
@@ -1019,12 +1045,21 @@ panel::part(content) {
   text-overflow: ellipsis !important;
 }
 
+#unified-extensions-panel .unified-extensions-item:hover .unified-extensions-item-name {
+  color: #ffffff !important;
+}
+
 #unified-extensions-panel .unified-extensions-item-message {
   color: #94a3b8 !important;
   font-size: 11.5px !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+  opacity: 0.9 !important;
+}
+
+#unified-extensions-panel .unified-extensions-item:hover .unified-extensions-item-message {
+  color: #cbd5e1 !important;
 }
 
 #unified-extensions-panel .unified-extensions-item-menu-button {
@@ -1042,12 +1077,13 @@ panel::part(content) {
   border: none !important;
   color: #cbd5e1 !important;
   fill: #cbd5e1 !important;
-  opacity: 0.75 !important;
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+  opacity: 0.8 !important;
   transition: all 0.15s ease !important;
 }
 
 #unified-extensions-panel .unified-extensions-item-menu-button:hover {
-  background: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
   opacity: 1 !important;
   color: #ffffff !important;
   fill: #ffffff !important;
@@ -1058,6 +1094,7 @@ panel::part(content) {
   margin: 4px 4px !important;
 }
 
+#unified-extensions-panel #unified-extensions-manage-extensions,
 #unified-extensions-manage-extensions {
   display: flex !important;
   align-items: center !important;
@@ -1076,9 +1113,41 @@ panel::part(content) {
   transition: all 0.15s ease !important;
 }
 
+#unified-extensions-panel #unified-extensions-manage-extensions:hover,
 #unified-extensions-manage-extensions:hover {
-  background: rgba(99, 102, 241, 0.2) !important;
+  background: rgba(99, 102, 241, 0.22) !important;
   color: #ffffff !important;
+}
+
+/* Extension subviews (options/permissions when three dots are clicked) */
+#unified-extensions-panel panelview .subviewbutton {
+  color: #cbd5e1 !important;
+  border-radius: 8px !important;
+  transition: all 0.15s ease !important;
+}
+
+#unified-extensions-panel panelview .subviewbutton:hover {
+  color: #ffffff !important;
+  background: rgba(99, 102, 241, 0.22) !important;
+}
+
+#unified-extensions-panel panelview .subview-subheader {
+  color: #94a3b8 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  padding: 6px 10px 2px 10px !important;
+}
+
+#unified-extensions-panel .subviewbutton-back {
+  color: #cbd5e1 !important;
+  fill: #cbd5e1 !important;
+}
+
+#unified-extensions-panel .subviewbutton-back:hover {
+  color: #ffffff !important;
+  fill: #ffffff !important;
 }
 
 /* Unified Extensions Empty State */
@@ -1110,45 +1179,65 @@ panel::part(content) {
   line-height: 1.4 !important;
 }
 
-/* Light Theme overrides for Unified Extensions Panel */
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .panel-header > h1,
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .panel-header > h1 > span,
-:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .panel-header > h1,
-:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .panel-header > h1 > span,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .panel-header > h1,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .panel-header > h1 > span {
-  color: #0f172a !important;
+/* Explicit high-contrast guarantee overriding any Light Theme or OS Light Mode styles */
+:root[theme-effective-id] #unified-extensions-panel .panel-header > h1,
+:root[theme-effective-id] #unified-extensions-panel .panel-header > h1 > span,
+:root[lwtheme] #unified-extensions-panel .panel-header > h1,
+:root[lwtheme] #unified-extensions-panel .panel-header > h1 > span,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel .panel-header > h1,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel .panel-header > h1 > span {
+  color: #f8fafc !important;
 }
 
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .unified-extensions-item-name,
-:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item-name,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .unified-extensions-item-name {
-  color: #0f172a !important;
+:root[theme-effective-id] #unified-extensions-panel .unified-extensions-item-name,
+:root[lwtheme] #unified-extensions-panel .unified-extensions-item-name,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item-name {
+  color: #f1f5f9 !important;
 }
 
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .unified-extensions-item-message,
-:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item-message,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .unified-extensions-item-message {
-  color: #64748b !important;
+:root[theme-effective-id] #unified-extensions-panel .unified-extensions-item-message,
+:root[lwtheme] #unified-extensions-panel .unified-extensions-item-message,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item-message {
+  color: #94a3b8 !important;
+  opacity: 0.9 !important;
 }
 
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .unified-extensions-item:hover,
-:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item:hover,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .unified-extensions-item:hover {
-  background: rgba(0, 0, 0, 0.06) !important;
+:root[theme-effective-id] #unified-extensions-panel .unified-extensions-item-menu-button,
+:root[lwtheme] #unified-extensions-panel .unified-extensions-item-menu-button,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item-menu-button {
+  color: #cbd5e1 !important;
+  fill: #cbd5e1 !important;
 }
 
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-manage-extensions,
-:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-manage-extensions,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-manage-extensions {
-  color: #334155 !important;
+:root[theme-effective-id] #unified-extensions-panel #unified-extensions-manage-extensions,
+:root[lwtheme] #unified-extensions-panel #unified-extensions-manage-extensions,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel #unified-extensions-manage-extensions {
+  color: #cbd5e1 !important;
 }
 
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-manage-extensions:hover,
-:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-manage-extensions:hover,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-manage-extensions:hover {
-  background: rgba(0, 0, 0, 0.08) !important;
-  color: #0f172a !important;
+:root[theme-effective-id] #unified-extensions-panel .unified-extensions-item:hover,
+:root[lwtheme] #unified-extensions-panel .unified-extensions-item:hover,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item:hover {
+  background: rgba(99, 102, 241, 0.22) !important;
+}
+
+:root[theme-effective-id] #unified-extensions-panel .unified-extensions-item:hover .unified-extensions-item-name,
+:root[lwtheme] #unified-extensions-panel .unified-extensions-item:hover .unified-extensions-item-name,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item:hover .unified-extensions-item-name {
+  color: #ffffff !important;
+}
+
+:root[theme-effective-id] #unified-extensions-panel .unified-extensions-item:hover .unified-extensions-item-message,
+:root[lwtheme] #unified-extensions-panel .unified-extensions-item:hover .unified-extensions-item-message,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item:hover .unified-extensions-item-message {
+  color: #cbd5e1 !important;
+}
+
+:root[theme-effective-id] #unified-extensions-panel #unified-extensions-manage-extensions:hover,
+:root[lwtheme] #unified-extensions-panel #unified-extensions-manage-extensions:hover,
+:root:not([lwtheme-brighttext]) #unified-extensions-panel #unified-extensions-manage-extensions:hover {
+  background: rgba(99, 102, 241, 0.22) !important;
+  color: #ffffff !important;
 }
 
 /* ==========================================================================
