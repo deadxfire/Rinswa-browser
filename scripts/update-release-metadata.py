@@ -43,9 +43,29 @@ def main():
         sha256_hash = hashlib.sha256(f.read()).hexdigest()
     file_size = os.path.getsize(installer_path)
 
+    # Locate buildID from application.ini
+    app_ini_candidates = [
+        r"C:\Program Files\Rinswa\application.ini",
+        os.path.join(dist_dir, "bin", "application.ini"),
+        os.path.join(root, "rinswa-stable", "obj-rinswa", "dist", "rinswa", "application.ini"),
+        os.path.join(dist_dir, "application.ini"),
+    ]
+    build_id = None
+    for cand in app_ini_candidates:
+        if os.path.exists(cand):
+            with open(cand, "r", encoding="utf-8") as f:
+                for line in f:
+                    if line.startswith("BuildID="):
+                        build_id = line.strip().split("=", 1)[1]
+                        break
+            if build_id:
+                break
+
     print(f"[OK] Found Installer: {os.path.basename(installer_path)}")
-    print(f"     Size:   {file_size:,} bytes")
-    print(f"     SHA256: {sha256_hash}")
+    print(f"     Size:    {file_size:,} bytes")
+    print(f"     SHA256:  {sha256_hash}")
+    if build_id:
+        print(f"     BuildID: {build_id}")
 
     # Write / Update update.xml
     update_xml_path = os.path.join(root, "update.xml")
@@ -55,6 +75,8 @@ def main():
 
         content = re.sub(r'displayVersion="[^"]*"', f'displayVersion="{version}"', content)
         content = re.sub(r'appVersion="[^"]*"', f'appVersion="{version}"', content)
+        if build_id:
+            content = re.sub(r'buildID="[^"]*"', f'buildID="{build_id}"', content)
         content = re.sub(
             r'URL="https://github.com/deadxfire/Rinswa-browser/releases/download/v[^/]*/rinswa-[^.]*.en-US.win64.installer.exe"',
             f'URL="https://github.com/deadxfire/Rinswa-browser/releases/download/v{version}/rinswa-{version}.en-US.win64.installer.exe"',
@@ -66,7 +88,7 @@ def main():
         with open(update_xml_path, "w", encoding="utf-8") as f:
             f.write(content)
 
-        print(f"[OK] Successfully updated update.xml with exact hash and size for v{version}!")
+        print(f"[OK] Successfully updated update.xml with exact hash, size, and buildID for v{version}!")
 
     # Write SHA256SUMS.txt
     sums_path = os.path.join(dist_dir, "SHA256SUMS.txt")

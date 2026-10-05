@@ -186,12 +186,28 @@ def update_version_files(root_dir, new_ver, old_ver):
         with open(update_xml_path, "r", encoding="utf-8") as f:
             xml_content = f.read()
 
-        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        # Locate buildID from application.ini or platform.ini
+        build_id = None
+        for cand in [
+            os.path.join(root_dir, "rinswa-stable", "obj-rinswa", "dist", "bin", "application.ini"),
+            os.path.join(root_dir, "rinswa-stable", "obj-rinswa", "dist", "rinswa", "application.ini"),
+            r"C:\Program Files\Rinswa\application.ini",
+        ]:
+            if os.path.exists(cand):
+                with open(cand, "r", encoding="utf-8") as f_ini:
+                    for line in f_ini:
+                        if line.startswith("BuildID="):
+                            build_id = line.strip().split("=", 1)[1]
+                            break
+            if build_id:
+                break
+        if not build_id:
+            build_id = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
         
         # Replace displayVersion and appVersion
         xml_content = re.sub(r'displayVersion="[^"]*"', f'displayVersion="{new_ver}"', xml_content)
         xml_content = re.sub(r'appVersion="[^"]*"', f'appVersion="{new_ver}"', xml_content)
-        xml_content = re.sub(r'buildID="[^"]*"', f'buildID="{timestamp}"', xml_content)
+        xml_content = re.sub(r'buildID="[^"]*"', f'buildID="{build_id}"', xml_content)
         
         # Replace download URL version
         xml_content = re.sub(
