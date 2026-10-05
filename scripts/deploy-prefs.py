@@ -64,11 +64,28 @@ user_pref("browser.newtabpage.activity-stream.newtabWallpapers.user.enabled", tr
 
 profile_dirs = glob.glob(r"C:\Users\arind\AppData\Roaming\Mozilla\Rinswa\Profiles\*")
 
+user_content_css = """/* Hide enterprise policies managed notice in Settings */
+@-moz-document url-prefix("about:preferences") {
+  #policies-container-content,
+  #policies-container {
+    display: none !important;
+  }
+}
+"""
+
 for p in profile_dirs:
     if os.path.isdir(p):
         user_js = os.path.join(p, "user.js")
         with open(user_js, "w", encoding="utf-8") as f:
             f.write(user_prefs)
         print(f"Updated {user_js}")
+        
+        chrome_dir = os.path.join(p, "chrome")
+        os.makedirs(chrome_dir, exist_ok=True)
+        user_content_path = os.path.join(chrome_dir, "userContent.css")
+        with open(user_content_path, "w", encoding="utf-8") as f:
+            f.write(user_content_css)
+        print(f"Updated {user_content_path}")
 
 print("All preferences deployed!")
+

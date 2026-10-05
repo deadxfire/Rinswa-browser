@@ -554,6 +554,7 @@
 
 #urlbar-container {
   min-height: 32px !important;
+  min-width: 250px !important;
   max-width: 820px !important;
   margin: 0 auto !important;
 }
@@ -710,11 +711,83 @@
 
 /* Floating Bookmarks Quick Action Dock */
 :root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar {
+  --toolbar-color: #f1f5f9 !important;
+  --toolbarbutton-icon-fill: #f1f5f9 !important;
+  --toolbarbutton-icon-fill-opacity: 0.9 !important;
+  color: #f1f5f9 !important;
   background: rgba(10, 15, 30, 0.6) !important;
   backdrop-filter: blur(16px) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
   padding: 4px 12px !important;
+}
+
+/* Default Theme Floating Bookmarks (Force Crisp Light Text & Icons over Dark Glossy Dock) */
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar toolbarbutton,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar .bookmark-item,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesToolbarItems .bookmark-item,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesChevron,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #OtherBookmarks,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #import-button {
+  color: #f1f5f9 !important;
+  fill: #f1f5f9 !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar toolbarbutton > .toolbarbutton-text,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar .bookmark-item > .toolbarbutton-text,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesToolbarItems .bookmark-item > .toolbarbutton-text,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #OtherBookmarks > .toolbarbutton-text,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #import-button > .toolbarbutton-text {
+  color: #f1f5f9 !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar toolbarbutton > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar .bookmark-item > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesToolbarItems .bookmark-item > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #OtherBookmarks > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesChevron > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #import-button > .toolbarbutton-icon {
+  fill: #e2e8f0 !important;
+  color: #e2e8f0 !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar .bookmark-item[container="true"] > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #OtherBookmarks > .toolbarbutton-icon {
+  fill: #818cf8 !important;
+  color: #818cf8 !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar toolbarbutton:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar .bookmark-item:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesToolbarItems .bookmark-item:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesChevron:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #OtherBookmarks:hover,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #import-button:hover {
+  background: rgba(99, 102, 241, 0.22) !important;
+  border-color: rgba(129, 140, 248, 0.45) !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar toolbarbutton:hover > .toolbarbutton-text,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar .bookmark-item:hover > .toolbarbutton-text,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesToolbarItems .bookmark-item:hover > .toolbarbutton-text,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #OtherBookmarks:hover > .toolbarbutton-text,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #import-button:hover > .toolbarbutton-text {
+  color: #ffffff !important;
+}
+
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar toolbarbutton:hover > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PersonalToolbar .bookmark-item:hover > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesToolbarItems .bookmark-item:hover > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #OtherBookmarks:hover > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #PlacesChevron:hover > .toolbarbutton-icon,
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #import-button:hover > .toolbarbutton-icon {
+  fill: #ffffff !important;
+  color: #ffffff !important;
 }
 
 :root[lwtheme] #PersonalToolbar,
@@ -745,6 +818,7 @@ toolbarbutton.bookmark-item {
   background: rgba(255, 255, 255, 0.035) !important;
   border: 1px solid rgba(255, 255, 255, 0.06) !important;
   margin: 2px 4px !important;
+  color: inherit !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
@@ -761,14 +835,25 @@ toolbarbutton.bookmark-item:hover {
 #browser,
 #appcontent {
   background-color: var(--rinswa-bg-base) !important;
-  padding: 0 4px 4px 4px !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+  min-height: 0 !important;
+}
+
+#tabbrowser-tabbox {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  min-height: 0 !important;
 }
 
 #tabbrowser-tabpanels {
   border-radius: 12px !important;
   overflow: hidden !important;
   border: 1px solid rgba(255, 255, 255, 0.09) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.15) !important;
+  box-sizing: border-box !important;
+  min-height: 0 !important;
 }
 
 browser[type="content-primary"],
@@ -825,6 +910,297 @@ panel::part(content) {
   filter: none !important;
   backdrop-filter: blur(28px) saturate(190%) !important;
   -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+}
+
+/* ==========================================================================
+   UNIFIED EXTENSIONS PANEL (#unified-extensions-panel)
+   Responsive, beautifully aligned extensions manager popup matching Cyber-Glass UI
+   ========================================================================== */
+#unified-extensions-panel {
+  --panel-width: 380px !important;
+  width: 380px !important;
+  min-width: 360px !important;
+  max-width: 440px !important;
+}
+
+#unified-extensions-panel::part(content) {
+  width: 380px !important;
+  min-width: 360px !important;
+  max-width: 440px !important;
+  padding: 6px !important;
+  border-radius: var(--panel-border-radius, 14px) !important;
+  box-sizing: border-box !important;
+}
+
+#unified-extensions-panel panelmultiview,
+#unified-extensions-panel .panel-viewcontainer,
+#unified-extensions-panel .panel-viewstack,
+#unified-extensions-panel panelview,
+#unified-extensions-view {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#unified-extensions-panel .panel-header {
+  padding: 8px 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 34px !important;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+#unified-extensions-panel .panel-header > h1,
+#unified-extensions-panel .panel-header > h1 > span {
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #f8fafc !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#unified-extensions-panel .panel-subview-body {
+  padding: 4px 2px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+#unified-extensions-panel .unified-extensions-item {
+  border-radius: 8px !important;
+  margin: 2px 0 !important;
+  padding: 4px 6px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  transition: background-color 0.15s ease !important;
+}
+
+#unified-extensions-panel .unified-extensions-item:hover {
+  background: rgba(99, 102, 241, 0.18) !important;
+}
+
+#unified-extensions-panel .unified-extensions-item-row-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#unified-extensions-panel .unified-extensions-item-action-button {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px 6px !important;
+  border-radius: 6px !important;
+  text-align: start !important;
+  color: #f1f5f9 !important;
+}
+
+#unified-extensions-panel .unified-extensions-item-contents {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+#unified-extensions-panel .unified-extensions-item-name {
+  color: #f1f5f9 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+#unified-extensions-panel .unified-extensions-item-message {
+  color: #94a3b8 !important;
+  font-size: 11.5px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+#unified-extensions-panel .unified-extensions-item-menu-button {
+  width: 28px !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  padding: 0 !important;
+  margin: 0 2px !important;
+  background: transparent !important;
+  border: none !important;
+  color: #cbd5e1 !important;
+  fill: #cbd5e1 !important;
+  opacity: 0.75 !important;
+  transition: all 0.15s ease !important;
+}
+
+#unified-extensions-panel .unified-extensions-item-menu-button:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  opacity: 1 !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+#unified-extensions-panel toolbarseparator {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin: 4px 4px !important;
+}
+
+#unified-extensions-manage-extensions {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 32px !important;
+  padding: 6px 10px !important;
+  margin: 4px 0 2px 0 !important;
+  border-radius: 8px !important;
+  color: #cbd5e1 !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  transition: all 0.15s ease !important;
+}
+
+#unified-extensions-manage-extensions:hover {
+  background: rgba(99, 102, 241, 0.2) !important;
+  color: #ffffff !important;
+}
+
+/* Unified Extensions Empty State */
+#unified-extensions-empty-state {
+  padding: 16px 12px !important;
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#unified-extensions-empty-state > img {
+  max-width: 180px !important;
+  height: auto !important;
+  margin: 0 auto 10px auto !important;
+  opacity: 0.85 !important;
+}
+
+#unified-extensions-empty-state > h2 {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #f8fafc !important;
+  margin-bottom: 6px !important;
+}
+
+#unified-extensions-empty-state > description {
+  font-size: 12px !important;
+  color: #94a3b8 !important;
+  line-height: 1.4 !important;
+}
+
+/* Light Theme overrides for Unified Extensions Panel */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .panel-header > h1,
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .panel-header > h1 > span,
+:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .panel-header > h1,
+:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .panel-header > h1 > span,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .panel-header > h1,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .panel-header > h1 > span {
+  color: #0f172a !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .unified-extensions-item-name,
+:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item-name,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .unified-extensions-item-name {
+  color: #0f172a !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .unified-extensions-item-message,
+:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item-message,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .unified-extensions-item-message {
+  color: #64748b !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-panel .unified-extensions-item:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-panel .unified-extensions-item:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-panel .unified-extensions-item:hover {
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-manage-extensions,
+:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-manage-extensions,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-manage-extensions {
+  color: #334155 !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #unified-extensions-manage-extensions:hover,
+:root[lwtheme]:not([lwtheme-brighttext]) #unified-extensions-manage-extensions:hover,
+:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #unified-extensions-manage-extensions:hover {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: #0f172a !important;
+}
+
+/* ==========================================================================
+   WEB EXTENSION POPUPS (Bitwarden, Proton Pass, uBlock Origin, etc.)
+   Ensures fully responsive extension popups that expand to extension-defined dimensions
+   without horizontal clipping, squashing, or overflow truncation
+   ========================================================================== */
+#customizationui-widget-panel[viewId^="PanelUI-webext-"],
+#customizationui-widget-panel[viewId*="webext"],
+panel[viewId^="PanelUI-webext-"],
+panel[viewId*="webext"] {
+  --panel-width: auto !important;
+  width: auto !important;
+  min-width: unset !important;
+  max-width: 800px !important;
+}
+
+#customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(content),
+#customizationui-widget-panel[viewId*="webext"]::part(content),
+panel[viewId^="PanelUI-webext-"]::part(content),
+panel[viewId*="webext"]::part(content) {
+  width: auto !important;
+  min-width: unset !important;
+  max-width: 800px !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+panelview[id^="PanelUI-webext-"],
+panelview[id*="webext"],
+.cui-widget-panelview[id^="PanelUI-webext-"],
+.cui-widget-panelview[id*="webext"] {
+  width: auto !important;
+  min-width: unset !important;
+  max-width: 800px !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
+}
+
+.webextension-popup-stack {
+  width: 100% !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.webextension-popup-browser {
+  /* Allow Firefox ExtensionPopups to manage responsive width/minWidth/height */
+  max-width: 800px !important;
+  max-height: 600px !important;
+  box-sizing: border-box !important;
+  overflow: auto !important;
+  border-radius: inherit !important;
 }
 
 menuitem, menu {
@@ -893,6 +1269,14 @@ menupopup menu:-moz-locale-dir(rtl):hover::after {
 /* Window Control Buttons */
 .titlebar-button {
   transition: all 0.2s ease !important;
+}
+
+/* Default Theme Titlebar / Window Control Buttons (Force Light Icons on Dark Glossy Background) */
+:root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) .titlebar-button {
+  color: #f1f5f9 !important;
+  stroke: #f1f5f9 !important;
+  fill: #f1f5f9 !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 /* Light Theme Titlebar / Window Control Buttons */
@@ -1586,6 +1970,41 @@ setting-group[groupid="browserIconBonus"],
 #allTabsMenu-containerTabsView {
   min-width: 320px !important;
   max-width: 440px !important;
+  --panel-background: rgba(18, 14, 34, 0.72) !important;
+  --panel-color: #f1f5f9 !important;
+  --panel-text-color: #f1f5f9 !important;
+  color: #f1f5f9 !important;
+}
+
+#allTabsMenu-allTabsView .subviewbutton,
+#allTabsMenu-hiddenTabsView .subviewbutton,
+#allTabsMenu-containerTabsView .subviewbutton {
+  color: #cbd5e1 !important;
+  border-radius: 8px !important;
+  transition: all 0.15s ease !important;
+}
+
+#allTabsMenu-allTabsView .subviewbutton:hover,
+#allTabsMenu-hiddenTabsView .subviewbutton:hover,
+#allTabsMenu-containerTabsView .subviewbutton:hover {
+  color: #ffffff !important;
+  background: rgba(99, 102, 241, 0.2) !important;
+}
+
+#allTabsMenu-allTabsView toolbarseparator,
+#allTabsMenu-hiddenTabsView toolbarseparator,
+#allTabsMenu-containerTabsView toolbarseparator {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin: 4px 6px !important;
+}
+
+#allTabsMenu-allTabsView .subview-subheader {
+  color: #94a3b8 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  padding: 6px 10px 2px 10px !important;
 }
 
 #allTabsMenu-allTabsView-tabs {
@@ -1628,6 +2047,10 @@ setting-group[groupid="browserIconBonus"],
   font-weight: 500 !important;
 }
 
+.all-tabs-item:hover > .all-tabs-button {
+  color: #ffffff !important;
+}
+
 .all-tabs-item > .all-tabs-button > .toolbarbutton-icon {
   width: 16px !important;
   height: 16px !important;
@@ -1645,7 +2068,11 @@ setting-group[groupid="browserIconBonus"],
   white-space: nowrap !important;
   display: block !important;
   text-align: start !important;
-  color: inherit !important;
+  color: #f1f5f9 !important;
+}
+
+.all-tabs-item:hover > .all-tabs-button > .toolbarbutton-text {
+  color: #ffffff !important;
 }
 
 .all-tabs-item > .all-tabs-secondary-button {
@@ -1665,7 +2092,7 @@ setting-group[groupid="browserIconBonus"],
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  opacity: 0.6 !important;
+  opacity: 0.75 !important;
   color: #cbd5e1 !important;
   fill: #cbd5e1 !important;
   -moz-context-properties: fill, stroke !important;
@@ -1674,6 +2101,8 @@ setting-group[groupid="browserIconBonus"],
 
 .all-tabs-item:hover > .all-tabs-secondary-button {
   opacity: 1 !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
 }
 
 .all-tabs-item > .all-tabs-close-button:hover {
@@ -1686,30 +2115,4 @@ setting-group[groupid="browserIconBonus"],
   background: rgba(99, 102, 241, 0.25) !important;
   color: #38bdf8 !important;
   fill: #38bdf8 !important;
-}
-
-/* Light Theme All Tabs Menu Overrides */
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] .all-tabs-item > .all-tabs-button,
-:root[lwtheme]:not([lwtheme-brighttext]) .all-tabs-item > .all-tabs-button,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .all-tabs-item > .all-tabs-button {
-  color: #15141a !important;
-}
-
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] .all-tabs-item > .all-tabs-secondary-button,
-:root[lwtheme]:not([lwtheme-brighttext]) .all-tabs-item > .all-tabs-secondary-button,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .all-tabs-item > .all-tabs-secondary-button {
-  color: #475569 !important;
-  fill: #475569 !important;
-}
-
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] .all-tabs-item:hover,
-:root[lwtheme]:not([lwtheme-brighttext]) .all-tabs-item:hover,
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .all-tabs-item:hover {
-  background: rgba(0, 0, 0, 0.06) !important;
-}
-
-:root[theme-effective-id="firefox-compact-light@mozilla.org"] .all-tabs-item[selected],
-:root[lwtheme]:not([lwtheme-brighttext]) .all-tabs-item[selected],
-:root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .all-tabs-item[selected] {
-  background: rgba(0, 0, 0, 0.1) !important;
 }

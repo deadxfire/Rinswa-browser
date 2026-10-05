@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
 
-set "RINSWA_VERSION=1.0.3"
+set "RINSWA_VERSION=1.0.4"
 if exist "rinswa-stable\browser\config\version.txt" (
     set /p RINSWA_VERSION=<"rinswa-stable\browser\config\version.txt"
 )

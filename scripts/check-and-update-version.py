@@ -88,7 +88,7 @@ def get_current_rinswa_version(root_dir):
             v = f.read().strip()
             if v:
                 return v
-    return "1.0.3"
+    return "1.0.4"
 
 def suggest_next_version(ver_str):
     parts = ver_str.split(".")
@@ -195,10 +195,30 @@ def update_version_files(root_dir, new_ver, old_ver):
         
         # Replace download URL version
         xml_content = re.sub(
-            r'URL="https://github.com/deadxfire/Rinswa-browser/releases/download/v[^/]*/rinswa-[^.]*.en-US.win64.installer.exe"',
+            r'URL="https://github.com/deadxfire/Rinswa-browser/releases/download/[^"]*"',
             f'URL="https://github.com/deadxfire/Rinswa-browser/releases/download/v{new_ver}/rinswa-{new_ver}.en-US.win64.installer.exe"',
             xml_content
         )
+
+        # Auto-calculate SHA256 and size if installer binary exists
+        installer_candidates = [
+            os.path.join(root_dir, "rinswa-stable", "obj-rinswa", "dist", f"rinswa-{new_ver}.en-US.win64.installer.exe"),
+            os.path.join(root_dir, "rinswa-stable", "obj-rinswa", "dist", "install", "sea", f"rinswa-{new_ver}.en-US.win64.installer.exe"),
+        ]
+        found_installer = None
+        for cand in installer_candidates:
+            if os.path.exists(cand):
+                found_installer = cand
+                break
+        
+        if found_installer:
+            import hashlib
+            with open(found_installer, "rb") as f_inst:
+                calculated_hash = hashlib.sha256(f_inst.read()).hexdigest()
+            file_size = str(os.path.getsize(found_installer))
+            xml_content = re.sub(r'hashValue="[^"]*"', f'hashValue="{calculated_hash}"', xml_content)
+            xml_content = re.sub(r'size="[^"]*"', f'size="{file_size}"', xml_content)
+            log_info(f"Auto-calculated hash ({calculated_hash[:12]}...) and size ({file_size} bytes) for update.xml")
 
         with open(update_xml_path, "w", encoding="utf-8") as f:
             f.write(xml_content)

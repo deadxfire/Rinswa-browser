@@ -7,3 +7,5 @@ dist/
 *.tmp
 .vscode/
 .gemini/
+__pycache__/
+*.pyc

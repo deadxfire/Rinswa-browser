@@ -12,7 +12,7 @@ MOZ_DIR="$PROJECT_DIR/rinswa-stable"
 CONFIG_FILE="$PROJECT_DIR/config/mozconfig.windows"
 
 # Dynamically load version from version.txt
-VERSION="1.0.3"
+VERSION="1.0.4"
 if [ -f "$MOZ_DIR/browser/config/version.txt" ]; then
     VERSION=$(tr -d '\r\n ' < "$MOZ_DIR/browser/config/version.txt")
 fi
@@ -91,6 +91,9 @@ run_package() {
     fi
     
     python ./mach package
+    if [ -f "$PROJECT_DIR/scripts/update-release-metadata.py" ]; then
+        python "$PROJECT_DIR/scripts/update-release-metadata.py" || true
+    fi
     echo ">> Step 4 (Packaging) complete."
 }
 
