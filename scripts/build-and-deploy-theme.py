@@ -49,6 +49,40 @@ if os.path.exists(profiles_dir):
             f.write(css)
         print(f"Deployed userChrome.css to {prof}")
 
+        user_content = os.path.join(chrome_dir, "userContent.css")
+        license_css = """
+@-moz-document url('about:license'), url-prefix('about:license') {
+  #rinswa {
+    background: linear-gradient(135deg, #00d2ff 0%, #a855f7 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-weight: 700 !important;
+  }
+  tr:has(#rinswa) {
+    background: rgba(0, 210, 255, 0.06) !important;
+    border-left: 4px solid #00d2ff !important;
+  }
+  tr:has(#rinswa) h2 {
+    color: #00d2ff !important;
+    font-size: 1.25em !important;
+    margin-top: 0.5em !important;
+  }
+  tr:has(#rinswa) h3 {
+    color: #93c5fd !important;
+    font-size: 1.05em !important;
+    margin-top: 1.2em !important;
+  }
+}
+"""
+        existing_content = ""
+        if os.path.exists(user_content):
+            with open(user_content, "r", encoding="utf-8", errors="ignore") as f:
+                existing_content = f.read()
+        if "#rinswa" not in existing_content:
+            with open(user_content, "a", encoding="utf-8") as f:
+                f.write(license_css)
+            print(f"Injected about:license styles into {prof}/userContent.css")
+
         user_js = os.path.join(prof_path, "user.js")
         pref_lines = [
             'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);\n',
