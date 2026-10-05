@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <updates xmlns="http://www.mozilla.org/2005/app-update">
-    <update type="minor" displayVersion="1.0.4" appVersion="1.0.4" platformVersion="158.0.0" buildID="20261005121713">
+    <update type="minor" displayVersion="1.0.4" appVersion="1.0.4" platformVersion="158.0.0" buildID="20261005151918">
         <patch type="complete" 
                URL="https://github.com/deadxfire/Rinswa-browser/releases/download/v1.0.4/rinswa-1.0.4.en-US.win64.installer.exe" 
                hashFunction="SHA256" 
-               hashValue="67f46933afaa1eaa65cb88b2020b8705f3b0d4b3660b20ef8d3f10dd98f2d0c3" 
-               size="96708514"/>
+               hashValue="2cf0547e6c4013c21f92f3379e9f4373c478008228119e8cbff003834105592c" 
+               size="96712020"/>
     </update>
 </updates>
