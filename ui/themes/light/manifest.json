@@ -1,19 +1,68 @@
 {
   "manifest_version": 2,
-  "name": "Rinswa Light",
-  "version": "1.0",
-  "description": "Default light theme for Rinswa Browser",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "firefox-compact-light@mozilla.org"
+    }
+  },
+  "name": "Rinswa Light theme",
+  "description": "Official light theme with signature Rinswa multicolour ribbon styling.",
+  "author": "Rinswa",
+  "version": "1.4.0",
+  "icons": {
+    "32": "icon.svg"
+  },
   "theme": {
+    "images": {
+      "additional_backgrounds": [
+        {
+          "linear-gradient": "to right, #f1ecf9 0%, #f6f1fc 45%, #fbf6fa 100%"
+        }
+      ]
+    },
+    "properties": {
+      "additional_backgrounds_alignment": [
+        "right top"
+      ],
+      "additional_backgrounds_tiling": [
+        "repeat-x"
+      ],
+      "color_scheme": "light"
+    },
     "colors": {
-      "frame": "#f8f9fa",
-      "tab_background_text": "#495057",
-      "toolbar": "#ffffff",
-      "bookmark_text": "#212529",
-      "toolbar_field": "#f1f3f5",
-      "toolbar_field_text": "#212529",
-      "tab_line": "transparent",
+      "frame": "#f1ecf9",
+      "frame_inactive": "#f5f0fb",
+      "tab_selected": "#ffffff",
+      "tab_text": "#0f172a",
+      "tab_background_text": "#475569",
+      "tab_line": "#00f2fe",
+      "tab_loading": "#0072ff",
+      "toolbar": "#f7f3fc",
+      "toolbar_field": "#ffffff",
+      "toolbar_field_focus": "#ffffff",
+      "toolbar_field_text": "#0f172a",
+      "toolbar_field_text_focus": "#0f172a",
+      "toolbar_field_border": "rgba(0, 0, 0, 0.12)",
+      "toolbar_field_border_focus": "#818cf8",
+      "toolbar_top_separator": "transparent",
+      "toolbar_bottom_separator": "rgba(0, 0, 0, 0.06)",
+      "toolbar_vertical_separator": "rgba(0, 0, 0, 0.08)",
+      "icons": "#334155",
+      "icons_attention": "#0072ff",
+      "button_background_hover": "rgba(0, 0, 0, 0.06)",
+      "button_background_active": "rgba(0, 0, 0, 0.12)",
       "popup": "#ffffff",
-      "popup_text": "#212529"
+      "popup_text": "#0f172a",
+      "popup_border": "rgba(0, 0, 0, 0.12)",
+      "popup_highlight": "rgba(99, 102, 241, 0.12)",
+      "popup_highlight_text": "#0f172a",
+      "sidebar": "#f8fafc",
+      "sidebar_text": "#0f172a",
+      "sidebar_border": "rgba(0, 0, 0, 0.08)",
+      "sidebar_highlight": "#818cf8",
+      "sidebar_highlight_text": "#0f172a",
+      "ntp_background": "#f8fafc",
+      "ntp_text": "#0f172a"
     }
   }
 }

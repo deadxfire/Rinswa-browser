@@ -233,7 +233,12 @@ def main():
                 print(f"  [OK] Injected about:license styles into {prof}/userContent.css")
 
     # 4. Repack release zip
-    zip_path = os.path.join(ROOT, "rinswa-stable", "obj-rinswa", "dist", "rinswa-1.0.4.en-US.win64.zip")
+    ver_file = os.path.join(ROOT, "rinswa-version.txt")
+    cur_ver = "1.0.5"
+    if os.path.exists(ver_file):
+        with open(ver_file, "r", encoding="utf-8") as f:
+            cur_ver = f.read().strip() or "1.0.5"
+    zip_path = os.path.join(ROOT, "rinswa-stable", "obj-rinswa", "dist", f"rinswa-{cur_ver}.en-US.win64.zip")
     if os.path.exists(zip_path) and os.path.exists(browser_omni) and os.path.exists(root_omni):
         root_omni_bytes = open(root_omni, "rb").read()
         browser_omni_bytes = open(browser_omni, "rb").read()

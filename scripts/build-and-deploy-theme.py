@@ -15,6 +15,7 @@ source_destinations = [
     os.path.join(root, "rinswa-stable", "browser", "themes", "windows", "browser.css"),
     os.path.join(root, "mozilla-central", "browser", "themes", "windows", "browser.css"),
     os.path.join(root, "rinswa-stable", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "skin", "classic", "browser", "browser.css"),
+    os.path.join(root, "mozilla-central", "obj-rinswa", "dist", "bin", "browser", "chrome", "browser", "skin", "classic", "browser", "browser.css"),
 ]
 
 prefix_imports = """/* This Source Code Form is subject to the terms of the Mozilla Public

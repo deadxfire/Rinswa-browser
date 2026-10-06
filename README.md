@@ -8,7 +8,7 @@
 
 Developed and maintained by **[Arindam Makar](https://github.com/deadxfire)**
 
-[![Version](https://img.shields.io/badge/version-1.0.4_Stable-00d2ff?style=for-the-badge&logo=firefox)](https://github.com/deadxfire/Rinswa-browser/releases)
+[![Version](https://img.shields.io/badge/version-1.0.5_Stable-00d2ff?style=for-the-badge&logo=firefox)](https://github.com/deadxfire/Rinswa-browser/releases)
 [![Engine](https://img.shields.io/badge/engine-Gecko_157.0.1-orange?style=for-the-badge&logo=mozilla)](https://github.com/deadxfire/Rinswa-browser)
 [![Platform](https://img.shields.io/badge/platform-Windows_x64-blue?style=for-the-badge&logo=windows)](https://github.com/deadxfire/Rinswa-browser)
 [![License](https://img.shields.io/badge/license-MPL_2.0-blueviolet?style=for-the-badge)](LICENSE)
@@ -41,6 +41,17 @@ Developed and maintained by **[Arindam Makar](https://github.com/deadxfire)**
 
 ### ⚡ Out-of-the-Box Native Ad Blocking
 - **Pre-Integrated uBlock Origin:** Comes bundled directly with Raymond Hill's industry-leading `uBlock Origin` extension in the distribution folder, giving you instant, lightweight, and effective ad and tracker blocking on your first launch.
+
+### 📑 Native Smart Tab Management & Clean Tabs
+- **Automatic Tab Grouping:** Automatically organizes heavy multitasking sessions into structured categories:
+  - **Work / Dev:** Laravel, GitHub, Stack Overflow, Documentation, Notion, Figma
+  - **Shopping:** Amazon, Flipkart, Product reviews, shopping carts
+  - **Personal:** Gmail, YouTube, WhatsApp Web, social feeds
+  - **Media & Streaming** & **Docs & Research**
+- **Duplicate-Tab Detection:** Identifies exact URL clones and normalized path duplicates across all windows.
+- **Sleeping Tabs:** Proactively hibernates inactive tabs using native discard APIs to drop RAM instantly.
+- **Smart Workspaces:** Save any tab group as a persistent workspace and restore it later with one click.
+- **Signature "Clean Tabs" Engine:** Instant automated audit (e.g. *"You have 47 tabs: 12 duplicates, 8 inactive for >7 days, 4 YouTube tabs"*) with `[Clean Automatically]` and interactive `[Review]` checklist modes.
 
 ### 🚀 Cutting-Edge Engine Performance
 - **Gecko 157.0.1 Stable Engine:** Full support for the latest web standards, WebAssembly, WebGPU, and modern CSS features.

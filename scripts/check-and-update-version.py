@@ -82,7 +82,7 @@ def get_root_dir():
     return os.path.abspath(os.path.join(current, ".."))
 
 def get_current_rinswa_version(root_dir):
-    ver_path = os.path.join(root_dir, "rinswa-stable", "browser", "config", "version.txt")
+    ver_path = os.path.join(root_dir, "rinswa-version.txt")
     if os.path.exists(ver_path):
         with open(ver_path, "r", encoding="utf-8") as f:
             v = f.read().strip()
@@ -171,14 +171,11 @@ def update_version_files(root_dir, new_ver, old_ver):
     log_header("STEP 2: UPDATING RINSWA VERSION FILES")
     modified_files = []
 
-    # 1. rinswa-stable version files
-    for sub in ["rinswa-stable", "mozilla-central"]:
-        for name in ["version.txt", "version_display.txt"]:
-            target = os.path.join(root_dir, sub, "browser", "config", name)
-            if os.path.exists(target):
-                with open(target, "w", encoding="utf-8") as f:
-                    f.write(f"{new_ver}\n")
-                modified_files.append(os.path.relpath(target, root_dir))
+    # 1. rinswa-version.txt (Rinswa product version)
+    rinswa_ver_file = os.path.join(root_dir, "rinswa-version.txt")
+    with open(rinswa_ver_file, "w", encoding="utf-8") as f:
+        f.write(f"{new_ver}\n")
+    modified_files.append("rinswa-version.txt")
 
     # 2. update.xml
     update_xml_path = os.path.join(root_dir, "update.xml")

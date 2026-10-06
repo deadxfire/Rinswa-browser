@@ -8,6 +8,10 @@
         "installation_mode": "normal_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/addon-607454-latest.xpi",
         "default_area": "navbar"
+      },
+      "smart-tabs@rinswa.com": {
+        "installation_mode": "normal_installed",
+        "default_area": "navbar"
       }
     },
     "Extensions": {
@@ -34,6 +38,10 @@
       },
       "extensions.enabledScopes": {
         "Value": 15,
+        "Status": "default"
+      },
+      "general.useragent.override": {
+        "Value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:157.0) Gecko/20100101 Firefox/157.0",
         "Status": "default"
       },
       "general.useragent.compatMode.firefox": {
@@ -150,6 +158,106 @@
       },
       "browser.newtabpage.activity-stream.newtabWallpapers.user.enabled": {
         "Value": true,
+        "Status": "default"
+      },
+      "dom.ipc.processCount": {
+        "Value": 3,
+        "Status": "default"
+      },
+      "dom.ipc.processCount.webIsolated": {
+        "Value": 3,
+        "Status": "default"
+      },
+      "browser.tabs.unloadOnLowMemory": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.tabs.min_inactive_duration_before_unload": {
+        "Value": 180000,
+        "Status": "default"
+      },
+      "browser.tabs.unloadTabInContextMenu": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.tabs.fadeOutExplicitlyUnloadedTabs": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.tabs.fadeOutUnloadedTabs": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.tabs.remote.warmup.maxTabs": {
+        "Value": 1,
+        "Status": "default"
+      },
+      "browser.sessionhistory.max_total_viewers": {
+        "Value": 2,
+        "Status": "default"
+      },
+      "browser.sessionhistory.max_entries": {
+        "Value": 20,
+        "Status": "default"
+      },
+      "browser.cache.memory.capacity": {
+        "Value": 32768,
+        "Status": "default"
+      },
+      "browser.cache.memory.max_entry_size": {
+        "Value": 4096,
+        "Status": "default"
+      },
+      "browser.cache.disk.max_chunks_memory_usage": {
+        "Value": 10240,
+        "Status": "default"
+      },
+      "browser.cache.disk.max_priority_chunks_memory_usage": {
+        "Value": 10240,
+        "Status": "default"
+      },
+      "image.mem.discardable": {
+        "Value": true,
+        "Status": "default"
+      },
+      "image.mem.animated.discardable": {
+        "Value": true,
+        "Status": "default"
+      },
+      "image.mem.surfacecache.max_size_kb": {
+        "Value": 262144,
+        "Status": "default"
+      },
+      "image.mem.surfacecache.min_expiration_ms": {
+        "Value": 20000,
+        "Status": "default"
+      },
+      "javascript.options.compact_on_user_inactive": {
+        "Value": true,
+        "Status": "default"
+      },
+      "javascript.options.compact_on_user_inactive_delay": {
+        "Value": 20000,
+        "Status": "default"
+      },
+      "javascript.options.gc_on_memory_pressure": {
+        "Value": true,
+        "Status": "default"
+      },
+      "javascript.options.gc_delay": {
+        "Value": 2000,
+        "Status": "default"
+      },
+      "media.memory_cache_max_size": {
+        "Value": 4096,
+        "Status": "default"
+      },
+      "media.memory_caches_combined_limit_kb": {
+        "Value": 65536,
+        "Status": "default"
+      },
+      "browser.sessionstore.interval": {
+        "Value": 30000,
         "Status": "default"
       }
     }

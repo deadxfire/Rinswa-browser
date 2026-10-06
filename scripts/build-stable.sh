@@ -11,10 +11,10 @@ PROJECT_DIR="/c/Users/arind/OneDrive/Documents/Project/browser"
 MOZ_DIR="$PROJECT_DIR/rinswa-stable"
 CONFIG_FILE="$PROJECT_DIR/config/mozconfig.windows"
 
-# Dynamically load version from version.txt
-VERSION="1.0.4"
-if [ -f "$MOZ_DIR/browser/config/version.txt" ]; then
-    VERSION=$(tr -d '\r\n ' < "$MOZ_DIR/browser/config/version.txt")
+# Dynamically load version from rinswa-version.txt
+VERSION="1.0.5"
+if [ -f "$PROJECT_DIR/rinswa-version.txt" ]; then
+    VERSION=$(tr -d '\r\n ' < "$PROJECT_DIR/rinswa-version.txt")
 fi
 
 # Put Python 3.11 and Git at front of PATH for MSYS2
@@ -77,7 +77,12 @@ run_package() {
     mkdir -p obj-rinswa/dist/bin/distribution/extensions
     curl -L -s -o obj-rinswa/dist/bin/distribution/extensions/uBlock0@raymondhill.net.xpi "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/addon-607454-latest.xpi"
     
-    # Copy enterprise distribution policies to force-install and pin uBlock Origin to navbar
+    # Bundle native Rinswa Smart Tab Manager & Clean Tabs
+    if [ -f "$PROJECT_DIR/branding/distribution/extensions/smart-tabs@rinswa.com.xpi" ]; then
+        cp "$PROJECT_DIR/branding/distribution/extensions/smart-tabs@rinswa.com.xpi" obj-rinswa/dist/bin/distribution/extensions/smart-tabs@rinswa.com.xpi
+    fi
+
+    # Copy enterprise distribution policies to force-install and pin extensions to navbar
     if [ -f "$PROJECT_DIR/branding/distribution/policies.json" ]; then
         cp "$PROJECT_DIR/branding/distribution/policies.json" obj-rinswa/dist/bin/distribution/policies.json
     fi

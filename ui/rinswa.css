@@ -30,10 +30,19 @@
   --rinswa-fg-secondary: #94a3b8;
   --rinswa-fg-muted: #64748b;
 
-  --rinswa-radius-card: 14px;
+  --rinswa-radius-card: 12px;
   --rinswa-radius-pill: 9999px;
-  --rinswa-radius-tab: 10px;
-  --rinswa-radius-input: 12px;
+  --rinswa-radius-tab: 8px;
+  --rinswa-radius-input: 8px;
+
+  /* Compact Chromium-Style Toolbar Metrics */
+  --tab-min-height: 30px !important;
+  --tab-border-radius: 8px !important;
+  --urlbar-min-height: 30px !important;
+  --urlbar-height: 30px !important;
+  --urlbar-toolbar-height: 34px !important;
+  --toolbarbutton-inner-padding: 4px !important;
+  --toolbarbutton-outer-padding: 1px !important;
 }
 
 /* Overwrite default Gecko toolbar design tokens for Default Rinswa theme */
@@ -48,6 +57,7 @@
   --toolbarbutton-border-radius: 8px !important;
   --lwt-toolbar-field-background-color: rgba(24, 15, 48, 0.85) !important;
   --lwt-toolbar-field-color: #f8fafc !important;
+  --rinswa-viewport-bg: var(--rinswa-bg-base) !important;
 }
 
 /* Explicit Light Theme & Bright Lightweight Theme Design Tokens */
@@ -68,14 +78,15 @@
   --lwt-toolbar-field-background-color: #ffffff !important;
   --lwt-toolbar-field-color: #15141a !important;
   --tab-loading-fill: #2563eb !important;
+  --rinswa-viewport-bg: #f1ecf9 !important;
 }
 
 /* ==========================================================================
    1. NAVIGATION TOOLBOX & HEADER
    ========================================================================== */
 #navigator-toolbox {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-  padding-bottom: 2px !important;
+  border-bottom: 1px solid var(--chrome-content-separator-color, rgba(0, 0, 0, 0.08)) !important;
+  padding-bottom: 0px !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", Roboto, sans-serif !important;
 }
 
@@ -92,10 +103,34 @@
 }
 
 /* User-Selected & Lightweight Themes: Allow Custom Background Colors & Images */
-:root[lwtheme] #navigator-toolbox,
-:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) #navigator-toolbox {
+:root[lwtheme]:not([theme-effective-id="firefox-compact-light@mozilla.org"]):not([lwtheme-brighttext]) #navigator-toolbox,
+:root:not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-light@mozilla.org"]):not([lwtheme]) #navigator-toolbox {
   background-color: transparent !important;
   background-image: none !important;
+}
+
+/* Rinswa Light Theme Header: Soft Pastel Lilac Gradient */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #navigator-toolbox,
+:root[lwtheme]:not([lwtheme-brighttext]) #navigator-toolbox {
+  background-color: #f1ecf9 !important;
+  background-image: linear-gradient(135deg, #f1ecf9 0%, #f6f1fc 45%, #fbf6fa 100%) !important;
+  position: relative !important;
+  border-bottom: none !important;
+}
+
+/* Rinswa Light Theme: Official Multicolour Ribbon Logo Stripe Separator */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #navigator-toolbox::after,
+:root[lwtheme]:not([lwtheme-brighttext]) #navigator-toolbox::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 2px !important;
+  background: var(--rinswa-ribbon-bar) !important;
+  box-shadow: 0 1px 6px rgba(0, 242, 254, 0.4), 0 1px 3px rgba(236, 72, 153, 0.3) !important;
+  z-index: 10 !important;
 }
 
 :root[lwtheme] body {
@@ -118,17 +153,28 @@
    2. FLOATING GLASSMORPHIC TAB BAR (MODULAR TAB ISLANDS)
    ========================================================================== */
 #TabsToolbar {
-  padding-top: 2px !important;
+  padding-top: 1px !important;
+  padding-bottom: 0 !important;
   padding-inline: 4px !important;
+  min-height: 32px !important;
+  height: 32px !important;
   background: transparent !important;
 }
 
-/* Individual Tabs as Detached Floating Islands */
+/* Individual Tabs as Compact Floating Islands */
 .tabbrowser-tab {
-  margin: 0 2px !important;
+  margin: 0 1px !important;
   padding: 0 !important;
-  min-height: 28px !important;
+  min-height: 30px !important;
+  height: 30px !important;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.tab-content {
+  min-height: 28px !important;
+  height: 28px !important;
+  padding-inline: 8px !important;
+  padding-block: 0 !important;
 }
 
 .tabbrowser-tab:hover {
@@ -137,6 +183,8 @@
 
 .tab-background {
   border-radius: var(--rinswa-radius-tab) !important;
+  min-height: 28px !important;
+  margin-block: 1px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
@@ -190,24 +238,27 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Light Theme Active & Hover Tab Backgrounds */
+/* Rinswa Light Theme Active & Hover Tab Backgrounds */
 :root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background,
 :root[lwtheme]:not([lwtheme-brighttext]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background,
 :root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background {
   background: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.15) !important;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(168, 85, 247, 0.22) !important;
+  box-shadow: 0 2px 8px rgba(120, 80, 180, 0.12), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  position: relative !important;
 }
 
 :root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab:hover:not(:is([selected], [visuallyselected])) .tab-background,
 :root[lwtheme]:not([lwtheme-brighttext]) .tabbrowser-tab:hover:not(:is([selected], [visuallyselected])) .tab-background,
 :root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) .tabbrowser-tab:hover:not(:is([selected], [visuallyselected])) .tab-background {
-  background: rgba(0, 0, 0, 0.05) !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  border-color: rgba(168, 85, 247, 0.15) !important;
 }
 
+/* Rinswa Light Theme: Clean Floating White Tab Card (No Line Under Tab Name) */
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background::after,
 :root[lwtheme] .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background::after,
-:root:not([theme-effective-id="default-theme@mozilla.org"]):not([lwtheme]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background::after {
+:root:not([theme-effective-id="default-theme@mozilla.org"]) .tabbrowser-tab:is([selected], [visuallyselected]) .tab-background::after {
   display: none !important;
 }
 
@@ -442,9 +493,15 @@
 }
 
 #tabs-newtab-button,
-#new-tab-button {
-  border-radius: 10px !important;
-  margin: 3px 6px !important;
+#new-tab-button,
+#alltabs-button {
+  border-radius: 6px !important;
+  margin: 2px 2px !important;
+  min-height: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  width: 26px !important;
+  padding: 2px !important;
   transition: all 0.2s ease !important;
 }
 
@@ -548,19 +605,33 @@
    ========================================================================== */
 #nav-bar {
   background: transparent !important;
-  padding: 2px 8px 4px !important;
-  margin: 0 !important;
+  padding: 1px 4px 2px !important;
+  margin: -5px 0 5px 0 !important;
+  min-height: 34px !important;
+  height: 34px !important;
 }
 
 #urlbar-container {
-  min-height: 32px !important;
+  min-height: 28px !important;
+  height: 28px !important;
+  padding-block: 0 !important;
+  margin-inline: 4px !important;
   min-width: 250px !important;
   max-width: 820px !important;
   margin: 0 auto !important;
 }
 
+#urlbar {
+  min-height: 28px !important;
+  --urlbar-height: 28px !important;
+  --urlbar-min-height: 28px !important;
+  --urlbar-toolbar-height: 28px !important;
+  top: 0 !important;
+}
+
 #urlbar-background {
   border-radius: var(--rinswa-radius-input) !important;
+  min-height: 28px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
@@ -568,20 +639,27 @@
   background: rgba(15, 23, 42, 0.72) !important;
   backdrop-filter: blur(16px) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* Address Bar Focused with Multicolour Ribbon Glow */
 :root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #urlbar[focused="true"] > #urlbar-background {
   background: rgba(15, 23, 42, 0.95) !important;
   border: 1px solid rgba(245, 158, 11, 0.6) !important;
-  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2), 0 0 16px rgba(245, 158, 11, 0.25) !important;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2), 0 0 12px rgba(245, 158, 11, 0.25) !important;
+}
+
+#urlbar-input-container {
+  min-height: 28px !important;
+  height: 28px !important;
+  padding-inline: 6px !important;
 }
 
 #urlbar-input {
-  font-size: 13.5px !important;
+  font-size: 13px !important;
   font-weight: 500 !important;
-  padding-left: 8px !important;
+  padding-left: 6px !important;
+  padding-block: 0 !important;
 }
 
 :root:is([theme-effective-id="default-theme@mozilla.org"], :not([theme-effective-id])):not([lwtheme]) #urlbar-input {
@@ -617,14 +695,28 @@
 :root[lwtheme]:not([lwtheme-brighttext]) #urlbar-background,
 :root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #urlbar-background {
   background: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.18) !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 1px 4px rgba(100, 70, 140, 0.08) !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #urlbar[focused="true"] > #urlbar-background,
+:root[lwtheme]:not([lwtheme-brighttext]) #urlbar[focused="true"] > #urlbar-background {
+  border: 1px solid rgba(99, 102, 241, 0.6) !important;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25), 0 2px 12px rgba(99, 102, 241, 0.15) !important;
 }
 
 :root[theme-effective-id="firefox-compact-light@mozilla.org"] #urlbar-input,
 :root[lwtheme]:not([lwtheme-brighttext]) #urlbar-input,
 :root:not([lwtheme-brighttext]):not([theme-effective-id="default-theme@mozilla.org"]):not([theme-effective-id="firefox-compact-dark@mozilla.org"]):not([theme-effective-id="firefox-alpenglow@mozilla.org"]) #urlbar-input {
-  color: #15141a !important;
+  color: #0f172a !important;
+}
+
+:root[theme-effective-id="firefox-compact-light@mozilla.org"] #identity-box,
+:root[lwtheme]:not([lwtheme-brighttext]) #identity-box {
+  background: rgba(99, 102, 241, 0.08) !important;
+  border: 1px solid rgba(99, 102, 241, 0.18) !important;
+  border-radius: 6px !important;
+  color: #1e1b4b !important;
 }
 
 :root[theme-effective-id="firefox-compact-light@mozilla.org"] #identity-box,
@@ -665,8 +757,13 @@
    4. QUICK-ACTION DOCK & TOOLBAR BUTTONS (MODERN CHIPS)
    ========================================================================== */
 #back-button, #forward-button, #reload-button, #stop-button {
-  border-radius: 10px !important;
-  margin: 2px 3px !important;
+  border-radius: 6px !important;
+  margin: 1px 1px !important;
+  min-height: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  width: 28px !important;
+  padding: 4px !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
@@ -700,8 +797,14 @@
   transform: translateY(-1px) !important;
 }
 
-.toolbarbutton-1 {
-  border-radius: 9px !important;
+.toolbarbutton-1,
+#nav-bar toolbarbutton {
+  border-radius: 6px !important;
+  margin: 1px 1px !important;
+  padding: 3px !important;
+  min-height: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
   transition: all 0.2s ease !important;
 }
 
@@ -830,35 +933,37 @@ toolbarbutton.bookmark-item:hover {
 }
 
 /* ==========================================================================
-   5. DETACHED ROUNDED WEB VIEWPORT (CANVAS ISLAND)
+   5. COMPACT SEAMLESS WEB VIEWPORT & DYNAMIC THEME MATCHING
    ========================================================================== */
 #browser,
-#appcontent {
-  background-color: var(--rinswa-bg-base) !important;
-  padding: 4px !important;
-  box-sizing: border-box !important;
-  min-height: 0 !important;
-}
-
-#tabbrowser-tabbox {
+#appcontent,
+#tabbrowser-tabbox,
+#tabbrowser-tabpanels,
+tabbrowser-tabpanel,
+.browserSidebarContainer,
+.browserContainer,
+.browserStack {
+  background-color: var(--rinswa-viewport-bg) !important;
+  background: var(--rinswa-viewport-bg) !important;
   margin: 0 !important;
   padding: 0 !important;
-  box-sizing: border-box !important;
-  min-height: 0 !important;
-}
-
-#tabbrowser-tabpanels {
-  border-radius: 12px !important;
-  overflow: hidden !important;
-  border: 1px solid rgba(255, 255, 255, 0.09) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.15) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
   box-sizing: border-box !important;
   min-height: 0 !important;
 }
 
 browser[type="content-primary"],
 browser[type="content"] {
-  border-radius: 12px !important;
+  border-radius: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: var(--rinswa-viewport-bg) !important;
 }
 
 /* ==========================================================================

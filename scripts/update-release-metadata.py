@@ -16,8 +16,8 @@ def main():
     root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     dist_dir = os.path.join(root, "rinswa-stable", "obj-rinswa", "dist")
     
-    ver_path = os.path.join(root, "rinswa-stable", "browser", "config", "version.txt")
-    version = "1.0.4"
+    ver_path = os.path.join(root, "rinswa-version.txt")
+    version = "1.0.5"
     if os.path.exists(ver_path):
         with open(ver_path, "r", encoding="utf-8") as f:
             v = f.read().strip()

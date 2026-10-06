@@ -9,6 +9,10 @@ if [ ! -f obj-rinswa/dist/bin/distribution/extensions/uBlock0@raymondhill.net.xp
     curl -L -s -o obj-rinswa/dist/bin/distribution/extensions/uBlock0@raymondhill.net.xpi "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/addon-607454-latest.xpi"
 fi
 
+if [ -f "$PROJECT_DIR/branding/distribution/extensions/smart-tabs@rinswa.com.xpi" ]; then
+    cp "$PROJECT_DIR/branding/distribution/extensions/smart-tabs@rinswa.com.xpi" obj-rinswa/dist/bin/distribution/extensions/smart-tabs@rinswa.com.xpi
+fi
+
 if [ -f "$PROJECT_DIR/branding/distribution/policies.json" ]; then
     cp "$PROJECT_DIR/branding/distribution/policies.json" obj-rinswa/dist/bin/distribution/policies.json
 fi
